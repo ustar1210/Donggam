@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.urls import reverse
 from .models import *
 import calendar
-from .utils import EventForm, Calendar
+from .utils import EventForm, Calendar, ReservationForm
 
 class CalendarView(generic.ListView):
     model = Event
@@ -18,7 +18,7 @@ class CalendarView(generic.ListView):
         # use today's date for the calendar
         d = get_date(self.request.GET.get('month', None))
         context['prev_month'] = prev_month(d)
-        context['next_month'] = next_month(d)
+        context['next_month'] = next_month(d) 
         # Instantiate our calendar class with today's year and date
         cal = Calendar(d.year, d.month)
 
@@ -32,7 +32,6 @@ class CalendarView(generic.ListView):
 def get_date(req_day):
     if req_day:
         year, month = (int(x) for x in req_day.split('-'))
-        print(datetime.date(year, month, day=1), '1번')
         return datetime.date(year, month, day=1)
     return datetime.datetime.today()
 
@@ -61,3 +60,16 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('calender:calendar'))
     return render(request, 'calender/event.html', {'form': form})
+
+def reservation(request, reservation_id=None):
+    instance = Reservation()
+    if reservation_id:
+        instance = get_object_or_404(Reservation, pk=reservation_id)
+    else:
+        instance = Reservation()
+    
+    form = ReservationForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('calender:calendar'))
+    return render(request, 'calender/reservation.html', {'form': form})

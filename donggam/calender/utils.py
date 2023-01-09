@@ -15,7 +15,7 @@ class Calendar(calendar.HTMLCalendar):
             d += f'<li> {event.title} {event.get_html_url} </li>'
 
         if day != 0:
-            return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
+            return f"<td class='day'><span class='date'>{day}</span><ul> {d} </ul></td>"
         
         return '<td></td>'
 
@@ -23,7 +23,7 @@ class Calendar(calendar.HTMLCalendar):
         week = ''
         for d, weekday in theweek:
             week += self.formatday(d, events)
-        return f'<tr> {week} </tr>'
+        return f'<tr class="days"> {week} </tr>'
 
     def formatmonth(self, withyear=True):
         events = Event.objects.filter(start_time__year=self.year, start_time__month=self.month)
@@ -37,20 +37,26 @@ class Calendar(calendar.HTMLCalendar):
         
 
 from django.forms import ModelForm, DateInput
-from calender.models import Event
+from calender.models import Event, Reservation
+
+class ReservationForm(ModelForm):
+    class Meta:
+        model = Reservation
+        fields = '__all__'
+
 
 class EventForm(ModelForm):
-  class Meta:
-    model = Event
-    # datetime-local is a HTML5 input type, format to make date time show on fields
-    widgets = {
-      'start_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
-      'end_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
-    }
-    fields = '__all__'
+    class Meta:
+        model = Event
+        # datetime-local is a HTML5 input type, format to make date time show on fields
+        widgets = {
+        'start_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
+        'end_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
+        }
+        fields = '__all__'
 
-  def __init__(self, *args, **kwargs):
-    super(EventForm, self).__init__(*args, **kwargs)
-    # input_formats to parse HTML5 datetime-local input to datetime field
-    self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
-    self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
+    def __init__(self, *args, **kwargs):
+        super(EventForm, self).__init__(*args, **kwargs)
+        # input_formats to parse HTML5 datetime-local input to datetime field
+        self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
+        self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
