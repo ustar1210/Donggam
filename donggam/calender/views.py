@@ -61,12 +61,13 @@ def event(request, event_id=None):
         return HttpResponseRedirect(reverse('calender:calendar'))
     return render(request, 'calender/event.html', {'form': form})
 
-def reservation(request, reservation_id=None):
+def reservation(request, datetime=None, reservation_id=None):
     instance = Reservation()
     if reservation_id:
         instance = get_object_or_404(Reservation, pk=reservation_id)
     else:
-        instance = Reservation()
+        date = datetime[:7]
+        instance = Reservation(date=date, time=datetime[8:9])
     
     form = ReservationForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():

@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from django.urls import reverse
 import calendar
 from .models import Event
 
@@ -11,17 +12,17 @@ class Calendar(calendar.HTMLCalendar):
     def formatday(self, day, reservations):
         reservations_per_day = reservations.filter(date__day=day)
         d = ''
+        datetime = str(self.year)+'-'+str(self.month)
         try:
             am_reserv = reservations_per_day.get(time='10')
             d += f'<li>{am_reserv.get_html_url} </li>'
         except:
-            d += f'<li><a>[오전 신청가능] </a></li>'
+            pass
         try:
             pm_reserv = reservations_per_day.get(time='14')
             d += f'<li>{pm_reserv.get_html_url} </li>'
         except:
-            d += f'<li><a>[오후 신청가능] </a></li>'
-
+            pass
         if day != 0:
             return f"<td class='day'><span class='date'>{day}</span><ul> {d} </ul></td>"
         
