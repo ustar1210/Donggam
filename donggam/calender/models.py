@@ -44,3 +44,14 @@ class Reservation(models.Model):
         ('2', '승인완료'),
     )
     status = models.CharField(max_length =1, choices=STATUS_CHOICES, null=False, blank=False)
+
+    @property
+    def get_html_url(self):
+        url = reverse('calender:reservation_edit', args=(self.id,))
+        if self.status == '0':
+            return f'<a href="{url}"> [신청대기] </a>'
+        elif self.status == '1':
+            return f'<a> [검토중] </a>'
+        else:
+            return f'<a> {self.school} </a>'
+        
