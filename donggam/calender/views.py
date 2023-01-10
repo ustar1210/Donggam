@@ -6,10 +6,10 @@ from django.utils.safestring import mark_safe
 from django.urls import reverse
 from .models import *
 import calendar
-from .utils import EventForm, Calendar, AdminCalendar, ReservationForm
+from .utils import Calendar, AdminCalendar, ReservationForm
 
 class CalendarView(generic.ListView):
-    model = Event
+    model = Reservation
     template_name = 'calender/calendar.html'
 
     def get_context_data(self, **kwargs):
@@ -30,7 +30,7 @@ class CalendarView(generic.ListView):
         return context
 
 class AdminCalendarView(generic.ListView):
-    model = Event
+    model = Reservation
     template_name = 'calender/calendarAdmin.html'
 
     def get_context_data(self, **kwargs):
@@ -83,19 +83,6 @@ def next_month(d):
     next_month = last + datetime.timedelta(days=1)
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
-
-def event(request, event_id=None):
-    instance = Event()
-    if event_id:
-        instance = get_object_or_404(Event, pk=event_id)
-    else:
-        instance = Event()
-    
-    form = EventForm(request.POST or None, instance=instance)
-    if request.POST and form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('calender:calendar'))
-    return render(request, 'calender/event.html', {'form': form})
 
 def reservation(request, reservation_id=None):
     instance = get_object_or_404(Reservation, pk=reservation_id)

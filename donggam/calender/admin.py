@@ -1,5 +1,4 @@
 from django.contrib import admin
-from calender.models import Event, Reservation
+from calender.models import Reservation
 
-admin.site.register(Event)
 admin.site.register(Reservation)

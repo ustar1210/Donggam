@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from django.urls import reverse
 import calendar
-from .models import Event
 
 class Calendar(calendar.HTMLCalendar):
     def __init__(self, year=None, month=None):
@@ -86,27 +85,11 @@ class AdminCalendar(calendar.HTMLCalendar):
             cal += f'{self.formatweek(week, reservations)}\n'
         return cal
 
-from django.forms import ModelForm, DateInput
-from calender.models import Event, Reservation
+from django.forms import ModelForm
+from calender.models import Reservation
 
 class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
         fields = ('age', 'name', 'email', 'school', 'grade', 'headcount', 'phone', 'motivation', 'request')
 
-
-class EventForm(ModelForm):
-    class Meta:
-        model = Event
-        # datetime-local is a HTML5 input type, format to make date time show on fields
-        widgets = {
-        'start_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
-        'end_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
-        }
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super(EventForm, self).__init__(*args, **kwargs)
-        # input_formats to parse HTML5 datetime-local input to datetime field
-        self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
-        self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
