@@ -61,4 +61,3 @@ class Reservation(models.Model):
         else :
             return f'<a href="{url}">[신청가능]</a>'
         
-            

@@ -1,12 +1,12 @@
 import datetime
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 from .models import *
 import calendar
-from .utils import EventForm, Calendar, ReservationForm
+from .utils import EventForm, Calendar, AdminCalendar, ReservationForm
 
 class CalendarView(generic.ListView):
     model = Event
@@ -28,6 +28,43 @@ class CalendarView(generic.ListView):
 
 
         return context
+
+class AdminCalendarView(generic.ListView):
+    model = Event
+    template_name = 'calender/calendarAdmin.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # use today's date for the calendar
+        d = get_date(self.request.GET.get('month', None))
+        context['prev_month'] = prev_month(d)
+        context['next_month'] = next_month(d) 
+        # Instantiate our calendar class with today's year and date
+        cal = AdminCalendar(d.year, d.month)
+
+        # Call the formatmonth method, which returns our calendar as a table
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+
+
+        return context
+
+def adminsave(request):
+    print(request.POST)
+    for a in request.POST:
+        if a == 'csrfmiddlewaretoken':
+            continue
+        date = a.split('-', -1)
+        yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
+        if date[3] == 'am' :
+            time = '10'
+        else :
+            time = '14'
+        instance = Reservation(date=yearmonthdate, time=time, status='0')
+        instance.save()
+
+    return redirect('calender:calendarAdmin')
 
 def get_date(req_day):
     if req_day:
