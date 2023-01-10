@@ -47,7 +47,6 @@ class AdminCalendarView(generic.ListView):
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
 
-
         return context
 
 def adminsave(request):
@@ -98,16 +97,11 @@ def event(request, event_id=None):
         return HttpResponseRedirect(reverse('calender:calendar'))
     return render(request, 'calender/event.html', {'form': form})
 
-def reservation(request, datetime=None, reservation_id=None):
-    instance = Reservation()
-    if reservation_id:
-        instance = get_object_or_404(Reservation, pk=reservation_id)
-    else:
-        date = datetime[:7]
-        instance = Reservation(date=date, time=datetime[8:9])
-    
+def reservation(request, reservation_id=None):
+    instance = get_object_or_404(Reservation, pk=reservation_id)
     form = ReservationForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
+        instance.status = '1'
         form.save()
         return HttpResponseRedirect(reverse('calender:calendar'))
     return render(request, 'calender/reservation.html', {'form': form})

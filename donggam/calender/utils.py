@@ -92,7 +92,7 @@ from calender.models import Event, Reservation
 class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ('age', 'name', 'email', 'school', 'grade', 'headcount', 'phone', 'motivation', 'request')
 
 
 class EventForm(ModelForm):

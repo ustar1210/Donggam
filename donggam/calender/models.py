@@ -35,7 +35,7 @@ class Reservation(models.Model):
     )
     grade = models.CharField(max_length=1, choices=GRADE_CHOICES, null=True, blank=True)
     headcount = models.IntegerField(null=True, blank=True)
-    phone = models.CharField(max_length=11, null=True, blank=True)
+    phone = models.CharField(max_length=15, null=True, blank=True)
     motivation = models.TextField(max_length=200, null=True, blank=True)
     request = models.TextField(max_length=200, null=True, blank=True)
     STATUS_CHOICES = (
@@ -59,5 +59,8 @@ class Reservation(models.Model):
         elif self.status == '4':
             return f'<a>[신청마감]</a>'
         else :
-            return f'<a href="{url}">[신청가능]</a>'
+            if self.time == '10':
+                return f'<a href="{url}">[오전 신청가능]</a>'
+            else:
+                return f'<a href="{url}">[오후 신청가능]</a>'
         
