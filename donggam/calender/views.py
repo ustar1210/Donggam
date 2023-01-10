@@ -26,7 +26,7 @@ class CalendarView(generic.ListView):
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
 
-
+        change_status()
         return context
 
 class AdminCalendarView(generic.ListView):
@@ -92,3 +92,12 @@ def reservation(request, reservation_id=None):
         form.save()
         return HttpResponseRedirect(reverse('calender:calendar'))
     return render(request, 'calender/reservation.html', {'form': form})
+
+def change_status():
+    print(datetime.datetime.today())
+    beforedates = Reservation.objects.filter(date__range=[datetime.datetime.today() - datetime.timedelta(days=30), datetime.datetime.today() - datetime.timedelta(days=1)])
+    targets = beforedates.filter(status = '0')
+    for t in targets:
+        t.status = '4'
+        t.save()
+    return 
