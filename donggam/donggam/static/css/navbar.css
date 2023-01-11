@@ -48,6 +48,7 @@ hr{
     display: none;
 }
 
+
 /* 768 px 밑일때만  */
 @media screen and (max-width: 768px) {
     .navbar {
