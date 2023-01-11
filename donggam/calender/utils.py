@@ -86,10 +86,14 @@ class AdminCalendar(calendar.HTMLCalendar):
         return cal
 
 from django.forms import ModelForm
-from calender.models import Reservation
+from calender.models import Reservation, RegularReservation
 
 class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
-        fields = ('age', 'name', 'email', 'school', 'grade', 'headcount', 'phone', 'motivation', 'request')
+        fields = ('name', 'phone', 'email', 'school', 'grade', 'major', 'bus', 'headcount', 'length', 'memo')
 
+class RegularReservationForm(ModelForm):
+    class Meta:
+        model = RegularReservation
+        fields = ('age', 'parent_name', 'parent_phone', 'name', 'phone', 'email', 'school', 'grade', 'headcount', 'motivation', 'request')
