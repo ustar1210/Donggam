@@ -12,9 +12,16 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'calender/css/styles.css' %}">
+  <!-- navbar -->
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script src="{% static 'js/navbar.js' %}" defer ></script>
   <title>Django Calendar App</title>
+
 </head>
 <body>
+  {% include 'shared/navbar.html' %}
 
   <div class="clearfix">
     <a class="btn btn-info" href="{% url 'calender:group_notice' %}"> 단체 캠퍼스투어 </a>

@@ -1,0 +1,104 @@
+:root {
+    --text-color: #f0f4f5;
+    --background-color: #263343;
+    --accent-color: rgb(87, 170, 166)
+}      
+body {
+    margin : 0;
+    font-family: 'Source Sans Pro';
+}
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #263343;
+    padding: 8px 12px;
+}
+
+.navbar__logo {
+    font-size: 24px;
+    color: cadetblue;
+}
+
+.navbar__menu li {
+    padding: 10px 20px;
+}
+
+.navbar__icons {
+    list-style: none;
+    display :flex;
+    color:white;
+    padding-left: 0px;
+}
+
+.navbar__icons li {
+    /* padding: 8px 12px; */
+}
+
+.navbar__menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.navbar__menu li {
+    padding: 8px 13px;
+}
+
+.navbar__menu li:hover {
+    background-color : rgb(87, 170, 166);
+    border-radius: 5px;
+}
+
+.navbar__icons li {
+    padding : 10px;
+}
+
+.navbar__toggleBtn {
+    display: none;
+}
+
+/* 768 px 밑일때만  */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding : 10px 24px;
+    }
+    
+    .navbar__menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navbar__menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar__icons{
+        display: none;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .navbar__toggleBtn {
+        display: block;
+        position: absolute;
+        right : 20px;
+        font-size: 24px;
+        color :rgb(87, 170, 166);
+    }
+
+    .navbar__menu.active,
+    .navbar__icons.active {
+        display: flex;
+        transition: 1s ease-out;
+    }
+}
