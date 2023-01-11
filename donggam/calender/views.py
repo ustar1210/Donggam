@@ -92,12 +92,15 @@ def next_month(d):
 
 def reservation(request, reservation_id=None):
     instance = get_object_or_404(Reservation, pk=reservation_id)
-    form = ReservationForm(request.POST or None, instance=instance)
-    if request.POST and form.is_valid():
-        instance.status = '1'
-        form.save()
-        return HttpResponseRedirect(reverse('calender:calendar'))
-    return render(request, 'calender/reservation.html', {'form': form})
+    if instance.status == '1' or instance.status == '0':    
+        form = ReservationForm(request.POST or None, instance=instance)
+        if request.POST and form.is_valid():
+            instance.status = '1'
+            form.save()
+            return HttpResponseRedirect(reverse('calender:calendar'))
+        return render(request, 'calender/reservation.html', {'form': form})
+    else :
+        return redirect('calender:reservation_check', reservation_id=reservation_id)
 
 def reservationCheck(request, reservation_id):
     instance = get_object_or_404(Reservation, pk=reservation_id)

@@ -1,12 +1,5 @@
 /* cal/static/cal/css/styles.css */
-.container {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-}
 .calendartable{
-  width: 100%;
-}
-.timetable {
   width: 100%;
 }
 .calendar {
