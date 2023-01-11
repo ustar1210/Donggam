@@ -8,6 +8,12 @@ from .models import *
 import calendar
 from .utils import Calendar, AdminCalendar, ReservationForm
 
+def index(request):
+    return render(request, 'calender/index.html')
+
+def group_notice(request):
+    return render(request, 'calender/group_notice.html')
+
 class CalendarView(generic.ListView):
     model = Reservation
     template_name = 'calender/calendar.html'
@@ -62,7 +68,7 @@ def adminsave(request):
             time = '14'
         instance = Reservation(date=yearmonthdate, time=time, status='0')
         instance.save()
-
+    change_status()
     return redirect('calender:calendarAdmin')
 
 def get_date(req_day):
@@ -101,3 +107,10 @@ def change_status():
         t.status = '4'
         t.save()
     return 
+
+
+def regular_notice(request):
+    return render(request, 'calender/regular_notice.html')
+
+def regular_form(request):
+    return render(request, 'calender/regular_form.html')

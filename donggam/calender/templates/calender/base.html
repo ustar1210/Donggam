@@ -16,6 +16,10 @@
 </head>
 <body>
 
+  <div class="clearfix">
+    <a class="btn btn-info" href="{% url 'calender:group_notice' %}"> 단체 캠퍼스투어 </a>
+    <a class="btn btn-info" href="{% url 'calender:regular_notice' %}"> 정기 캠퍼스투어 </a>
+  </div>
   {% block content %}
   {% endblock %}
 
