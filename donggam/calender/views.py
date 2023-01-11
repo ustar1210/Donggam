@@ -99,6 +99,40 @@ def reservation(request, reservation_id=None):
         return HttpResponseRedirect(reverse('calender:calendar'))
     return render(request, 'calender/reservation.html', {'form': form})
 
+def reservationCheck(request, reservation_id):
+    instance = get_object_or_404(Reservation, pk=reservation_id)
+    if instance.status == '1':
+        status = '신청대기'
+    elif instance.status == '2':
+        status = '검토중'
+    elif instance.status == '3':
+        status = '승인완료'
+    date = str(instance.date).split('-')
+    date = date[0] + '년 ' + date[1] + '월 ' + date[2] + '일'
+    if instance.time == '10':
+        time = '10:00'
+    elif instance.time == '14':
+        time = '14:00'
+    datetime = date + ' / ' + time
+    return render(request, 'calender/group_check.html', 
+    {
+        'reservation' : instance,
+        'status': status,
+        'datetime': datetime,
+
+    })
+
+def password(request, reservation_id):
+    return render(request, 'calender/password.html', {'reservation_id' : reservation_id})
+
+def pw_check(request, reservation_id):
+    instance = get_object_or_404(Reservation, pk=reservation_id)
+    password = instance.phone.split('-')[-1]
+    if password == request.POST['pw']:
+        return redirect('calender:reservation_edit', reservation_id=reservation_id)
+    else :
+        return redirect('calender:password', reservation_id)
+
 def change_status():
     print(datetime.datetime.today())
     beforedates = Reservation.objects.filter(date__range=[datetime.datetime.today() - datetime.timedelta(days=30), datetime.datetime.today() - datetime.timedelta(days=1)])

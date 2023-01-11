@@ -42,19 +42,22 @@ class Reservation(models.Model):
         ('4', '신청마감'),
     )
     status = models.CharField(max_length =1, choices=STATUS_CHOICES, null=False, blank=False)
-
+    place = models.CharField(max_length=100, null=True, blank=True)
+    admin_comment = models.TextField(max_length=200, null=True, blank=True)
+    
     @property
     def get_html_url(self):
-        url = reverse('calender:reservation_edit', args=(self.id,))
+        url = reverse('calender:reservation_check', args=(self.id,))
         if self.status == '1':
             return f'<a href="{url}">[신청대기]</a>'
         elif self.status == '2':
-            return f'<a>[검토중]</a>'
+            return f'<a href="{url}">[검토중]</a>'
         elif self.status == '3':
-            return f'<a>{self.school}</a>'
+            return f'<a href="{url}">{self.school}</a>'
         elif self.status == '4':
             return f'<a>[신청마감]</a>'
         else :
+            url = reverse('calender:reservation_edit', args=(self.id,))
             if self.time == '10':
                 return f'<a href="{url}">[오전 신청가능]</a>'
             else:
