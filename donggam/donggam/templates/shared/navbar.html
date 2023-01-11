@@ -1,8 +1,8 @@
     {% load static %}
     <nav class="navbar"> 
         <div class="navbar__logo">
-            <img src="{% static 'img/dongguk_logo.png' %}" alt="Dongguk logo">
-            <a href="">YU WORLD</a>
+                <img src="{% static 'img/dongguk_logo.png' %}" alt="Dongguk logo" class="image">
+            <a href="{% url 'calender:group_notice' %}"> | 캠퍼스투어 신청</a>
         </div>
         <ul class="navbar__menu">
             <li><a href="">Home</a></li>

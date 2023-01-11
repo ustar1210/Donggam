@@ -23,7 +23,9 @@ a {
     font-size: 24px;
     color: cadetblue;
 }
-
+.image{
+    width: 20%;
+}
 .navbar__menu li {
     padding: 10px 20px;
 }
