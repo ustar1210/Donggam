@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.urls import reverse
 from .models import *
 import calendar
-from .utils import Calendar, AdminCalendar, ReservationForm
+from .utils import Calendar, ReservationForm
 
 def index(request):
     return render(request, 'calender/index.html')
@@ -35,41 +35,6 @@ class CalendarView(generic.ListView):
         change_status()
         return context
 
-class AdminCalendarView(generic.ListView):
-    model = Reservation
-    template_name = 'calender/calendarAdmin.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # use today's date for the calendar
-        d = get_date(self.request.GET.get('month', None))
-        context['prev_month'] = prev_month(d)
-        context['next_month'] = next_month(d) 
-        # Instantiate our calendar class with today's year and date
-        cal = AdminCalendar(d.year, d.month)
-
-        # Call the formatmonth method, which returns our calendar as a table
-        html_cal = cal.formatmonth(withyear=True)
-        context['calendar'] = mark_safe(html_cal)
-
-        return context
-
-def adminsave(request):
-    print(request.POST)
-    for a in request.POST:
-        if a == 'csrfmiddlewaretoken':
-            continue
-        date = a.split('-', -1)
-        yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
-        if date[3] == 'am' :
-            time = '10'
-        else :
-            time = '14'
-        instance = Reservation(date=yearmonthdate, time=time, status='0')
-        instance.save()
-    change_status()
-    return redirect('calender:calendarAdmin')
 
 def get_date(req_day):
     if req_day:
@@ -122,7 +87,6 @@ def reservationCheck(request, reservation_id):
         'reservation' : instance,
         'status': status,
         'datetime': datetime,
-
     })
 
 def password(request, reservation_id):

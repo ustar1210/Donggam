@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'calender:calendarAdmin' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'calender:calendarAdmin' %}?{{ next_month }}"> Next Month </a>
+	<a class="btn btn-info left" href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"> Previous Month </a>
+	<a class="btn btn-info right" href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"> Next Month </a>
 </div>
 <div class="container">
 	<div class="calendartable">
-		<form method="post" action="{% url 'calender:adminsave' %}">
+		<form method="post" action="{% url 'manager:adminsave' %}">
 			{% csrf_token %}
 			{{ calendar }}
 			<p><input type="submit" value="저장"><input type="Reset"></p>

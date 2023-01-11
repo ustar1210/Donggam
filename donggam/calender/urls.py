@@ -11,8 +11,6 @@ urlpatterns=[
     re_path(r'^reservation/pw/(?P<reservation_id>\d+)/check/$', views.pw_check, name='pw_check'),
     #re_path(r'^reservation/apply/$', views.reservation, name='reservation_new'),
     re_path(r'^reservation/edit/(?P<reservation_id>\d+)/$', views.reservation, name='reservation_edit'),
-    re_path(r'^reservation/open/$', views.AdminCalendarView.as_view(), name='calendarAdmin'),
-    re_path(f'^reservation/adminsave/$', views.adminsave, name='adminsave'),
     path('regular_notice/', views.regular_notice, name='regular_notice'),
     path('regular_form/', views.regular_form, name='regular_form'),
     ]
