@@ -10,7 +10,7 @@
 		<form method="post" action="{% url 'manager:adminsave' %}">
 			{% csrf_token %}
 			{{ calendar }}
-			<p><input type="submit" value="저장"><input type="Reset"></p>
+			<p><input type="submit" value="신청가능 추가"><input type="Reset" name="reset" value="신청가능 초기화"></p>
 		</form>
 	</div>
 	

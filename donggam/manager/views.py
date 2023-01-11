@@ -5,11 +5,11 @@ from django.views import generic
 from calender.views import *
 
 # Create your views here.
-def login(request):
-    return render(request, 'manager/login.html')
-
-def logout(request):
-    return redirect('manager:login')
+def manager_index(request):
+    if request.user.is_authenticated:
+        return render(request, 'manager/index.html')
+    else:
+        return redirect('manager:login')
 
 
 class AdminCalendarView(generic.ListView):
@@ -32,7 +32,7 @@ class AdminCalendarView(generic.ListView):
 
         return context
 
-def adminsave(request):
+def admin_save(request):
     print(request.POST)
     for a in request.POST:
         if a == 'csrfmiddlewaretoken':
