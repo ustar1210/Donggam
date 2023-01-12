@@ -1,9 +1,18 @@
-{% extends 'calender/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="text">
     <h1>단체 캠퍼스투어 신청 확인</h1>
 </div>
+{% if reservation.status == '1' %}
+<div class="check">
+    <div class="buttons">
+        <div class="clearfix">
+            <a class="btn btn-info" href="{% url 'manager:confirm' reservation_id=reservation.pk %}"> 검토하기 </a>
+        </div>
+    </div>
+</div>
+{% else %}
 <div class="form">
     <h2>신청정보 확인</h2>
     <hr>
@@ -13,18 +22,46 @@
     <p>전화번호 : {{ reservation.phone }}</p>
     <p>이메일 : {{ reservation.email }}</p>
     <p>학교(기관)명 : {{ reservation.school }}</p>
-    <p>학년 : {{ reservation.grade }}</p>
-    <p>분류 : {{ reservation.major }}</p>
+    <p>학년 : {{ grade }}</p>
+    <p>분류 : {{ major }}</p>
     <p>대형버스 : {{ reservation.bus }}</p>
     <p>투어 학생수 : {{ reservation.headcount }}</p>
-    <p>투어 시간 : {{ reservation.length }}</p>
-    <p>진행장소 : {{ reservation.place }}</p>
+    <p>투어 시간 : {{ length }}</p>
     <p>투어 메모 : {{ reservation.memo }}</p>
 </div>
+<hr>
 <div class="admin_section">
-    <p>진행장소 : {{ reservation.place }}</p>
-    <p>관리자메모 : {{ reservation.admin_comment }}</p>
+    <h2>관리자 설정</h2>
+    <hr>
+    <form method="post" action="{% url 'manager:confirm' reservation_id=reservation.pk %}">
+        {% csrf_token %}
+        <p>진행장소</p>
+        {% if reservation.place.name %}
+        <input list="placelist" name="place" id="place" placeholder="{{ reservation.place.name }}">
+        {% else %}
+        <input list="placelist" name="place" id="place" placeholder="정각원 앞 백년비">
+        {% endif %}
+        <datalist id="placelist">
+            {% for p in places %}
+            {% if p.name == '정각원 앞 백년비' %}
+            <option value='{{ p.name }}' selected>{{ p.name }}</option>
+            {% else %}
+            <option value='{{ p.name }}'>{{ p.name }}</option>
+            {% endif %}
+            {% endfor %}
+        </datalist>
+        <br>
+        <p>관리자메모</p>
+        {% if reservation.admin_comment %}
+        <input type="textarea" name="comment" placeholder="{{ reservation.admin_comment }}">
+        {% else %}
+        <input type="textarea" name="comment" placeholder="신청자가 볼 수 있는 코멘트입니다.">
+        {% endif %}
+        <br>
+        <input type="submit" value="승인">
+    </form>
 </div>
+{% endif %}
 <div class="buttons">
     <div class="clearfix">
         <a class="btn btn-info" href="{% url 'manager:calendarAdmin' %}"> 목록으로 </a>
