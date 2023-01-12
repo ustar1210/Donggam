@@ -15,6 +15,8 @@
   <!-- navbar -->
   <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- group -->
+  <link rel="stylesheet" href="{% static 'css/group.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script src="{% static 'js/navbar.js' %}" defer ></script>
@@ -25,15 +27,10 @@
   <header class="nav-down">
     {% include 'shared/navbar.html' %}
   </header>
-  <div class="clearfix">
-    <a class="btn btn-info" href="{% url 'manager:index' %}"> 관리자 </a>
-  </div>
+
 
   {% block content %}
   {% endblock %}
-  <div style="height:100em;">
-    ㅋㅋ
-  </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -46,4 +43,7 @@
   {% block script %}
   {% endblock %}
 </body>
+<div class="clearfix">
+  <a class="btn btn-info" href="{% url 'manager:index' %}"> 관리자 </a>
+</div>
 </html>

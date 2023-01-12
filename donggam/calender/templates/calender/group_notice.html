@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="notice">
+
+{% load static %}
+
+<div class="notice_title">
     <h1>단체 캠퍼스투어 공지사항</h1>
-    <p>어쩌구 저쩌구</p>
+    <p>10명 이상, 100명 이하 중고등학교, 청소년단체 및 교육기관 대상</p>
 </div>
+
 <div class="clearfix">
     <a class="btn btn-info" href="{% url 'calender:calendar' %}">신청하기</a>
 </div>

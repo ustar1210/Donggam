@@ -1,0 +1,19 @@
+.notice_title{
+    text-align:center; 
+    margin-top: 4%;
+    
+}
+.notice_title h1{
+    
+    font-size: 40px;
+    font-weight: 700;
+    color: #555555;
+    line-height: 180%;
+    
+
+}
+.notice_title p{
+    font-size: 18px;
+    color: #666666;
+    font-family: 'Noto Sans KR';
+}
