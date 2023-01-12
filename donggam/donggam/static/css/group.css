@@ -1,0 +1,99 @@
+/* 모바일 제외 */
+.notice_title{
+    text-align:center; 
+    margin-top: 4%;
+    
+}
+.notice_title h1{
+    
+    font-size: 40px;
+    font-weight: 700;
+    color: #555555;
+    line-height: 180%;
+}
+.notice_title p{
+    font-size: 18px;
+    color: #666666;
+    font-family: 'Noto Sans KR';
+}
+
+.notice_body{
+    margin: 80px 122px ;
+}
+.notice_body p{
+    margin: 24px 0px;
+    color:333333;
+    font-weight: 500;
+    font-size: 18px;
+}
+.notice_body p span{
+    color : #666666;
+    font-size: 16px;
+
+}
+.notice_body p high{
+    color: #DF633B; 
+    font-weight: 700;
+}
+.apply_btn{    
+    float: right;
+    background: #DF633B;
+    padding: 12px 76px;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+}
+.apply_btn:hover{
+    color: #DF633B;
+    background: white;
+}
+/* 모바일화면 */
+@media (max-width: 768px) {
+    .notice_title{
+        text-align:center; 
+        margin-top: 4%;
+        
+    }
+    .notice_title h1{
+        
+        font-size: 27px;
+        font-weight: 700;
+        color: #555555;
+    }
+    .notice_title p{
+        font-size: 13px;
+        color: #666666;
+    }
+    
+    .notice_body{
+        margin: 40px 20px ;
+        font-size: 13px;
+    }
+    .notice_body p{
+        margin: 24px 0px;
+        color:333333;
+        font-weight: 500;
+    }
+    .notice_body p span{
+        font-size: 11px;
+        color : #666666;
+    }
+    .notice_body p high{
+        color: #DF633B; 
+        font-weight: 700;
+    }
+    .apply_btn{    
+        float: right;
+        background: #DF633B;
+        padding: 7px 40px;
+        border: 1px solid #DF633B;
+        border-radius: 8px;
+        font-size: 13px;
+        color: white;
+    }
+    .apply_btn:hover{
+        color: #DF633B;
+        background: white;
+    }
+}

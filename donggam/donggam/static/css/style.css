@@ -1,6 +1,11 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 a{
     text-decoration: none;
 }
 a:hover{
     text-decoration: none;
+}
+body{
+    font-family: 'Noto Sans KR';
 }

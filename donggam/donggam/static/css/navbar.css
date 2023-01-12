@@ -49,6 +49,50 @@ hr{
 }
 
 
+@media (max-width: 1200px) {
+    .navbar {
+        
+        align-items: flex-start;
+        padding : 10px 24px;
+    }
+    
+    .navbar__logo {
+        font-size: 15px;
+        margin-left: 0px;
+    
+    }
+    .image{
+        width: 25%;
+    }
+
+    
+    .navbar__menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navbar__menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar__toggleBtn {
+        display: block;
+        position: absolute;
+        right : 20px;
+        font-size: 18px;
+        color: #A2988F;
+    }
+
+    .navbar__menu.active,
+    .navbar__icons.active {
+        display: flex;
+        transition: 1s ease-out;
+    }
+}
+
 /* 768 px 밑일때만  */
 @media screen and (max-width: 768px) {
     .navbar {
@@ -60,7 +104,6 @@ hr{
     .navbar__logo {
         font-size: 18px;
         margin-left: 0px;
-    
     }
     .image{
         width: 25%;
