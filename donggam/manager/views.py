@@ -101,7 +101,12 @@ def group_confirm(request, reservation_id):
         elif request.method == 'POST':
             place_name = request.POST['place']
             if place_name == '':
-                place = get_object_or_404(Place, name='정각원 앞 백년비')
+                try :
+                    place = get_object_or_404(Place, name='정각원 앞 백년비')
+                except : 
+                    place = Place()
+                    place.name = '정각원 앞 백년비'
+                    place.save()
             else :
                 try :
                     place = get_object_or_404(Place, name=place_name)
