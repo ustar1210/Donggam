@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.urls import reverse
 from .models import *
 import calendar
-from .utils import Calendar, ReservationForm
+from .utils import Calendar, ReservationForm, RegularReservationForm
 
 def index(request):
     return render(request, 'calender/index.html')
@@ -116,4 +116,16 @@ def regular_list(request):
     })
 
 def regular_form(request):
-    return render(request, 'calender/regular_form.html')
+    instance = RegularReservation()
+    form = RegularReservationForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        instance.status = '1'
+        form.save()
+        return HttpResponseRedirect(reverse('calender:regular_list'))
+    return render(request, 'calender/regular_form.html', {'form': form})
+
+def regular_detail(request, reservation_id):
+    return render(request, 'calender/regular_detail.html', 
+    {
+
+    })

@@ -13,4 +13,5 @@ urlpatterns=[
     re_path(r'^reservation/edit/(?P<reservation_id>\d+)/$', views.reservation, name='reservation_edit'),
     path('regular_list/', views.regular_list, name='regular_list'),
     path('regular_form/', views.regular_form, name='regular_form'),
+    re_path(r'^regular_detail/(?P<reservation_id>\d+)$', views.regular_detail, name='regular_detail'),
     ]

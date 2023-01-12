@@ -54,4 +54,4 @@ class ReservationForm(ModelForm):
 class RegularReservationForm(ModelForm):
     class Meta:
         model = RegularReservation
-        fields = ('age', 'parent_name', 'parent_phone', 'name', 'phone', 'email', 'school', 'grade', 'headcount', 'motivation', 'request')
+        fields = ('date', 'age', 'parent_name', 'parent_phone', 'name', 'phone', 'email', 'school', 'grade', 'headcount', 'motivation', 'request')
