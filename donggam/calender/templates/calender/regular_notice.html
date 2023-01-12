@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="notice">
+    <h1>정기 캠퍼스투어 공지사항</h1>
+    <p>어쩌구 저쩌구</p>
+</div>
+<div class="clearfix">
+    <a class="btn btn-info" href="{% url 'calender:regular_list' %}">신청하기</a>
+</div>
+{% endblock %}
