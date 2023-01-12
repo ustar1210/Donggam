@@ -16,13 +16,13 @@ class AdminCalendar(calendar.HTMLCalendar):
         datetime = str(self.year)+'-'+str(self.month)+'-'+str(day)
         try:
             am_reserv = reservations_per_day.get(time='10')
-            d += f'<li>{am_reserv.get_html_url} </li>'
+            d += f'<li>{am_reserv.get_admin_url} </li>'
         except:
             amdatetime = datetime + '-am'
             d += f'<li><label><input type="checkbox" name="{amdatetime}">[10:00]</label></li>'
         try:
             pm_reserv = reservations_per_day.get(time='14')
-            d += f'<li>{pm_reserv.get_html_url} </li>'
+            d += f'<li>{pm_reserv.get_admin_url} </li>'
         except:
             pmdatetime = datetime + '-pm'
             d += f'<li><label><input type="checkbox" name="{pmdatetime}">[14:00]</label></li>'
