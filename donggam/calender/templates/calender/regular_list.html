@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="notice">
+    <h1>정기 캠퍼스투어 공지사항</h1>
+    <p>어쩌구 저쩌구</p>
+</div>
+
+<div class="list">
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>신청상태</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in reservations %}
+            <tr>
+                <td>{{ r.pk }}</td>
+                <td>{{ r }}</td>
+                <td>{{ r.status }}</td>
+                <td>{{ r.date.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="clearfix">
+    <a class="btn btn-info" href="{% url 'calender:regular_form' %}">신청하기</a>
+</div>
+{% endblock %}
