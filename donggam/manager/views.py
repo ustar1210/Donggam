@@ -34,20 +34,23 @@ class AdminCalendarView(generic.ListView):
         return context
 
 def admin_save(request):
-    print(request.POST)
-    for a in request.POST:
-        if a == 'csrfmiddlewaretoken':
-            continue
-        date = a.split('-', -1)
-        yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
-        if date[3] == 'am' :
-            time = '10'
-        else :
-            time = '14'
-        instance = Reservation(date=yearmonthdate, time=time, status='0')
-        instance.save()
-    change_status()
-    return redirect('manager:calendarAdmin')
+    if request.user.is_authenticated:
+        print(request.POST)
+        for a in request.POST:
+            if a == 'csrfmiddlewaretoken':
+                continue
+            date = a.split('-', -1)
+            yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
+            if date[3] == 'am' :
+                time = '10'
+            else :
+                time = '14'
+            instance = Reservation(date=yearmonthdate, time=time, status='0')
+            instance.save()
+        change_status()
+        return redirect('manager:calendarAdmin')
+    else :
+        return redirect('manager:login')
 
 def group_form(request, reservation_id):
     instance = get_object_or_404(Reservation, pk=reservation_id)
@@ -59,15 +62,59 @@ def group_form(request, reservation_id):
         status = '승인완료'
     date = str(instance.date).split('-')
     date = date[0] + '년 ' + date[1] + '월 ' + date[2] + '일'
-    if instance.time == '10':
-        time = '10:00'
-    elif instance.time == '14':
-        time = '14:00'
+    time = instance.time + ':00'
     datetime = date + ' / ' + time
+    if instance.grade == 'n':
+        grade = '기타'
+    else :
+        grade = instance.grade + '학년'
+    if instance.major == 0:
+        major = '공통'
+    elif instance.major == 1:
+        major = '문과'
+    elif instance.major == 2:
+        major = '이과'
+    length = str(instance.length)+'0분'
 
+    places = Place.objects.all()
     return render(request, 'manager/groupform_admin.html', 
     {
         'reservation' : instance,
         'status': status,
         'datetime': datetime,
+        'grade': grade,
+        'major': major,
+        'length': length,
+        'places': places,
     })
+
+
+def group_confirm(request, reservation_id):
+    if request.user.is_authenticated:
+        instance = get_object_or_404(Reservation, pk=reservation_id)
+        
+        if request.method == 'GET':
+            if instance.status == '1':
+                instance.status = '2'
+                instance.save()
+            
+        elif request.method == 'POST':
+            place_name = request.POST['place']
+            if place_name == '':
+                place = get_object_or_404(Place, name='정각원 앞 백년비')
+            else :
+                try :
+                    place = get_object_or_404(Place, name=place_name)
+                except :
+                    place = Place()
+                    place.name = place_name
+                    place.save()
+            instance.place = place
+            instance.admin_comment = request.POST['comment']
+            
+            instance.status = '3'
+            instance.save()
+            
+        return redirect('manager:group_form', reservation_id = reservation_id)
+    else :
+        return redirect('manager:login')

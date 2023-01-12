@@ -77,10 +77,7 @@ def reservationCheck(request, reservation_id):
         status = '승인완료'
     date = str(instance.date).split('-')
     date = date[0] + '년 ' + date[1] + '월 ' + date[2] + '일'
-    if instance.time == '10':
-        time = '10:00'
-    elif instance.time == '14':
-        time = '14:00'
+    time = instance.time + ':00'
     datetime = date + ' / ' + time
     return render(request, 'calender/group_check.html', 
     {

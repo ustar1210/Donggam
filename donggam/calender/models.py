@@ -1,6 +1,11 @@
 from django.db import models
 from django.urls import reverse
 
+class Place(models.Model):
+    name = models.CharField(max_length=100, null=False, blank=False)
+
+    def __str__(self):
+        return self.name
 
 class Reservation(models.Model):
     date = models.DateField(null=False, blank=False)
@@ -42,7 +47,7 @@ class Reservation(models.Model):
         ('4', '신청마감'),
     )
     status = models.CharField(max_length =1, choices=STATUS_CHOICES, null=False, blank=False)
-    place = models.CharField(max_length=100, null=True, blank=True)
+    place = models.ForeignKey(Place, on_delete=models.SET_NULL, null=True, blank=True)
     admin_comment = models.TextField(max_length=200, null=True, blank=True)
     
     @property
@@ -79,6 +84,24 @@ class Reservation(models.Model):
                 return f'<a>[오전 신청가능]</a>'
             else:
                 return f'<a>[오후 신청가능]</a>'
+
+    def __str__(self):
+        datetime = str(self.date)+' / '+self.time+':00'
+        if self.status == '1':
+            status = '[신청대기]'
+        elif self.status == '2':
+            status =  '[검토중]'
+        elif self.status == '3':
+            status = '[승인완료]'
+        elif self.status == '4':
+            status = '[신청마감]'
+        else :
+            if self.time == '10':
+                status = '[오전 신청가능]'
+            else:
+                status = '[오후 신청가능]'
+        return datetime + status
+        
 
         
 class RegularReservation(models.Model):
