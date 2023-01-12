@@ -62,6 +62,24 @@ class Reservation(models.Model):
                 return f'<a href="{url}">[오전 신청가능]</a>'
             else:
                 return f'<a href="{url}">[오후 신청가능]</a>'
+    
+    @property
+    def get_admin_url(self):
+        url = reverse('manager:group_form', args=(self.id,))
+        if self.status == '1':
+            return f'<a href="{url}">[신청대기]</a>'
+        elif self.status == '2':
+            return f'<a href="{url}">[검토중]</a>'
+        elif self.status == '3':
+            return f'<a href="{url}">{self.school}</a>'
+        elif self.status == '4':
+            return f'<a>[신청마감]</a>'
+        else :
+            if self.time == '10':
+                return f'<a>[오전 신청가능]</a>'
+            else:
+                return f'<a>[오후 신청가능]</a>'
+
         
 class RegularReservation(models.Model):
     date = models.DateField(null=False, blank=False)

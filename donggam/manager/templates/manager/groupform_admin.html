@@ -1,0 +1,33 @@
+{% extends 'calender/base.html' %}
+
+{% block content %}
+<div class="text">
+    <h1>단체 캠퍼스투어 신청 확인</h1>
+</div>
+<div class="form">
+    <h2>신청정보 확인</h2>
+    <hr>
+    <p>신청상태 : {{ status }}</p>
+    <p>투어일시 : {{ datetime }}</p>
+    <p>신청자 : {{ reservation.name }}</p>
+    <p>전화번호 : {{ reservation.phone }}</p>
+    <p>이메일 : {{ reservation.email }}</p>
+    <p>학교(기관)명 : {{ reservation.school }}</p>
+    <p>학년 : {{ reservation.grade }}</p>
+    <p>분류 : {{ reservation.major }}</p>
+    <p>대형버스 : {{ reservation.bus }}</p>
+    <p>투어 학생수 : {{ reservation.headcount }}</p>
+    <p>투어 시간 : {{ reservation.length }}</p>
+    <p>진행장소 : {{ reservation.place }}</p>
+    <p>투어 메모 : {{ reservation.memo }}</p>
+</div>
+<div class="admin_section">
+    <p>진행장소 : {{ reservation.place }}</p>
+    <p>관리자메모 : {{ reservation.admin_comment }}</p>
+</div>
+<div class="buttons">
+    <div class="clearfix">
+        <a class="btn btn-info" href="{% url 'manager:calendarAdmin' %}"> 목록으로 </a>
+    </div>
+</div>
+{% endblock %}

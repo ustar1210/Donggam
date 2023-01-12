@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from calender.models import Reservation, RegularReservation
 from manager.utils import AdminCalendar
 from django.views import generic
 from calender.views import *
+from calender.models import *
 
 # Create your views here.
 def manager_index(request):
@@ -47,3 +48,26 @@ def admin_save(request):
         instance.save()
     change_status()
     return redirect('manager:calendarAdmin')
+
+def group_form(request, reservation_id):
+    instance = get_object_or_404(Reservation, pk=reservation_id)
+    if instance.status == '1':
+        status = '신청대기'
+    elif instance.status == '2':
+        status = '검토중'
+    elif instance.status == '3':
+        status = '승인완료'
+    date = str(instance.date).split('-')
+    date = date[0] + '년 ' + date[1] + '월 ' + date[2] + '일'
+    if instance.time == '10':
+        time = '10:00'
+    elif instance.time == '14':
+        time = '14:00'
+    datetime = date + ' / ' + time
+
+    return render(request, 'manager/groupform_admin.html', 
+    {
+        'reservation' : instance,
+        'status': status,
+        'datetime': datetime,
+    })
