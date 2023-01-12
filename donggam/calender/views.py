@@ -6,13 +6,16 @@ from django.utils.safestring import mark_safe
 from django.urls import reverse
 from .models import *
 import calendar
-from .utils import Calendar, ReservationForm
+from .utils import Calendar, ReservationForm, RegularReservationForm
 
 def index(request):
     return render(request, 'calender/index.html')
 
 def group_notice(request):
     return render(request, 'calender/group_notice.html')
+
+def regular_notice(request):
+    return render(request, 'calender/regular_notice.html')
 
 class CalendarView(generic.ListView):
     model = Reservation
@@ -95,7 +98,7 @@ def pw_check(request, reservation_id):
     if password == request.POST['pw']:
         return redirect('calender:reservation_edit', reservation_id=reservation_id)
     else :
-        return redirect('calender:password', reservation_id)
+        return redirect('calender:password', reservation_id = reservation_id)
 
 def change_status():
     print(datetime.datetime.today())
@@ -116,4 +119,28 @@ def regular_list(request):
     })
 
 def regular_form(request):
-    return render(request, 'calender/regular_form.html')
+    instance = RegularReservation()
+    form = RegularReservationForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        instance.status = '1'
+        form.save()
+        return HttpResponseRedirect(reverse('calender:regular_list'))
+    return render(request, 'calender/regular_form.html', {'form': form})
+
+def regular_detail(request, reservation_id):
+    return render(request, 'calender/regular_detail.html', 
+    {
+
+    })
+
+def regular_pw(request, reservation_id):
+    if request.method ==  'GET':
+        return render(request, 'calender/regular_password.html', {'reservation_id' : reservation_id})
+    
+    elif request.method == 'POST':
+        instance = get_object_or_404(RegularReservation, pk=reservation_id)
+        password = instance.phone.split('-')[-1]
+        if password == request.POST['pw']:
+            return redirect('calender:regular_detail', reservation_id = reservation_id)
+        else :
+            return redirect('calender:regular_pw', reservation_id = reservation_id)

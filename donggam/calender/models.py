@@ -107,7 +107,7 @@ class RegularDate(models.Model):
     date = models.DateField(null=False, blank=True)
 
     def __str__(self):
-        return self.date
+        return str(self.date)
 
         
 class RegularReservation(models.Model):
@@ -134,14 +134,13 @@ class RegularReservation(models.Model):
     motivation = models.TextField(max_length=200, null=True, blank=True)
     request = models.TextField(max_length=200, null=True, blank=True)
     STATUS_CHOICES = (
-        ('0', '신청가능'),
         ('1', '신청대기'),
         ('2', '검토중'),
         ('3', '승인완료'),
         ('4', '재확인 필요'),
     )
     status = models.CharField(max_length =1, choices=STATUS_CHOICES, null=False, blank=False)
-    created_at = models.DateField(auto_now=True)
+    created_at = models.DateField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
         return self.name + '님의 정기 캠퍼스투어 신청'
