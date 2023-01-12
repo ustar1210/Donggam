@@ -107,8 +107,13 @@ def change_status():
     return 
 
 
-def regular_notice(request):
-    return render(request, 'calender/regular_notice.html')
+def regular_list(request):
+    instances = RegularReservation.objects.all()
+
+    return render(request, 'calender/regular_list.html', 
+    {
+        'reservations': instances,
+    })
 
 def regular_form(request):
     return render(request, 'calender/regular_form.html')

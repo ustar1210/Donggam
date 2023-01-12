@@ -103,9 +103,15 @@ class Reservation(models.Model):
         return datetime + status
         
 
+class RegularDate(models.Model):
+    date = models.DateField(null=False, blank=True)
+
+    def __str__(self):
+        return self.date
+
         
 class RegularReservation(models.Model):
-    date = models.DateField(null=False, blank=False)
+    date = models.ForeignKey(RegularDate, on_delete=models.SET_NULL, null=True, blank=True)
     AGE_CHOICES = (
         ('u', '14세이상'),
         ('d', '14세미만'),
@@ -132,6 +138,10 @@ class RegularReservation(models.Model):
         ('1', '신청대기'),
         ('2', '검토중'),
         ('3', '승인완료'),
-        ('4', '신청마감'),
+        ('4', '재확인 필요'),
     )
     status = models.CharField(max_length =1, choices=STATUS_CHOICES, null=False, blank=False)
+    created_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.name + '님의 정기 캠퍼스투어 신청'
