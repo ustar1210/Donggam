@@ -1,0 +1,17 @@
+    {% load static %}
+    <nav class="navbar" style="margin-top: 12px;"> 
+        <div class="navbar__logo" style="font-weight:600">
+                
+            <a href="{% url 'calender:group_notice' %}" style="color: #A2988F;"> 
+                <img src="{% static 'img/dongguk_logo.png' %}" alt="Dongguk logo" class="image">
+                &nbsp;| &nbsp;캠퍼스투어 신청</a>
+        </div>
+        <ul class="navbar__menu">
+            <li><a class="" href="{% url 'calender:group_notice' %}"> 단체 캠퍼스투어 </a></li>
+            <li><a class="" href="{% url 'calender:regular_notice' %}"> 정기 캠퍼스투어 </a></li>
+        </ul>
+        <a href="#" class="navbar__toggleBtn">
+            <i class="fas fa-bars"></i>
+        </a>
+    </nav>
+    <hr>
