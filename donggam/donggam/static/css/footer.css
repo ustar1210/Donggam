@@ -1,6 +1,6 @@
 
 footer {
-    padding: 55px 122px;
+    padding: 55px 122px 78px 122px;
     color: #999999;
     font-size: 15px;
     background-color: #272626;
@@ -8,14 +8,14 @@ footer {
   
   footer p span {
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 32px;
+    transform: translateY(13%);
   }
-
 
 .footer_image{
     width: 10%;
 }
 .insta_image{
     float: right;
-    width: 1.4%;
+    width: 1.5%;
 }
