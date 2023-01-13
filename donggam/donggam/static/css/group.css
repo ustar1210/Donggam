@@ -35,6 +35,10 @@
     color: #DF633B; 
     font-weight: 700;
 }
+.notice_body p low{
+    font-weight: 400;
+}
+
 .apply_btn{    
     float: right;
     background: #DF633B;
