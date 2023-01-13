@@ -8,3 +8,54 @@
     padding: 30px 35px;
     font-weight: 700;
 }
+.board_list_wrap{
+    margin: 46px 123px 73px 123px;
+}
+.board_list {
+    width: 100%;
+}
+
+.board_list > div {
+    border-bottom: 1.5px solid #E8E8E8;
+    font-size: 0;
+}
+
+.board_list > div.top {
+    border-bottom: 1.5px solid #585757;
+}
+
+.board_list > div:last-child {
+
+    border-bottom: 1.5px solid #E8E8E8;
+}
+
+.board_list > div > div {
+    display: inline-block;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.board_list > div.top > div {
+    font-weight: 600;
+}
+
+.board_list .num {
+    width: 10%;
+}
+
+.board_list .title {
+    width: 55%;
+    text-align: left;
+}
+
+.board_list .top .title {
+    text-align: center;
+}
+.board_list .status{
+    width: 25%;
+}
+
+.board_list .date {
+    width: 10%;
+}

@@ -2,15 +2,71 @@
 
 {% block content %}
 <div class="regular_apply">
-    <div class="notice_title">
-        <h1>정기 캠퍼스투어 신청</h1>
+    <div class="board_wrap">
+        <div class="board_title">
+            <div class="notice_title">
+                <h1>정기 캠퍼스투어 신청</h1>
+            </div>
+            <div class="regular_info">
+                <p style>
+                    [공지] 1월 정기 캠퍼스투어일은 1월 18일(토) 입니다.
+                </p>
+            </div>
+        </div>
+        <div class="board_list_wrap">
+            <div class="board_list">
+                <div class="top">
+                    <div class="num">번호</div>
+                    <div class="title">제목</div>
+                    <div class="status">신청상태</div>
+                    <div class="date">작성일</div>
+                </div>
+                <div>
+                    <div class="num">5</div>
+                    <div class="title"><a href="">님의 정기 캠퍼스투어 신청</a></div>
+                    <div class="status">검토중</div>
+                    <div class="date">2021.1.15</div>
+                </div>
+                <div>
+                    <div class="num">4</div>
+                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
+                    <div class="status">검토중</div>
+                    <div class="date">2021.1.15</div>
+                </div>
+                <div>
+                    <div class="num">3</div>
+                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
+                    <div class="status">검토중</div>
+                    <div class="date">2021.1.15</div>
+                </div>
+                <div>
+                    <div class="num">2</div>
+                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
+                    <div class="status">검토중</div>
+                    <div class="date">2021.1.15</div>
+                </div>
+                <div>
+                    <div class="num">1</div>
+                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
+                    <div class="status"><high>신청상태를 확인해주세요</high></div>
+                    <div class="date">2021.1.15</div>
+                </div>
+            </div>
+            <div class="board_page">
+                <a href="#" class="bt first"><<</a>
+                <a href="#" class="bt prev"><</a>
+                <a href="#" class="num on">1</a>
+                <a href="#" class="num">2</a>
+                <a href="#" class="num">3</a>
+                <a href="#" class="num">4</a>
+                <a href="#" class="num">5</a>
+                <a href="#" class="bt next">></a>
+                <a href="#" class="bt last">>></a>
+            </div>
+            <a class="apply_btn" href="{% url 'calender:regular_form' %}">글쓰기</a>
+        </div>
+        
     </div>
-    <div class="regular_info">
-        <p style>
-            [공지] 1월 정기 캠퍼스투어일은 1월 18일(토) 입니다.
-        </p>
-    </div>
-
     
     <div class="list">
         <table>
@@ -44,7 +100,7 @@
     </div>
     
     <div class="clearfix">
-        <a class="btn btn-info" href="{% url 'calender:regular_form' %}">신청하기</a>
+        <a class="btn btn-info" href="">신청하기</a>
     </div>
 </div>
 {% endblock %}
