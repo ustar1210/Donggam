@@ -19,3 +19,25 @@ footer {
     float: right;
     width: 1.5%;
 }
+
+@media (max-width: 768px) {
+    footer {
+        padding: 20px 10px;
+        color: #999999;
+        background-color: #272626;
+        font-size: 4px;
+      }
+      
+      footer p span {
+        display: block;
+        font-size: 4px;
+        margin-left: 1px;
+      }
+    .footer_image{
+        width: 18%;
+    }
+    .insta_image{
+        float: right;
+        width: 5%;
+    }
+}

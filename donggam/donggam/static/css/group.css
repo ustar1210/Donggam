@@ -63,18 +63,19 @@
         color: #555555;
     }
     .notice_title p{
-        font-size: 13px;
+        font-size: 12px;
         color: #666666;
     }
     
     .notice_body{
         margin: 40px 20px ;
-        font-size: 13px;
+        
     }
     .notice_body p{
         margin: 24px 0px;
         color:333333;
         font-weight: 500;
+        font-size: 13px;
     }
     .notice_body p span{
         font-size: 11px;
