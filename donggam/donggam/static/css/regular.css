@@ -1,0 +1,10 @@
+.regular_info{
+    background: rgba(255, 150, 27, 0.1);
+    border-radius: 8px;
+    margin: 46px 123px 73px 123px;
+    height: 84px;
+}
+.regular_info p{
+    padding: 30px 35px;
+    font-weight: 700;
+}

@@ -1,42 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="notice">
-    <h1>정기 캠퍼스투어 신청</h1>
-</div>
+<div class="regular_apply">
+    <div class="notice_title">
+        <h1>정기 캠퍼스투어 신청</h1>
+    </div>
+    <div class="regular_info">
+        <p style>
+            [공지] 1월 정기 캠퍼스투어일은 1월 18일(토) 입니다.
+        </p>
+    </div>
 
-<div class="list">
-    <table>
-        <thead>
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>신청상태</th>
-                <th>작성일</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for r in reservations %}
-            <tr>
-                <td>{{ r.pk }}</td>
-                <td><a href="{% url 'calender:regular_pw' reservation_id=r.pk %}">{{ r }}</a></td>
-                {% if r.status == '1' %}
-                <td>신청대기</td>
-                {% elif r.status == '2' %}
-                <td>검토중</td>
-                {% elif r.status == '3' %}
-                <td>승인완료</td>
-                {% elif r.status == '4' %}
-                <td>신청상태를 확인해주세요</td>
-                {% endif %}
-                <td>{{ r.created_at }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-<div class="clearfix">
-    <a class="btn btn-info" href="{% url 'calender:regular_form' %}">신청하기</a>
+    
+    <div class="list">
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>신청상태</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reservations %}
+                <tr>
+                    <td>{{ r.pk }}</td>
+                    <td><a href="{% url 'calender:regular_pw' reservation_id=r.pk %}">{{ r }}</a></td>
+                    {% if r.status == '1' %}
+                    <td>신청대기</td>
+                    {% elif r.status == '2' %}
+                    <td>검토중</td>
+                    {% elif r.status == '3' %}
+                    <td>승인완료</td>
+                    {% elif r.status == '4' %}
+                    <td>신청상태를 확인해주세요</td>
+                    {% endif %}
+                    <td>{{ r.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="clearfix">
+        <a class="btn btn-info" href="{% url 'calender:regular_form' %}">신청하기</a>
+    </div>
 </div>
 {% endblock %}
