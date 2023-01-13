@@ -9,3 +9,18 @@ a:hover{
 body{
     font-family: 'Noto Sans KR';
 }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+main {
+  flex: 1;
+}
