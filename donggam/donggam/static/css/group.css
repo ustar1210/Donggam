@@ -48,6 +48,7 @@
     color: #DF633B;
     background: white;
 }
+
 /* 모바일화면 */
 @media (max-width: 768px) {
     .notice_title{
