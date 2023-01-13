@@ -40,7 +40,7 @@
         <a class="btn btn-info" href="{% url 'manager:index' %}"> 관리자 </a>
       </div> -->
 
-      {% include 'shared/footer.html' %}
+      
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -52,6 +52,7 @@
   <script src="{% static 'calender/script/selecttime.js' %}"></script>
   {% block script %}
   {% endblock %}
+  {% include 'shared/footer.html' %}
 </body>
 
 
