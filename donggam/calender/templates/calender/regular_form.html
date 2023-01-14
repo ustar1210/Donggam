@@ -111,7 +111,7 @@
                 <div>
                     <span class="title">견학일정*</span>
                     <span class="body">
-                        <select name="date" id="date" required>
+                        <select name="date" id="date">
                             <option value="" class="campus_date">캠퍼스 투어 일정 선택</option>
                             {% for d in dates %}
                             <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
