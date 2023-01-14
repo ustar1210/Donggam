@@ -25,8 +25,12 @@
                 <div>
                     <span class="title">구분*</span>
                     <span class="body">
-                        <input type="radio" name="age" value="u"/>14세이상
-                        <input type="radio" name="age" value="d"/>14세미만
+                        <span style="margin-right: 42px;">
+                            <input type="radio" name="age" value="u"  style="margin-right:10px"/>14세이상
+                        </span>
+                        <span>
+                            <input type="radio" name="age" value="d" style="margin-right:10px"/>14세미만
+                        </span>
                     </span>
                 </div>
                 <hr>
@@ -41,37 +45,37 @@
                 <div id="adult">
                     <span class="title">보호자 성명*</span>
                     <span class="body">
-                        <input type="text" name="parent_name">
+                        <input class="form_box"type="text" name="parent_name" required>
                     </span>
                 </div>
 
                 <div id="adult">
                     <span class="title">보호자 연락처*</span>
                     <span class="body">
-                        <input type="text" name="parent_phone"></p>
+                        <input type="text" class="form_box" name="parent_phone" placeholder="'-'를 제외하고 숫자로만 입력하세요" required></p>
                     </span>
                 </div>
                 <hr>
                 <div>
                     <span class="title">신청자 성명*</span>
                     <span class="body">
-                        <input type="text" name="name">
+                        <input type="text" class="form_box" name="name" required>
                     </span>
                 </div>
     
                 <div>
-                    <span class="title">신청자 연락처*</span>
+                    <span class="title" >신청자 연락처*</span>
                     <span class="body">
-                        <input type="text" name="phone">
+                        <input type="text"class="form_box" name="phone" required placeholder="'-'를 제외하고 숫자로만 입력하세요">
                     </span>
                 </div>
 
                 <div>
-                    <span class="title">신청자 이메일*</span>
+                    <span class="title" required>신청자 이메일*</span>
                     <span class="body">
-                        <input type="text" name="email_front">
+                        <input type="text" class="form_box" name="email_front">
                         @ 
-                            <input list="email_list" id="email_back" name="email_back"/>
+                            <input list="email_list" class="form_box" id="email_back" name="email_back"/>
                             <datalist id="email_list">
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
@@ -85,7 +89,7 @@
                 <div>
                     <span class="title">소속학교</span>
                     <span class="body">
-                        <input type="text" name="school">
+                        <input type="text"class="form_box"  name="school">
                     </span>
                 </div>
 
@@ -102,9 +106,9 @@
                     </span>
                 </div>
                 <div>
-                    <span class="title">견학인원*</span>
+                    <span class="title" >견학인원*</span>
                     <span class="body">
-                        <input type="number" name="headcount">&nbsp;명
+                        <input type="number"class="form_box" name="headcount" required>&nbsp;명
                     
                     </span>
                     <span style="color: #DF633B;">
@@ -117,7 +121,7 @@
                     <span class="title">견학일정*</span>
                     <span class="body">
                         <select name="date" id="date" required>
-                            <option value="" disabled>캠퍼스 투어 일정 선택</option>
+                            <option value="" class="campus_date">캠퍼스 투어 일정 선택</option>
                             {% for d in dates %}
                             <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
                             {% endfor %} 
@@ -198,7 +202,7 @@
                 </select></p>
                 <p>견학인원 : <input type="number" name="headcount" value="{{ reservation.headcount }}">명</p>
                 <p>* 10명 이상 100명 이하만 신청 가능합니다</p>
-                <p>견학일정 : <select name="date" id="date" required>
+                <p>견학일정 : <select name="date" id="date">
                     <option value="" disabled>캠퍼스 투어 일정 선택</option>
                     {% for d in dates %}
                     {% if reservation.date == d %}
@@ -224,7 +228,7 @@
                     *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
                     *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
                 </span>
-                <input type="radio" name="agree" value="on"/>동의
+                <input type="radio" name="agree" value="on"/ required>동의
                 <input type="radio" name="agree" value="off"/>동의하지않음
             </div>
 
