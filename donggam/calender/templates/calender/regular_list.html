@@ -21,82 +21,51 @@
                     <div class="status">신청상태</div>
                     <div class="date">작성일</div>
                 </div>
+                {% for r in page_obj %}
                 <div>
-                    <div class="num">5</div>
-                    <div class="title">님의 정기 캠퍼스투어 신청</div>
-                    <div class="status">검토중</div>
-                    <div class="date">2021.1.15</div>
+                    <div class="num">{{ r.pk }}</div>
+                    <div class="title"><a href="{% url 'calender:regular_detail' reservation_id=r.pk %}">{{ r }}</a></div>
+                    <div class="status">
+                        {% if r.status == '1' %}
+                        신청대기
+                        {% elif r.status == '2' %}
+                        검토중
+                        {% elif r.status == '3' %}
+                        승인완료                       
+                        {% elif r.status == '4' %}
+                        신청상태를 확인해주세요
+                        {% endif %}
+                    </div>
+                    <div class="date">{{ r.created_at }}</div>
                 </div>
-                <div>
-                    <div class="num">4</div>
-                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
-                    <div class="status">검토중</div>
-                    <div class="date">2021.1.15</div>
-                </div>
-                <div>
-                    <div class="num">3</div>
-                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
-                    <div class="status">검토중</div>
-                    <div class="date">2021.1.15</div>
-                </div>
-                <div>
-                    <div class="num">2</div>
-                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
-                    <div class="status">검토중</div>
-                    <div class="date">2021.1.15</div>
-                </div>
-                <div>
-                    <div class="num">1</div>
-                    <div class="title"><a href="view.html">글 제목이 들어갑니다.</a></div>
-                    <div class="status"><high>신청상태를 확인해주세요</high></div>
-                    <div class="date">2021.1.15</div>
-                </div>
+                {% endfor %}
             </div>
             <div class="board_page">
-                <a href="#" class="bt first"><<</a>
+                <a href="?page={{ page_obj.start_index }}" class="bt first"><<</a>
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="bt prev"><</a>
+                {% else %}
                 <a href="#" class="bt prev"><</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="num">4</a>
-                <a href="#" class="num">5</a>
+                {% endif %}
+
+                {% for p in page_obj.paginator.page_range %}
+                {% if p == page_obj.number %}
+                <a href="?page={{ p }}" class="num on">{{ p }}</a>
+                {% else %}
+                <a href="?page={{ p }}" class="num">{{ p }}</a>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="bt next">></a>
+                {% else %}
                 <a href="#" class="bt next">></a>
-                <a href="#" class="bt last">>></a>
+                {% endif %}
+                <a href="?page={{ page_obj.end_index }} " class="bt last">>></a>
             </div>
             <a class="apply_btn" href="{% url 'calender:regular_form' %}">글쓰기</a>
         </div>
         
-    </div>
-    
-    <div class="list">
-        <table>
-            <thead style="border-bottom: 1.5px solid #E8E8E8;">
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>신청상태</th>
-                    <th>작성일</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for r in reservations %}
-                <tr>
-                    <td>{{ r.pk }}</td>
-                    <td><a href="{% url 'calender:regular_pw' reservation_id=r.pk %}">{{ r }}</a></td>
-                    {% if r.status == '1' %}
-                    <td>신청대기</td>
-                    {% elif r.status == '2' %}
-                    <td>검토중</td>
-                    {% elif r.status == '3' %}
-                    <td>승인완료</td>
-                    {% elif r.status == '4' %}
-                    <td>신청상태를 확인해주세요</td>
-                    {% endif %}
-                    <td>{{ r.created_at }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
     
 </div>

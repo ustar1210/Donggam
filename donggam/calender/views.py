@@ -109,13 +109,16 @@ def change_status():
         t.save()
     return 
 
+from django.core.paginator import Paginator
 
 def regular_list(request):
     instances = RegularReservation.objects.all()
-
+    page = request.GET.get('page', '1')
+    paginator = Paginator(instances, '5')
+    page_obj = paginator.page(page)
     return render(request, 'calender/regular_list.html', 
     {
-        'reservations': instances,
+        'page_obj': page_obj,
     })
 
 def regular_form(request):
