@@ -39,6 +39,9 @@
 .board_list > div.top > div {
     font-weight: 600;
 }
+.board_list > div.body > div.title > a {
+    color : #333333;
+}
 
 .board_list .num {
     width: 10%;
@@ -69,34 +72,35 @@
 
 .board_page a {
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     box-sizing: border-box;
     vertical-align: middle;
-    border: 1px solid #ddd;
-    border-left: 0;
+    border-radius: 8px;
+    color: #666666;
+    border: 1.5px solid #666666;
     line-height: 100%;
+    margin: 0px 5px;
+    font-weight: 700;
 }
 
 .board_page a.bt {
-    padding-top: 10px;
+    padding-top: 12px;
     font-size: 1.2rem;
     letter-spacing: -1px;
 }
 
 .board_page a.num {
-    padding-top: 9px;
-    font-size: 1.4rem;
+    padding-top: 0.7rem;
+    font-size: 1.2rem;
+    
 }
 
 .board_page a.num.on {
-    border-color: #000;
-    background: #000;
+    border-color: #666666;
+    background: #666666;
     color: #fff;
 }
 
-.board_page a:first-child {
-    border-left: 1px solid #ddd;
-}
 
 
