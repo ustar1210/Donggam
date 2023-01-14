@@ -10,10 +10,126 @@
     <hr>
     <form method="post">
         {% csrf_token %}
-        <table class="form form-table">
-            {{ form }}
-            <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
-        </table>
+        {% if state == 0 %}
+            <p>구분 : 
+                <input type="radio" name="age" value="u"/>14세이상
+                <input type="radio" name="age" value="d"/>14세미만
+            </p>
+            <p>패스워드 : </p>
+            <p>*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
+            <p>보호자 성명 : <input type="text" name="parent_name"></p>
+            <p>보호자 연락처 : <input type="text" name="parent_phone"></p>
+            <p>신청자 성명 : <input type="text" name="name"></p>
+            <p>신청자 연락처 : <input type="text" name="phone"></p>
+            <p>신청자 이메일 : <input type="text" name="email_front"> @ 
+                <input list="email_list" id="email_back" name="email_back"/>
+                <datalist id="email_list">
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="daum.net">daum.net</option>
+                    <option value="hanmail.net">hanmail.net</option>
+                    <option value="직접입력">직접입력</option>
+                </datalist>
+            </p>
+            <p>소속학교 : <input type="text" name="school"></p>
+            <p>학년 : <select name="grade">
+                <option value="" disabled selected>학년선택</option>
+                <option value="1">1학년</option>
+                <option value="2">2학년</option>
+                <option value="3">3학년</option>
+                <option value="n">기타</option>
+            </select></p>
+            <p>견학인원 : <input type="number" name="headcount">명</p>
+            <p>* 10명 이상 100명 이하만 신청 가능합니다</p>
+            <p>견학일정 : <select name="date" id="date" required>
+                <option value="" disabled>캠퍼스 투어 일정 선택</option>
+                {% for d in dates %}
+                <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
+                {% endfor %}
+                
+            </select></p>
+            <p>견학 동기 : <input type="textarea" name="motivation"></p>
+            <p>요청사항 : <input type="textarea" name="request"></p>
+        {% else %}
+            <p>구분 : 
+                {% if reservation.age == "u" %}
+                <input type="radio" name="age" value="u" checked/>14세이상
+                {% else%}
+                <input type="radio" name="age" value="u"/>14세이상
+                {% endif %}
+                {% if reservation.age == "d" %}
+                <input type="radio" name="age" value="d" checked/>14세미만
+                {% else %}
+                <input type="radio" name="age" value="d"/>14세미만
+                {% endif %}
+            </p>
+            <p>패스워드 : </p>
+            <p>*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
+            <p>보호자 성명 : <input type="text" name="parent_name" value="{{ reservation.parent_name }}"></p>
+            <p>보호자 연락처 : <input type="text" name="parent_phone" value="{{ reservation.parent_phone }}"></p>
+            <p>신청자 성명 : <input type="text" name="name" value="{{ reservation.name }}"></p>
+            <p>신청자 연락처 : <input type="text" name="phone" value="{{ reservation.phone }}"></p>
+            <p>신청자 이메일 : <input type="text" name="email_front" value="{{ email_front }}"> @ 
+                <input list="email_list" id="email_back" name="email_back" value="{{ email_back }}"/>
+                <datalist id="email_list">
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="daum.net">daum.net</option>
+                    <option value="hanmail.net">hanmail.net</option>
+                    <option value="직접입력">직접입력</option>
+                </datalist>
+            </p>
+            <p>소속학교 : <input type="text" name="school" value="{{ reservation.school }}"></p>
+            <p>학년 : <select name="grade">
+                <option value="" disabled selected>학년선택</option>
+                {% if reservation.grade == '1' %}
+                <option value="1" selected>1학년</option>
+                {% else %}
+                <option value="1">1학년</option>
+                {% endif %}
+
+                {% if reservation.grade == '2' %}
+                <option value="2" selected>2학년</option>
+                {% else %}
+                <option value="2">2학년</option>
+                {% endif %}
+
+                {% if reservation.grade == '3' %}
+                <option value="3" selected>3학년</option>
+                {% else %}
+                <option value="3">3학년</option>
+                {% endif %}
+
+                {% if reservation.grade == 'n' %}
+                <option value="n" selected>기타</option>
+                {% else %}
+                <option value="n">기타</option>
+                {% endif %}
+            </select></p>
+            <p>견학인원 : <input type="number" name="headcount" value="{{ reservation.headcount }}">명</p>
+            <p>* 10명 이상 100명 이하만 신청 가능합니다</p>
+            <p>견학일정 : <select name="date" id="date" required>
+                <option value="" disabled>캠퍼스 투어 일정 선택</option>
+                {% for d in dates %}
+                {% if reservation.date == d %}
+                <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" selected>{{ d }}</option>
+                {% else %}
+                <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
+                {% endif %}
+                {% endfor %}
+                
+            </select></p>
+            <p>견학 동기 : <input type="textarea" name="motivation" value="{{ reservation.motivation }}"></p>
+            <p>요청사항 : <input type="textarea" name="request" value="{{ reservation.request }}"></p>
+        {% endif %}
+        <p>동의사항 : </p>
+        <p>개인정보 수집 및 이용자 동의사항</p>
+        <p>구분 : 
+            <input type="radio" name="agree" value="on"/>동의
+            <input type="radio" name="agree" value="off"/>동의하지않음
+        </p>
+        
+        <button type="submit" class="btn btn-info right"> Submit </button>
     </form>
 
 </div>

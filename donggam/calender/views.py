@@ -127,14 +127,45 @@ def regular_list(request):
 def regular_form(request, reservation_id=None):
     if reservation_id != None:
         instance = get_object_or_404(RegularReservation, pk=reservation_id)
+        email_front = instance.email.split('@')[0]
+        email_back = instance.email.split('@')[1]
+        state = 1
     else :
         instance = RegularReservation()
-    form = RegularReservationForm(request.POST or None, instance=instance)
-    if request.POST and form.is_valid():
-        instance.status = '1'
-        form.save()
-        return HttpResponseRedirect(reverse('calender:regular_list'))
-    return render(request, 'calender/regular_form.html', {'form': form})
+        email_front = '' 
+        email_back = ''
+        state = 0
+
+    tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
+    
+
+    if request.POST:
+        if request.POST['agree'] == 'on':
+            instance.status = '1'
+            instance.age = request.POST['age']
+            instance.parent_name = request.POST['parent_name']
+            instance.parent_phone = request.POST['parent_phone']
+            instance.name = request.POST['name']
+            instance.phone = request.POST['phone']
+            instance.email = request.POST['email_front'] + '@' +request.POST['email_back']
+            instance.school = request.POST['school']
+            instance.grade = request.POST['grade']
+            instance.headcount = request.POST['headcount']
+            instance.date = get_object_or_404(RegularDate, date = request.POST['date'])
+            instance.motivation = request.POST['motivation']
+            instance.request = request.POST['request']
+            instance.save()    
+            return HttpResponseRedirect(reverse('calender:regular_list'))
+        else :
+            return redirect('calender:regular_form', reservation_id=reservation_id)
+
+    return render(request, 'calender/regular_form.html', {
+        'reservation': instance,
+        'state': state,
+        'dates': tourdates,
+        'email_front': email_front,
+        'email_back': email_back,
+        })
 
 def regular_detail(request, reservation_id):
     instance = get_object_or_404(RegularReservation, pk = reservation_id)
