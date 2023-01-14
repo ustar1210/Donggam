@@ -11,6 +11,7 @@
 }
 
 .regular_form_info span{
+
     padding: 10px 35px 0px 35px;
     font-weight: 500;
     font-size: 16px;
@@ -46,16 +47,28 @@ line-height: 35px;
 
 .regular_btn_box{
     text-align: center;
+    justify-content: center;
+
 }
 .regular_btn{
+    margin: 10px;
     display: inline-block;
     background: #DF633B;
-    padding: 12px 76px;
+    width: 13%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    
     border: 1px solid #DF633B;
     border-radius: 8px;
     font-size: 16px;
     color: white;
 }
+
+.regular_btn:hover{
+        color: #DF633B;
+        background: white;
+}
+
 input[type='radio'] {
     -webkit-appearance:none;
     width:17px;
@@ -83,7 +96,8 @@ input[type='radio']:checked:before {
 }
 
 .form_box{
-    text-align: center;
+    padding-left: 10px;
+    text-align: left;
     font-size: 14px;
     font-weight: 400;
     height: 40px;
@@ -91,6 +105,76 @@ input[type='radio']:checked:before {
     border-radius: 5px;
     width: 220px;
 }
-.phone_num{
+/* 모바일화면 */
+@media (max-width: 768px) {
+    .regular_form_info{
+        background: rgba(255, 150, 27, 0.1);
+        border-radius: 8px;
+        margin: 10px 25px 10px 25px;
+        height: 13rem;
+        padding: 0px 5px;
+    }
+    .regular_form_info p.title{
+        padding: 10px 10px 0px 20px;
+        font-weight: 700;
+        font-size: 13px;
+    }
     
+    .regular_form_info span{
+        padding: 0px;
+        font-weight: 500;
+        font-size: 10px;
+        padding-bottom: 10px;
+    }
+    .form_wrap{
+        margin: 20px 25px 73px 25px;   
+    }
+    .form_title{
+        font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #585757;;
+    }
+    
+    
+    .form_list {
+        width: 100%;
+    }
+    
+    .form_list > form > div > div {
+        padding: 10px 0;
+        font-size: 12px;
+        display: flex;
+    }
+    .form_list > form > div > div > span.title{
+        width: 25%;
+        font-weight: 700;
+    }
+    .form_list > form > div > div > span.body{
+        width: 75%;
+    }
+
+
+.regular_btn_box{
+    text-align: center;
 }
+.regular_btn{
+    display: inline-block;
+    background: #DF633B;
+    padding: 10px 36px;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+}
+.form_box{
+    text-align: center;
+    font-size: 11px;
+    font-weight: 400;
+    height: 30px;
+    border: 1.2px solid #CBCBCB;
+    border-radius: 5px;
+    width: 150px;
+}
+    }

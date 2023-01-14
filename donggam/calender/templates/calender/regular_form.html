@@ -111,10 +111,7 @@
                     <span class="title" >견학인원*</span>
                     <span class="body">
                         <input type="number"class="form_box" name="headcount" required>&nbsp;명
-                    
-                    </span>
-                    <span style="color: #DF633B;">
-                        &nbsp;&nbsp;* 10명 이상 100명 이하만 신청 가능합니다
+                        <high style="color: #DF633B;"> *10명 이상 100명 이하만 신청 가능합니다</high>
                     </span>
                 </div>
                 <hr>
@@ -229,9 +226,10 @@
                     <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
                     *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
                     *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                    <br>
+                    <input type="radio" name="agree" value="on"/ required>동의
+                    <input type="radio" name="agree" value="off"/>동의하지않음
                 </span>
-                <input type="radio" name="agree" value="on"/ required>동의
-                <input type="radio" name="agree" value="off"/>동의하지않음
             </div>
 
             <div class="regular_btn_box">
@@ -241,19 +239,6 @@
             
         </form>
     </div>
-    <input type="radio" name="cs_channel" id="cs_channel" value="지인소개" class="radio" /><span class="ml_10">지인소개</span>&nbsp;
- 
-<input type="radio" name="cs_channel" id="cs_channel_etc" value="" class="radio" /><span class="ml_10">기타</span>&nbsp;
- 
-<br><br>
- 
-<div id="etc_view" style="display:none;">
- 
-    <input type="text" id="cs_channel_etc_view" name="cs_channel"  class="form-control" style="width:200px" placeholder="기타 선택 시 입력해주세요." />
-     
-    </div>
-     
-
 </div>
 
 <script>
