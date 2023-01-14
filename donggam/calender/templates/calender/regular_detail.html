@@ -25,7 +25,7 @@
 
 <div class="clearfix">
     <a class="btn btn-info left" href="{% url 'calender:regular_list' %}"> 목록으로 </a>    
-    <a class="btn btn-info left" href="{% url 'calender:regular_form' reservation_id=reservation.pk %}"> 수정하기 </a>
+    <a class="btn btn-info left" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}"> 수정하기 </a>
     <a class="btn btn-info left" href="{% url 'calender:regular_delete' reservation_id=reservation.pk %}"> 삭제하기 </a>
 
 </div>
