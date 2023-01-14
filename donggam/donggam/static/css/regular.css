@@ -152,3 +152,113 @@
 }
 
 }
+
+@media  (max-width: 1200px) {
+    
+.board_list_wrap{
+    margin: 46px 113px 73px 113px;
+}
+
+.board_list > div > div {
+    display: inline-block;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.board_list .num {
+    width: 10%;
+}
+
+.board_list .title {
+    width: 50%;
+    text-align: left;
+}
+
+.board_list .status{
+    width: 23%;
+}
+
+.board_list .date {
+    width: 17%;
+}
+
+.board_page a {
+    width: 30px;
+    height: 30px;
+}
+
+.board_page a.bt {
+    padding-top: 5px;
+    font-size: 1rem;
+    letter-spacing: -1px;
+}
+
+.board_page a.num {
+    padding-top: 0.3rem;
+    font-size: 1rem;
+    
+}
+}
+
+@media  (max-width: 768px) {
+
+    .regular_info{
+        background: rgba(255, 150, 27, 0.1);
+        border-radius: 8px;
+        margin: 23px 43px 22px 43px;
+        height: 43px;
+    }
+    .regular_info p{
+        font-size: 11.4px;
+        padding: 12px 30px 12px 20px;
+        font-weight: 700;
+    }
+    
+    
+    .board_list_wrap{
+        margin: 33px 23px 0px 23px;
+    }
+    
+    .board_list > div > div {
+        display: inline-block;
+        text-align: center;
+        font-size: 0.65rem;
+    }
+    
+    .board_list .num {
+        width: 7%;
+    }
+    
+    .board_list .title {
+        width: 53%;
+        text-align: left;
+    }
+    
+    .board_list .status{
+        width: 23%;
+    }
+    
+    .board_list .date {
+        width: 17%;
+    }
+    .board_page{
+        margin-bottom: 30px;
+    }
+    .board_page a {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .board_page a.bt {
+        padding-top: 5px;
+        font-size: 1rem;
+        letter-spacing: -1px;
+    }
+    
+    .board_page a.num {
+        padding-top: 0.3rem;
+        font-size: 1rem;
+        
+    }
+    
+    }
