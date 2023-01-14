@@ -26,10 +26,10 @@
                     <span class="title">구분*</span>
                     <span class="body">
                         <span style="margin-right: 42px;">
-                            <input type="radio" name="age" value="u"  style="margin-right:10px"/>14세이상
+                            <input id="adult"type="radio" name="age" value="u"  style="margin-right:10px" checked/>14세이상
                         </span>
                         <span>
-                            <input type="radio" name="age" value="d" style="margin-right:10px"/>14세미만
+                            <input id="adult" type="radio" name="age" value="d" style="margin-right:10px"/>14세미만
                         </span>
                     </span>
                 </div>
@@ -42,20 +42,22 @@
                 </div>
                 <hr>
                 <!-- 14세 미만일대만 보호자 성명, 연락처 뜨게하기 -->
-                <div id="adult">
+
+                <div id="adult_name" style="display: none;">
                     <span class="title">보호자 성명*</span>
                     <span class="body">
                         <input class="form_box"type="text" name="parent_name" required>
                     </span>
                 </div>
 
-                <div id="adult">
+                <div id="adult_num" style="display: none;">
                     <span class="title">보호자 연락처*</span>
                     <span class="body">
                         <input type="text" class="form_box" name="parent_phone" placeholder="'-'를 제외하고 숫자로만 입력하세요" required></p>
                     </span>
+                    <hr>
                 </div>
-                <hr>
+                
                 <div>
                     <span class="title">신청자 성명*</span>
                     <span class="body">
@@ -239,7 +241,43 @@
             
         </form>
     </div>
+    <input type="radio" name="cs_channel" id="cs_channel" value="지인소개" class="radio" /><span class="ml_10">지인소개</span>&nbsp;
+ 
+<input type="radio" name="cs_channel" id="cs_channel_etc" value="" class="radio" /><span class="ml_10">기타</span>&nbsp;
+ 
+<br><br>
+ 
+<div id="etc_view" style="display:none;">
+ 
+    <input type="text" id="cs_channel_etc_view" name="cs_channel"  class="form-control" style="width:200px" placeholder="기타 선택 시 입력해주세요." />
+     
+    </div>
+     
+
 </div>
 
+<script>
+   $(function(){
+    			// type 이 radio 이고 id adult 인 input 을 click 했을 경우
+                $('input[type="radio"][id="adult"]').on('click',function(){
+                    console.log("zzz")
+                    // startSetting 에 checked된 radio button의 value 값을 넣는다.
+                    var startSetting = $('input[type=radio][id="adult"]:checked').val();
+                   // startSetting이 later인 경우 style display를 flex로 변경한다. 
+                   if(startSetting == 'd'){
+                        $('#adult_name').css('display','block');                   
+                        $('#adult_num').css('display','block');                   
+                   // 그외의 경우 style display를 none 으로 변경한다.
+                    }else{
+                        $('#adult_name').css('display','none');                   
+                        $('#adult_num').css('display','none');                   
+                    }
+                });
+            });
+
+
+  
+  
+</script>
 
 {% endblock %}
