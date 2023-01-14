@@ -25,3 +25,39 @@ line-height: 35px;
     padding-bottom: 26px;
     border-bottom: 2.5px solid #585757;;
 }
+
+.form_wrap{
+
+}
+
+.form_body{
+
+
+}
+.form_list {
+    width: 100%;
+}
+
+.form_list > form > div > div {
+    padding: 15px 0;
+    font-size: 18px;
+}
+.form_list > form > div > div > span.title{
+    width: 20%;
+}
+.form_list > form > div > div > span.body{
+    width: 80%;
+}
+
+.regular_btn_box{
+    text-align: center;
+}
+.regular_btn{
+    display: inline-block;
+    background: #DF633B;
+    padding: 12px 76px;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+}
