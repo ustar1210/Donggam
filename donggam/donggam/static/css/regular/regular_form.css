@@ -1,0 +1,27 @@
+.regular_form_info{
+    background: rgba(255, 150, 27, 0.1);
+    border-radius: 8px;
+    margin: 46px 123px 73px 123px;
+    height: 180px;
+}
+.regular_form_info p.title{
+    padding: 30px 35px 0px 35px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.regular_form_info span{
+    padding: 10px 35px 0px 35px;
+    font-weight: 500;
+    font-size: 16px;
+}
+.form_wrap{
+    margin: 46px 123px 73px 123px;   
+}
+.form_title{
+    font-weight: 700;
+font-size: 24px;
+line-height: 35px;
+    padding-bottom: 26px;
+    border-bottom: 2.5px solid #585757;;
+}

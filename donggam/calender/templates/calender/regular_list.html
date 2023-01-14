@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% load static %}
 <div class="regular_apply">
     <div class="board_wrap">
         <div class="board_title">
@@ -8,7 +10,8 @@
                 <h1>정기 캠퍼스투어 신청</h1>
             </div>
             <div class="regular_info">
-                <p style>
+                <p>
+                    <!-- [공지] 1월 정기 캠퍼스투어일은 18일 입니다. -->
                     {% for d in tour_dates %}
                     [공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{ d }} 입니다.
                     {% endfor %}
@@ -24,14 +27,14 @@
                     <div class="date">작성일</div>
                 </div>
                 {% for r in page_obj %}
-                <div>
+                <div class="body">
                     <div class="num">{{ r.pk }}</div>
                     <div class="title"><a href="{% url 'calender:regular_detail' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
                         {% if r.status == '2' %}
-                        검토중
+                        <wait style="color: #999999;">검토중</wait>
                         {% elif r.status == '3' or '4' %}
-                        신청상태를 확인해주세요
+                        <high style="color: #DF633B;">신청상태를 확인해주세요</high>
                         {% endif %}
                     </div>
                     <div class="date">{{ r.created_at }}</div>
