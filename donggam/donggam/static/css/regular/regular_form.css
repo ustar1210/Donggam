@@ -26,14 +26,7 @@ line-height: 35px;
     border-bottom: 2.5px solid #585757;;
 }
 
-.form_wrap{
 
-}
-
-.form_body{
-
-
-}
 .form_list {
     width: 100%;
 }
@@ -41,13 +34,14 @@ line-height: 35px;
 .form_list > form > div > div {
     padding: 15px 0;
     font-size: 18px;
+    display: flex;
 }
 .form_list > form > div > div > span.title{
-    width: 20%;
+    width: 13%;
     font-weight: 700;
 }
 .form_list > form > div > div > span.body{
-    width: 80%;
+    width: 70%;
 }
 
 .regular_btn_box{
@@ -89,9 +83,14 @@ input[type='radio']:checked:before {
 }
 
 .form_box{
-    font-size: 16px;
+    text-align: center;
+    font-size: 14px;
     font-weight: 400;
-    height: 36px;
+    height: 40px;
     border: 1.2px solid #CBCBCB;
     border-radius: 5px;
+    width: 220px;
+}
+.phone_num{
+    
 }
