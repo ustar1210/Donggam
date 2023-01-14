@@ -28,13 +28,9 @@
                     <div class="num">{{ r.pk }}</div>
                     <div class="title"><a href="{% url 'calender:regular_detail' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
-                        {% if r.status == '1' %}
-                        신청대기
-                        {% elif r.status == '2' %}
+                        {% if r.status == '2' %}
                         검토중
-                        {% elif r.status == '3' %}
-                        승인완료                       
-                        {% elif r.status == '4' %}
+                        {% elif r.status == '3' or '4' %}
                         신청상태를 확인해주세요
                         {% endif %}
                     </div>

@@ -7,10 +7,26 @@
 </div>
 
 <div class="detail">
-    어쩌구저쩌구
+    <h2>신청정보 확인</h2>
+    <hr>
+    <p>신청구분 : {{ age }}</p>
+    <p>보호자 성명 : {{ reservation.parent_name }}</p>
+    <p>보호자 연락처 : {{ reservation.parent_phone }}</p>
+    <p>신청자 성명 : {{ reservation.name }}</p>
+    <p>신청자 연락처 : {{ reservation.phone }}</p>
+    <p>신청자 이메일 : {{ reservation.email }}</p>
+    <p>소속학교 : {{ reservation.school }}</p>
+    <p>학년 : {{ grade }}</p>
+    <p>견학인원 : {{ reservation.headcount}}명</p>
+    <p>견학일정 : {{ reservation.date.date.month }}월 정기 캠퍼스투어 / {{ reservation.date }}</p>
+    <p>견학동기 : {{ reservation.motivation }}</p>
+    <p>요청사항 : {{ reservation.request }}</p>
 </div>
 
 <div class="clearfix">
-    <a class="btn btn-info left" href="{% url 'calender:regular_list' %}"> 목록으로 </a>
+    <a class="btn btn-info left" href="{% url 'calender:regular_list' %}"> 목록으로 </a>    
+    <a class="btn btn-info left" href="{% url 'calender:regular_form' reservation_id=reservation.pk %}"> 수정하기 </a>
+    <a class="btn btn-info left" href="{% url 'calender:regular_delete' reservation_id=reservation.pk %}"> 삭제하기 </a>
+
 </div>
 {% endblock %}
