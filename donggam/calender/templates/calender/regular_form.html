@@ -32,7 +32,7 @@
                 <hr>
                 <div>
                     <span class="title">패스워드</span>
-                    <span class="body">
+                    <span class="body" style="color: #DF633B;">
                         *패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다
                     </span>
                 </div>
@@ -107,7 +107,7 @@
                         <input type="number" name="headcount">&nbsp;명
                     
                     </span>
-                    <span>
+                    <span style="color: #DF633B;">
                         &nbsp;&nbsp;* 10명 이상 100명 이하만 신청 가능합니다
                     </span>
                 </div>
@@ -153,7 +153,8 @@
                     {% endif %}
                 </p>
                 <p>패스워드 : </p>
-                <p>*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
+                <p style="color: #DF633B;">*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
+                
                 <p>보호자 성명 : <input type="text" name="parent_name" value="{{ reservation.parent_name }}"></p>
                 <p>보호자 연락처 : <input type="text" name="parent_phone" value="{{ reservation.parent_phone }}"></p>
                 <p>신청자 성명 : <input type="text" name="name" value="{{ reservation.name }}"></p>
@@ -219,7 +220,7 @@
                     1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
                     2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
                                             [보호자] 보호자 성명, 보호자 연락처<br>
-                    3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br>
+                    <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
                     *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
                     *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
                 </span>
