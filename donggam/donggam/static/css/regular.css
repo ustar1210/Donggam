@@ -103,8 +103,7 @@
     color: #fff;
 }
 
-
-
+/* tablet */
 @media  (max-width: 1200px) {
     
 .board_list_wrap{

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% load static %}
 <div class="regular_apply">
     <div class="board_wrap">
         <div class="board_title">
@@ -30,9 +32,9 @@
                     <div class="title"><a href="{% url 'calender:regular_detail' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
                         {% if r.status == '2' %}
-                        검토중
+                        <wait style="color: #999999;">검토중</wait>
                         {% elif r.status == '3' or '4' %}
-                        <high>신청상태를 확인해주세요</high>
+                        <high style="color: #DF633B;">신청상태를 확인해주세요</high>
                         {% endif %}
                     </div>
                     <div class="date">{{ r.created_at }}</div>
