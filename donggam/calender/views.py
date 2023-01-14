@@ -112,17 +112,23 @@ def change_status():
 from django.core.paginator import Paginator
 
 def regular_list(request):
-    instances = RegularReservation.objects.all()
+    instances = RegularReservation.objects.all().order_by('-pk')
     page = request.GET.get('page', '1')
     paginator = Paginator(instances, '5')
     page_obj = paginator.page(page)
+
+    tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
     return render(request, 'calender/regular_list.html', 
     {
         'page_obj': page_obj,
+        'tour_dates': tourdates, 
     })
 
-def regular_form(request):
-    instance = RegularReservation()
+def regular_form(request, reservation_id=None):
+    if reservation_id != None:
+        instance = get_object_or_404(RegularReservation, pk=reservation_id)
+    else :
+        instance = RegularReservation()
     form = RegularReservationForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
         instance.status = '1'
@@ -131,8 +137,20 @@ def regular_form(request):
     return render(request, 'calender/regular_form.html', {'form': form})
 
 def regular_detail(request, reservation_id):
+    instance = get_object_or_404(RegularReservation, pk = reservation_id)
+    if instance.age == 'u':
+        age = '14세이상'
+    else :
+        age = '14세미만'
+    if instance.grade == 'n':
+        grade = '기타'
+    else :
+        grade = str(instance.grade) + '학년'
     return render(request, 'calender/regular_detail.html', 
     {
+        'reservation' : instance,
+        'age' : age,
+        'grade' : grade,
 
     })
 
@@ -147,3 +165,8 @@ def regular_pw(request, reservation_id):
             return redirect('calender:regular_detail', reservation_id = reservation_id)
         else :
             return redirect('calender:regular_pw', reservation_id = reservation_id)
+
+def regular_delete(request, reservation_id):
+    instance = get_object_or_404(RegularReservation, pk = reservation_id)
+    instance.delete()
+    return redirect('calender:regular_list')

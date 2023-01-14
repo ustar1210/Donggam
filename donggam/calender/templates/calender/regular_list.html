@@ -9,7 +9,9 @@
             </div>
             <div class="regular_info">
                 <p style>
-                    [공지] 1월 정기 캠퍼스투어일은 1월 18일(토) 입니다.
+                    {% for d in tour_dates %}
+                    [공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{ d }} 입니다.
+                    {% endfor %}
                 </p>
             </div>
         </div>
@@ -26,13 +28,9 @@
                     <div class="num">{{ r.pk }}</div>
                     <div class="title"><a href="{% url 'calender:regular_detail' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
-                        {% if r.status == '1' %}
-                        신청대기
-                        {% elif r.status == '2' %}
+                        {% if r.status == '2' %}
                         검토중
-                        {% elif r.status == '3' %}
-                        승인완료                       
-                        {% elif r.status == '4' %}
+                        {% elif r.status == '3' or '4' %}
                         신청상태를 확인해주세요
                         {% endif %}
                     </div>
