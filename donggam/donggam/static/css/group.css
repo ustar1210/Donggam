@@ -35,6 +35,10 @@
     color: #DF633B; 
     font-weight: 700;
 }
+.notice_body p low{
+    font-weight: 400;
+}
+
 .apply_btn{    
     float: right;
     background: #DF633B;
@@ -48,6 +52,7 @@
     color: #DF633B;
     background: white;
 }
+
 /* 모바일화면 */
 @media (max-width: 768px) {
     .notice_title{
@@ -62,18 +67,19 @@
         color: #555555;
     }
     .notice_title p{
-        font-size: 13px;
+        font-size: 12px;
         color: #666666;
     }
     
     .notice_body{
         margin: 40px 20px ;
-        font-size: 13px;
+        
     }
     .notice_body p{
         margin: 24px 0px;
         color:333333;
         font-weight: 500;
+        font-size: 13px;
     }
     .notice_body p span{
         font-size: 11px;

@@ -16,22 +16,33 @@
   <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/animation.css' %}">
+  <!-- footer -->
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
   <!-- group -->
   <link rel="stylesheet" href="{% static 'css/group.css' %}">
+  <!-- regular -->
+  <link rel="stylesheet" href="{% static 'css/regular.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+  
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script src="{% static 'js/navbar.js' %}" defer ></script>
   <title>Django Calendar App</title>
 
 </head>
 <body>
-  <header class="nav-down">
+  <header>
     {% include 'shared/navbar.html' %}
   </header>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+        
+      <!-- <div class="clearfix">
+        <a class="btn btn-info" href="{% url 'manager:index' %}"> 관리자 </a>
+      </div> -->
 
-
-  {% block content %}
-  {% endblock %}
+      
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -43,8 +54,8 @@
   <script src="{% static 'calender/script/selecttime.js' %}"></script>
   {% block script %}
   {% endblock %}
+  {% include 'shared/footer.html' %}
 </body>
-<div class="clearfix">
-  <a class="btn btn-info" href="{% url 'manager:index' %}"> 관리자 </a>
-</div>
+
+
 </html>
