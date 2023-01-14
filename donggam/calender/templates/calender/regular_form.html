@@ -55,8 +55,8 @@
                     <span class="body">
                         <input type="text" class="form_box phone_num" name="parent_phone" placeholder="'-'를 제외하고 숫자로만 입력하세요" required></p>
                     </span>
-                    <hr>
                 </div>
+                <hr id="adult_line" style="display: none;"> 
                 
                 <div>
                     <span class="title">신청자 성명*</span>
@@ -265,12 +265,14 @@
                     var startSetting = $('input[type=radio][id="adult"]:checked').val();
                    // startSetting이 later인 경우 style display를 flex로 변경한다. 
                    if(startSetting == 'd'){
-                        $('#adult_name').css('display','block');                   
-                        $('#adult_num').css('display','block');                   
+                        $('#adult_name').css('display','flex');                   
+                        $('#adult_num').css('display','flex');     
+                        $('#adult_line').css('display','flex');                   
                    // 그외의 경우 style display를 none 으로 변경한다.
                     }else{
                         $('#adult_name').css('display','none');                   
-                        $('#adult_num').css('display','none');                   
+                        $('#adult_num').css('display','none');     
+                        $('#adult_line').css('display','none');                   
                     }
                 });
             });
