@@ -116,9 +116,12 @@ def regular_list(request):
     page = request.GET.get('page', '1')
     paginator = Paginator(instances, '5')
     page_obj = paginator.page(page)
+
+    tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
     return render(request, 'calender/regular_list.html', 
     {
         'page_obj': page_obj,
+        'tour_dates': tourdates, 
     })
 
 def regular_form(request):

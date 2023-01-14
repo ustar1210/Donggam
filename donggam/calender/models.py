@@ -107,7 +107,9 @@ class RegularDate(models.Model):
     date = models.DateField(null=False, blank=True)
 
     def __str__(self):
-        return str(self.date)
+        days = ['월', '화', '수', '목', '금', '토', '일']
+        day = self.date.weekday()
+        return str(self.date.month) + '월 ' + str(self.date.day) + '일(' + days[day] + ')'
 
         
 class RegularReservation(models.Model):
