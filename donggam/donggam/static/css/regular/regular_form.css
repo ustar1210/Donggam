@@ -25,3 +25,73 @@ line-height: 35px;
     padding-bottom: 26px;
     border-bottom: 2.5px solid #585757;;
 }
+
+.form_wrap{
+
+}
+
+.form_body{
+
+
+}
+.form_list {
+    width: 100%;
+}
+
+.form_list > form > div > div {
+    padding: 15px 0;
+    font-size: 18px;
+}
+.form_list > form > div > div > span.title{
+    width: 20%;
+    font-weight: 700;
+}
+.form_list > form > div > div > span.body{
+    width: 80%;
+}
+
+.regular_btn_box{
+    text-align: center;
+}
+.regular_btn{
+    display: inline-block;
+    background: #DF633B;
+    padding: 12px 76px;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+}
+input[type='radio'] {
+    -webkit-appearance:none;
+    width:17px;
+    height:17px;
+    /* [라디오 버튼 테두리 색상 정의] */
+    border:1px solid darkgray;
+    border-radius:50%;
+    outline:none;
+    /* [라디오 버튼 배경 색상 정의] */
+}
+input[type='radio']:before {
+    /* [content null 설정해서 커스텀 지정] */
+    content:'';
+    display:block;
+    width:70%;
+    height:70%;
+    margin: 15% auto;
+    border-radius:50%;  
+}
+input[type='radio']:checked:before {
+    /* [라디오 버튼이 클릭 되었을 경우 내부 원형 색상] */
+    border:1px solid darkgray;
+    background:#DF633B;
+    border: 1px solid #DF633B;
+}
+
+.form_box{
+    font-size: 16px;
+    font-weight: 400;
+    height: 36px;
+    border: 1.2px solid #CBCBCB;
+    border-radius: 5px;
+}
