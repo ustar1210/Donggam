@@ -1,38 +1,110 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="text">
+
+<div class="notice_title">
     <h1>단체 캠퍼스투어 신청</h1>
-    <div class="caution">
-        <h3>캠퍼스투어 주의사항</h3>
-        <p>1. 사전 연락 없이 견학 당일 신청인원을 10명 이상 증원하는 경우, 견학 예정시간을 임의로 변경하는 경우 추후 견학 신청에 불이익을 받으실 수 있습니다.</p>
-        <p>2. 캠퍼스투어 진행 인원이 많지 않으므로, 학생들의 즐거운 견학을 위해 함께 방문하시는 인솔자 선생님들께서 적극적으로 인솔해주시기 바랍니다.</p>
-        <p>3. 재학생들의 면학 분위기 조성을 위해, 동국대학교 홍보대사 '동감'의 인솔 하에 캠퍼스 투어가 진행되는 장소 외에는 견학이 불가함을 양해바랍니다.</p>
-    </div>
 </div>
-<div class="form">
-    <h2>신청정보 확인</h2>
-    <hr>
-    <p>신청상태 : {{ status }}</p>
-    <p>투어일시 : {{ datetime }}</p>
-    {% if reservation.status == '3' %}
-    <p>신청자 : {{ reservation.name }}</p>
-    <p>학교(기관)명 : {{ reservation.school }}</p>
-    <p>진행장소 : {{ reservation.place }}</p>
-    <p>관리자메모 : {{ reservation.admin_comment }}</p>
-    {% else %}
-    <p>신청자 : -</p>
-    <p>학교(기관)명 : -</p>
-    <p>진행장소 : {{ reservation.place }}</p>
-    <p>관리자메모 : -</p>
+  {% include 'shared/regular_head.html' %}
+
+
+  <div class="form_wrap">
+    <p class="form_title">신청정보 확인</p>
+    <div class="form_list">
+        <form>
+            {% csrf_token %}
+            <div class="form_body">
+                <div >
+                    <span class="title">신청상태</span>
+                    <span class="body">
+                        <span>
+                            {{ status }}
+                        </span>
+                    </span>
+                </div>
+                <hr>
+
+                <div>
+                    <span class="title">투어일시</span>
+                    <span class="body">
+                        <span>{{ reservation.date }}&nbsp;/&nbsp;{{reservation.time}}:00</span>
+  
+                    </span>
+                </div>
+                <hr>
+                {% if reservation.status == '3' %}
+                <div>
+                    <span class="title">신청자</span>
+                    <span class="body">
+                        {{ reservation.name }}
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">소속학교</span>
+                    <span class="body">
+                        {{reservation.school}}
+                    </span>
+                </div>
+                <hr>
+
+                <div>
+                    <span class="title">진행장소</span>
+                    <span class="body">
+                            {{ reservation.place }}
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">관리자메모</span>
+                    <span class="body">
+                        {{ reservation.admin_comment }}
+                    </span>
+                </div>
+
+                {% else %}
+                <div>
+                    <span class="title">신청자</span>
+                    <span class="body">
+                        {{ reservation.name }}
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">소속학교</span>
+                    <span class="body">
+                        {{reservation.school}}
+                    </span>
+                </div>
+                <hr>
+
+                <div>
+                    <span class="title">진행장소</span>
+                    <span class="body">
+                        {{ reservation.place }}
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">관리자메모</span>
+                    <span class="body">
+                        -
+                    </span>
+                </div>
+                {% endif %} 
+                <hr>
+        </form>
+    </div>
+
+    {% if reservation.status == '1' %}
+    <div class="regular_btn_box" style="text-align: right;">
+        <a class="regular_btn mo" href="{% url 'calender:password' reservation_id=reservation.pk %}">수정하기</a>
+    </div>
     {% endif %}
-</div>
-<div class="buttons">
-    <div class="clearfix">
-        <a class="btn btn-info" href="{% url 'calender:calendar' %}"> 목록으로 </a>
-        {% if reservation.status == '1' %}
-        <a class="btn btn-info" href="{% url 'calender:password' reservation_id=reservation.pk %}"> 수정하기 </a>
-        {% endif %}
+
+    <div class="regular_btn_box" style="text-align: left;">
+        <a class="regular_btn" href="{% url 'calender:calendar' %}" style="text-align: center;">목록으로</a>
     </div>
+
 </div>
 {% endblock %}
