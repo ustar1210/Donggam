@@ -3,8 +3,7 @@ from . import views
 
 app_name = 'calender'
 urlpatterns=[
-    path('', views.index, name='index'),
-    path('group_notice/', views.group_notice, name='group_notice'),
+    path('', views.group_notice, name='group_notice'),
     path('regular_notice/', views.regular_notice, name='regular_notice'),
     re_path(r'^calendar/$', views.CalendarView.as_view(), name='calendar'),
     re_path(r'^reservation/check/(?P<reservation_id>\d+)$', views.reservationCheck, name='reservation_check'),

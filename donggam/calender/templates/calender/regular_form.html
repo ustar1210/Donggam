@@ -1,16 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="notice_title">
-    <h1>정기 캠퍼스투어 신청</h1>
-</div>
-<div class="regular_form_info">
-    <p class="title">캠퍼스투어 주의사항</p>
 
-        <span>1. 사전 연락 없이 견학 당일 신청인원을 10명 이상 증원하는 경우, 견학 예정시간을 임의로 변경하는 경우 추후 견학 신청에 불이익을 받으실 수 있습니다.<br></spin>
-        <span>2. 캠퍼스투어 진행 인원이 많지 않으므로, 학생들의 즐거운 견학을 위해 함께 방문하시는 인솔자 선생님들께서 적극적으로 인솔해주시기 바랍니다.<br></span>
-        <span>3. 재학생들의 면학 분위기 조성을 위해, 동국대학교 홍보대사 ‘동감’의 인솔 하에 캠퍼스 투어가 진행되는 장소 외에는 견학이 불가함을 양해바랍니다.</span>
-</div>
+{% include 'shared/regular_head.html' %}
 
 <div class="form_wrap">
     <p class="form_title">신청서 작성</p>
@@ -22,14 +14,14 @@
 
                 {% if state == 0 %}            
                 
-                <div>
+                <div >
                     <span class="title">구분*</span>
                     <span class="body">
                         <span style="margin-right: 42px;">
-                            <input type="radio" name="age" value="u"  style="margin-right:10px"/>14세이상
+                            <input id="adult"type="radio" name="age" value="u"  style="margin-right:10px" checked/>14세이상
                         </span>
                         <span>
-                            <input type="radio" name="age" value="d" style="margin-right:10px"/>14세미만
+                            <input id="adult" type="radio" name="age" value="d" style="margin-right:10px"/>14세미만
                         </span>
                     </span>
                 </div>
@@ -42,20 +34,22 @@
                 </div>
                 <hr>
                 <!-- 14세 미만일대만 보호자 성명, 연락처 뜨게하기 -->
-                <div id="adult">
+
+                <div id="adult_name" style="display: none;">
                     <span class="title">보호자 성명*</span>
                     <span class="body">
                         <input class="form_box"type="text" name="parent_name" required>
                     </span>
                 </div>
 
-                <div id="adult">
+                <div id="adult_num" style="display: none;">
                     <span class="title">보호자 연락처*</span>
                     <span class="body">
-                        <input type="text" class="form_box" name="parent_phone" placeholder="'-'를 제외하고 숫자로만 입력하세요" required></p>
+                        <input type="text" class="form_box phone_num" name="parent_phone" placeholder="'-'를 제외하고 숫자로만 입력하세요" required></p>
                     </span>
                 </div>
-                <hr>
+                <hr id="adult_line" style="display: none;"> 
+                
                 <div>
                     <span class="title">신청자 성명*</span>
                     <span class="body">
@@ -109,10 +103,7 @@
                     <span class="title" >견학인원*</span>
                     <span class="body">
                         <input type="number"class="form_box" name="headcount" required>&nbsp;명
-                    
-                    </span>
-                    <span style="color: #DF633B;">
-                        &nbsp;&nbsp;* 10명 이상 100명 이하만 신청 가능합니다
+                        <high style="color: #DF633B;"> *10명 이상 100명 이하만 신청 가능합니다</high>
                     </span>
                 </div>
                 <hr>
@@ -120,7 +111,7 @@
                 <div>
                     <span class="title">견학일정*</span>
                     <span class="body">
-                        <select name="date" id="date" required>
+                        <select name="date" id="date">
                             <option value="" class="campus_date">캠퍼스 투어 일정 선택</option>
                             {% for d in dates %}
                             <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
@@ -132,14 +123,14 @@
                 <div>
                     <span class="title">견학 동기</span>
                     <span class="body">
-                        <textarea name="motivation" id="" cols="110" rows="7"></textarea>
+                        <textarea name="motivation" id=""></textarea>
                     </span>
                 </div>
                 <hr>
                 <div>
                     <span class="title">요청사항</span>
                     <span class="body">
-                        <textarea name="request" id="" cols="110" rows="7"></textarea>
+                        <textarea name="request" id=""></textarea>
                     </span>
                 </div>
                 <hr>
@@ -227,9 +218,10 @@
                     <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
                     *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
                     *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                    <br>
+                    <input type="radio" name="agree" value="on"/ required>동의
+                    <input type="radio" name="agree" value="off"/>동의하지않음
                 </span>
-                <input type="radio" name="agree" value="on"/ required>동의
-                <input type="radio" name="agree" value="off"/>동의하지않음
             </div>
 
             <div class="regular_btn_box">
@@ -241,5 +233,30 @@
     </div>
 </div>
 
+<script>
+   $(function(){
+    			// type 이 radio 이고 id adult 인 input 을 click 했을 경우
+                $('input[type="radio"][id="adult"]').on('click',function(){
+                    console.log("zzz")
+                    // startSetting 에 checked된 radio button의 value 값을 넣는다.
+                    var startSetting = $('input[type=radio][id="adult"]:checked').val();
+                   // startSetting이 later인 경우 style display를 flex로 변경한다. 
+                   if(startSetting == 'd'){
+                        $('#adult_name').css('display','flex');                   
+                        $('#adult_num').css('display','flex');     
+                        $('#adult_line').css('display','flex');                   
+                   // 그외의 경우 style display를 none 으로 변경한다.
+                    }else{
+                        $('#adult_name').css('display','none');                   
+                        $('#adult_num').css('display','none');     
+                        $('#adult_line').css('display','none');                   
+                    }
+                });
+            });
+
+
+  
+  
+</script>
 
 {% endblock %}
