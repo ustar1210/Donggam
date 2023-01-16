@@ -54,10 +54,10 @@ line-height: 35px;
     margin: 10px;
     display: inline-block;
     background: #DF633B;
-    width: 13%;
+    width: 12%;
     padding-top: 12px;
     padding-bottom: 12px;
-    
+    text-align: center;
     border: 1px solid #DF633B;
     border-radius: 8px;
     font-size: 16px;
@@ -178,7 +178,12 @@ input[type='radio']:checked:before {
     border: 1px solid #DF633B;
     border-radius: 8px;
     font-size: 14px;
+    text-align: center;
     color: white;
+}
+.mo{
+    text-align: center;
+    width: 20%;
 }
 .form_box{
     text-align: center;

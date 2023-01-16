@@ -1,149 +1,342 @@
 {% extends 'base.html' %}
 
-{% block title %}
+<!-- {% block title %}
 Event
-{% endblock %}
+{% endblock %} -->
 
 {% block content %}
-<div class="form">
-  <h2>신청서 작성</h2>
-  <hr>
-  <form method="post">
-      {% csrf_token %}
-      {% if state == 0 %}
-        <p>투어일시 : {{ reservation.date }}</p>
-        <p>패스워드 : </p>
-        <p>*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
-        <p>신청자 성명 : <input type="text" name="name"></p>
-        <p>신청자 연락처 : <input type="text" name="phone"></p>
-        <p>신청자 이메일 : <input type="text" name="email_front"> @ 
-            <input list="email_list" id="email_back" name="email_back"/>
-            <datalist id="email_list">
-                <option value="naver.com">naver.com</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="daum.net">daum.net</option>
-                <option value="hanmail.net">hanmail.net</option>
-                <option value="직접입력">직접입력</option>
-            </datalist>
-        </p>
-        <p>학교(기관)명 : <input type="text" name="school"></p>
-        <p>학년 : <select name="grade">
-            <option value="" disabled selected>학년선택</option>
-            <option value="1">1학년</option>
-            <option value="2">2학년</option>
-            <option value="3">3학년</option>
-            <option value="n">기타</option>
-        </select></p>
-        <p>분류 : 
-          <input type="radio" name="major" value="0"/>공통
-          <input type="radio" name="major" value="1"/>문과
-          <input type="radio" name="major" value="2"/>이과
-        </p>
-        <p>대형버스 : <input type="number" name="bus">대</p>
-        <p>* 무료주차권은 대형버스에 한해서 지급됩니다</p>
-        <p>투어 학생수 : <input type="number" name="headcount">명</p>
-        <p>* 10명 이상 100명 이하만 신청 가능합니다</p>
-        <p>투어시간 : 
-          <input type="radio" name="length" value="6"/>60분
-          <input type="radio" name="length" value="9"/>90분
-        </p>    
-        <p>투어 메모 : <input type="textarea" name="memo"></p>
-      {% else %}
-          <p>투어일시 : {{ reservation.date }}</p>
-          <p>패스워드 : </p>
-          <p>*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
-          <p>신청자 성명 : <input type="text" name="name" value="{{ reservation.name }}"></p>
-          <p>신청자 연락처 : <input type="text" name="phone" value="{{ reservation.phone }}"></p>
-          <p>신청자 이메일 : <input type="text" name="email_front" value="{{ email_front }}"> @ 
-              <input list="email_list" id="email_back" name="email_back" value="{{ email_back }}"/>
-              <datalist id="email_list">
-                  <option value="naver.com">naver.com</option>
-                  <option value="gmail.com">gmail.com</option>
-                  <option value="daum.net">daum.net</option>
-                  <option value="hanmail.net">hanmail.net</option>
-                  <option value="직접입력">직접입력</option>
-              </datalist>
-          </p>
-          <p>학교(기관)명 : <input type="text" name="school" value="{{ reservation.school }}"></p>
-          <p>학년 : <select name="grade">
-              <option value="" disabled selected>학년선택</option>
-              {% if reservation.grade == '1' %}
-              <option value="1" selected>1학년</option>
-              {% else %}
-              <option value="1">1학년</option>
-              {% endif %}
+<div class="notice_title">
+  <h1>단체 캠퍼스투어 신청</h1>
+</div>
+{% include 'shared/regular_head.html' %}
 
-              {% if reservation.grade == '2' %}
-              <option value="2" selected>2학년</option>
-              {% else %}
-              <option value="2">2학년</option>
-              {% endif %}
+<div class="form_wrap">
+  <p class="form_title">신청서 작성</p>
+  <div class="form_list">
+      <form method="post">
+        <div class="form_body"> 
+          {% csrf_token %}
+          {% if state == 0 %}
+              <div>
+                  <span class="title">투어일시</span>
+                  <span class="body">
+                      <span>{{ reservation.date }}&nbsp;/&nbsp;{{reservation.time}}:00</span>
 
-              {% if reservation.grade == '3' %}
-              <option value="3" selected>3학년</option>
-              {% else %}
-              <option value="3">3학년</option>
-              {% endif %}
+                  </span>
+              </div>
+              <hr>
+              <div>
+                  <span class="title">패스워드</span>
+                  <span class="body" style="color: #DF633B;">
+                      *패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다
+                  </span>
+              </div>
+              <hr>
+              
+              <div>
+                  <span class="title">신청자 성명*</span>
+                  <span class="body">
+                      <input type="text" class="form_box" name="name" required>
+                  </span>
+              </div>
+  
+              <div>
+                  <span class="title" >신청자 연락처*</span>
+                  <span class="body">
+                      <input type="text"class="form_box" name="phone" required placeholder="'-'를 제외하고 숫자로만 입력하세요">
+                  </span>
+              </div>
 
-              {% if reservation.grade == 'n' %}
-              <option value="n" selected>기타</option>
-              {% else %}
-              <option value="n">기타</option>
-              {% endif %}
-          </select></p>
-          <p>분류 : 
-            {% if reservation.major == 0 %}
-            <input type="radio" name="major" value="0" checked/>공통
+              <div>
+                  <span class="title" required>신청자 이메일*</span>
+                  <span class="body">
+                      <input type="text" class="form_box" name="email_front">
+                      @ 
+                          <input list="email_list" class="form_box" id="email_back" name="email_back"/>
+                          <datalist id="email_list">
+                              <option value="naver.com">naver.com</option>
+                              <option value="gmail.com">gmail.com</option>
+                              <option value="daum.net">daum.net</option>
+                              <option value="hanmail.net">hanmail.net</option>
+                              <option value="직접입력">직접입력</option>
+                          </datalist>
+                  </span>
+              </div>
+              <hr>
+              <div>
+                  <span class="title">학교(기관)명</span>
+                  <span class="body">
+                      <input type="text"class="form_box"  name="school">
+                  </span>
+              </div>
+
+              <div>
+                  <span class="title">학년</span>
+                  <span class="body">
+                      <select name="grade">
+                          <option value="" disabled selected>학년선택</option>
+                          <option value="1">1학년</option>
+                          <option value="2">2학년</option>
+                          <option value="3">3학년</option>
+                          <option value="n">기타</option>
+                      </select>
+                  </span>
+              </div>
+              <div>
+                  <span class="title" >분류</span>
+                    <span class="body">
+                      <span style="margin-right: 22px;">
+                        <input type="radio" style="margin-right: 10px;"name="major" value="0"/>공통
+                    </span>
+                    <span style="margin-right: 22px;">
+                      <input type="radio" style="margin-right: 10px;"name="major" value="1"/>문과
+                    </span>
+                    <span>
+                      <input type="radio" style="margin-right: 10px;"name="major" value="2"/>이과
+                    </span>
+                  </span>
+              </div>
+              <hr>
+              <div>
+                <span class="title" >대형버스</span>
+                <span class="body">
+                    <input type="number"class="form_box" name="bus" required>&nbsp;&nbsp;대
+                    <high style="color: #DF633B;"> * 무료주차권은 대형버스에 한해서 지급됩니다</high>
+                </span>
+            </div>
+            <div>
+              <span class="title" >투어학생수</span>
+              <span class="body">
+                  <input type="number"class="form_box" name="headcount" required>&nbsp;&nbsp;명
+                  <high style="color: #DF633B;"> *10명 이상 100명 이하만 신청 가능합니다</high>
+              </span>
+            </div>
+            <hr>
+              <div>
+                <span class="title" >투어시간</span>
+                <span class="body">
+                  <span style="margin-right: 22px;">
+                    <input type="radio" style="margin-right: 10px;"name="length" value="6"/>60분
+                  </span>
+                  <span>
+                    <input type="radio" style="margin-right: 10px;"name="length" value="9"/>90분
+                  </span>
+                    <high style="color: #DF633B; margin-left: 10%;">* 60분(실내PT + 도보투어) / 90분(실내PT + 입학사정관 설명 + 도보투어, 고등학교만 신청가능)</high>
+                </span>
+            </div>
+            <hr>
+            <div>
+                <span class="title">투어 메모</span>
+                <span class="body">
+                    <textarea name="memo"></textarea>
+                </span>
+            </div>
+            <div>
+              <span class="title">동의사항*</span>
+              <span class="body">
+                  개인정보 수집 및 이용자 동의사항<br>
+                  1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
+                  2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
+                                          [보호자] 보호자 성명, 보호자 연락처<br>
+                  <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
+                  *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
+                  *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                  <br>
+                  <input type="radio" style="margin-right: 10px;"name="agree" value="on"/ required>동의
+                  <input type="radio" style="margin-right: 10px;"name="agree" value="off"/>동의하지않음
+              </span>
+          </div>
+             
+        </div>
+        <div class="regular_btn_box">
+            <a class="regular_btn" href="{% url 'calender:calendar' %}">이전</a>
+            <button class="regular_btn" type="submit"> 신청완료 </button>
+        </div>
             {% else %}
-            <input type="radio" name="major" value="0"/>공통
-            {% endif %}
-
-            {% if reservation.major == 1 %}
-            <input type="radio" name="major" value="1" checked/>문과
-            {% else %}
-            <input type="radio" name="major" value="1"/>문과
-            {% endif %}
-
-            {% if reservation.major == 2 %}
-            <input type="radio" name="major" value="2" checked/>이과
-            {% else %}
-            <input type="radio" name="major" value="2"/>이과
-            {% endif %}
-          </p>
-          <p>대형버스 : <input type="number" name="bus" value="{{ reservation.bus }}">대</p>
-          <p>* 무료주차권은 대형버스에 한해서 지급됩니다</p>
-          <p>투어 학생수 : <input type="number" name="headcount" value="{{ reservation.headcount }}">명</p>
-          <p>* 10명 이상 100명 이하만 신청 가능합니다</p>
-          <p>투어시간 : 
-            {% if reservation.length == 6 %}
-            <input type="radio" name="length" value="6" checked/>60분
-            {% else %}
-            <input type="radio" name="length" value="6"/>60분
-            {% endif %}
             
-            {% if reservation.length == 9 %}
-            <input type="radio" name="legnth" value="9" checked/>90분
-            {% else %}
-            <input type="radio" name="legnth" value="9"/>90분
-            {% endif %}
-          </p>    
-          <p>투어 메모 : <input type="textarea" name="memo" value="{{ reservation.memo }}"></p>
-      {% endif %}
-      <p>동의사항 : </p>
-      <p>개인정보 수집 및 이용자 동의사항</p>
-      <p>구분 : 
-          <input type="radio" name="agree" value="on"/>동의
-          <input type="radio" name="agree" value="off"/>동의하지않음
-      </p>
+            <div>
+              <span class="title">투어일시</span>
+              <span class="body">
+                  <span>{{ reservation.date }}&nbsp;/&nbsp;{{reservation.time}}:00</span>
+
+              </span>
+          </div>
+          <hr>
+          <div>
+              <span class="title">패스워드</span>
+              <span class="body" style="color: #DF633B;">
+                  *패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다
+              </span>
+          </div>
+          <hr>
+          
+          <div>
+              <span class="title">신청자 성명*</span>
+              <span class="body">
+                  <input type="text" class="form_box" name="name"  value="{{ reservation.name }}" required>
+              </span>
+          </div>
+
+          <div>
+              <span class="title" >신청자 연락처*</span>
+              <span class="body">
+                  <input type="text"class="form_box" name="phone" value="{{ reservation.phone }}" required placeholder="'-'를 제외하고 숫자로만 입력하세요">
+              </span>
+          </div>
+
+          <div>
+              <span class="title" required>신청자 이메일*</span>
+              <span class="body">
+                  <input type="text" class="form_box" name="email_front" value="{{ email_front }}">
+                  @ 
+                      <input list="email_list" class="form_box" id="email_back" name="email_back" value="{{ email_back }}"/>
+                      <datalist id="email_list">
+                          <option value="naver.com">naver.com</option>
+                          <option value="gmail.com">gmail.com</option>
+                          <option value="daum.net">daum.net</option>
+                          <option value="hanmail.net">hanmail.net</option>
+                          <option value="직접입력">직접입력</option>
+                      </datalist>
+              </span>
+          </div>
+          <hr>
+          <div>
+              <span class="title">학교(기관)명</span>
+              <span class="body">
+                  <input type="text"class="form_box" value="{{ reservation.school }}" name="school">
+              </span>
+          </div>
+
+          <div>
+              <span class="title">학년</span>
+              <span class="body">
+
+                      <select name="grade">
+                        <option value="" disabled selected>학년선택</option>
+                        {% if reservation.grade == '1' %}
+                        <option value="1" selected>1학년</option>
+                        {% else %}
+                        <option value="1">1학년</option>
+                        {% endif %}
+          
+                        {% if reservation.grade == '2' %}
+                        <option value="2" selected>2학년</option>
+                        {% else %}
+                        <option value="2">2학년</option>
+                        {% endif %}
+          
+                        {% if reservation.grade == '3' %}
+                        <option value="3" selected>3학년</option>
+                        {% else %}
+                        <option value="3">3학년</option>
+                        {% endif %}
+          
+                        {% if reservation.grade == 'n' %}
+                        <option value="n" selected>기타</option>
+                        {% else %}
+                        <option value="n">기타</option>
+                        {% endif %}
+                    </select>
+              </span>
+          </div>
+          <div>
+              <span class="title" >분류</span>
+                <span class="body">
+                  <span style="margin-right: 22px;">
+                    {% if reservation.major == 0 %}
+                    <input type="radio" style="margin-right: 10px;"name="major" value="0" checked/>공통
+                    {% else %}
+                    <input type="radio" style="margin-right: 10px;"name="major" value="0"/>공통
+                    {% endif %}
+
+                  </span>
+                <span style="margin-right: 22px;">
+                    
+              {% if reservation.major == 1 %}
+              <input type="radio" style="margin-right: 10px;"name="major" value="1" checked/>문과
+              {% else %}
+              <input type="radio" style="margin-right: 10px;"name="major" value="1"/>문과
+              {% endif %}
+                </span>
+                <span>
+                  {% if reservation.major == 2 %}
+                  <input type="radio" style="margin-right: 10px;"name="major" value="2" checked/>이과
+                  {% else %}
+                  <input type="radio" style="margin-right: 10px;"name="major" value="2"/>이과
+                  {% endif %}
+                </span>
+              </span>
+          </div>
+          <hr>
+          <div>
+            <span class="title" >대형버스</span>
+            <span class="body">
+                <input type="number"class="form_box" name="bus" value="{{ reservation.bus }}">&nbsp;&nbsp;대
+                <high style="color: #DF633B;"> * 무료주차권은 대형버스에 한해서 지급됩니다</high>
+            </span>
+        </div>
+        <div>
+          <span class="title" >투어학생수</span>
+          <span class="body">
+              <input type="number"class="form_box" name="headcount" value="{{ reservation.headcount }}" required>&nbsp;&nbsp;명
+              <high style="color: #DF633B;"> *10명 이상 100명 이하만 신청 가능합니다</high>
+          </span>
+        </div>
+        <hr>
+          <div>
+            <span class="title" >투어시간</span>
+            <span class="body">
+              <span style="margin-right: 22px;">
+                {% if reservation.length == 6 %}
+              <input type="radio" style="margin-right: 10px;"name="length" value="6" checked/>60분
+              {% else %}
+              <input type="radio" style="margin-right: 10px;"name="length" value="6"/>60분
+              {% endif %}
+              </span>
+              <span>
+                {% if reservation.length == 9 %}
+                <input type="radio" style="margin-right: 10px;"name="legnth" value="9" checked/>90분
+                {% else %}
+                <input type="radio" style="margin-right: 10px;"name="legnth" value="9"/>90분
+                {% endif %}
+              </span>
+                <high style="color: #DF633B; margin-left: 10%;">* 60분(실내PT + 도보투어) / 90분(실내PT + 입학사정관 설명 + 도보투어, 고등학교만 신청가능)</high>
+            </span>
+        </div>
+        <hr>
+        <div>
+            <span class="title">투어 메모</span>
+            <span class="body">
+                <textarea name="memo">{{ reservation.memo }}</textarea>
+            </span>
+        </div>
+        <hr>
+        <div>
+            <span class="title">동의사항*</span>
+            <span class="body">
+                개인정보 수집 및 이용자 동의사항<br>
+                1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
+                2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
+                                        [보호자] 보호자 성명, 보호자 연락처<br>
+                <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
+                *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
+                *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                <br>
+                <input type="radio" style="margin-right: 10px;"name="agree" value="on"/ required>동의
+                <input type="radio" style="margin-right: 10px;"name="agree" value="off"/>동의하지않음
+            </span>
+        </div>
+
+
+        <div class="regular_btn_box">
+          <a class="regular_btn" href="{% url 'calender:calendar' %}">이전</a>
+          <button class="regular_btn" type="submit"> 수정완료 </button>
+        </div>
+        {% endif %}
       
-      <button type="submit" class="btn btn-info right"> Submit </button>
-  </form>
-
+      </form>
+  </div>
 </div>
 
-
-<div class="clearfix">
-  <a class="btn btn-info left" href="{% url 'calender:calendar' %}"> 목록으로 </a>
-</div>
 
 {% endblock %}

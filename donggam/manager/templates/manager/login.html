@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>관리자 로그인</h1>
+<div class="notice_title">
+    <h1>로그인</h1>
+    <p>동국대학교 관리자만 로그인 가능합니다.</p>
+</div>
 <div class="container my-3">
     <form method="post" action="{% url 'manager:login' %}">
         {% csrf_token %}
         {% include "manager/form_errors.html" %}
-        <div class="mb-3">
+        <div class="mb-3"> 
             <label for="username">사용자ID</label>
             <input type="text" class="form-control" name="username" id="username"
-                   value="{{ form.username.value|default_if_none:'' }}">
+                    value="{{ form.username.value|default_if_none:'' }}">
         </div>
         <div class="mb-3">
             <label for="password">비밀번호</label>
             <input type="password" class="form-control" name="password" id="password"
                    value="{{ form.password.value|default_if_none:'' }}">
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
+        <button class="regular_btn" type="submit" style="float:right"> 로그인 </button>
     </form>
 </div>
 {% endblock %}
