@@ -34,9 +34,9 @@
                     <div class="num">{{ r.pk }}</div>
                     <div class="title"><a href="{% url 'calender:regular_detail' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
-                        {% if r.status == '1' or '2' %}
+                        {% if r.status == '1' or r.status == '2' %}
                         <wait style="color: #999999;">검토중</wait>
-                        {% elif r.status == '3' or '4' %}
+                        {% elif r.status == '3' or r.status == 4 %}
                         <high style="color: #DF633B;">신청상태를 확인해주세요</high>
                         {% endif %}
                     </div>

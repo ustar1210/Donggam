@@ -153,17 +153,18 @@ def regular_list(request):
         days += str(d.date.day) + ', '
     now_sentence = now_sentence + days[:-2] + "일 입니다."
     days = ''
-    next_month_dates = tourdates.filter(date__month=datetime.datetime.today().month + 1)
-    for d in next_month_dates:
-        next_sentence = str(d.date.month) + '월 정기 캠퍼스투어일은 '
-        days += str(d.date.day) + ', '
-    next_sentence = next_sentence + days[:-2] + "일 입니다."
+    # next_month_dates = tourdates.filter(date__month=datetime.datetime.today().month + 1)
+
+    # for d in next_month_dates:
+    #     next_sentence = str(d.date.month) + '월 정기 캠퍼스투어일은 '
+    #     days += str(d.date.day) + ', '
+    # next_sentence = next_sentence + days[:-2] + "일 입니다."
 
     return render(request, 'calender/regular_list.html', 
     {
         'page_obj': page_obj,
         'now_sentence': now_sentence, 
-        'next_sentence': next_sentence,
+        # 'next_sentence': next_sentence,
     })
 
 def regular_form(request, reservation_id=None):
