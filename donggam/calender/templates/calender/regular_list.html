@@ -12,10 +12,10 @@
             <div class="regular_info">
                 <p>
                     <!-- [공지] 1월 정기 캠퍼스투어일은 18일 입니다. -->
-                    {% if now_sentence %}
+                    {% if now_sentence != '' %}
                     [공지] {{ now_sentence }}
                     {% endif %}
-                    {% if next_sentence %}
+                    {% if next_sentence != ''%}
                     [공지] {{ next_sentence }}
                     {% endif %}
                 </p>
@@ -36,7 +36,7 @@
                     <div class="status">
                         {% if r.status == '1' or r.status == '2' %}
                         <wait style="color: #999999;">검토중</wait>
-                        {% elif r.status == '3' or r.status == 4 %}
+                        {% elif r.status == '3' or r.status == '4' %}
                         <high style="color: #DF633B;">신청상태를 확인해주세요</high>
                         {% endif %}
                     </div>
