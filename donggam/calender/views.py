@@ -170,7 +170,7 @@ def regular_list(request):
     {
         'page_obj': page_obj,
         'now_sentence': now_sentence, 
-        # 'next_sentence': next_sentence,
+        'next_sentence': next_sentence,
     })
 
 def regular_form(request, reservation_id=None):
