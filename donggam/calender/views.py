@@ -70,20 +70,24 @@ def reservation(request, reservation_id=None):
         state = 0
     if request.method == 'POST':
         if instance.status == '1' or instance.status == '0':    
-            if request.POST['agree'] == 'on':
-                instance.status = '1'
-                instance.name = request.POST['name']
-                instance.phone = request.POST['phone']
-                instance.email = request.POST['email_front'] + '@' +request.POST['email_back']
-                instance.school = request.POST['school']
-                instance.grade = request.POST['grade']
-                instance.major = int(request.POST['major'])
-                instance.bus = request.POST['bus']
-                instance.headcount = request.POST['headcount']
-                instance.length = int(request.POST['length'])
-                instance.memo = request.POST['memo']
-                instance.save()    
-                return HttpResponseRedirect(reverse('calender:calendar'))
+            if request.POST['agree'] == 'on' and int(request.POST['headcount']) >= 10 and int(request.POST['headcount']) < 101:
+                try : 
+                    instance.status = '1'
+                    instance.name = request.POST['name']
+                    phone = request.POST['phone']
+                    instance.phone = phone.replace('-', '')
+                    instance.email = request.POST['email_front'] + '@' +request.POST['email_back']
+                    instance.school = request.POST['school']
+                    instance.grade = request.POST['grade']
+                    instance.major = int(request.POST['major'])
+                    instance.bus = request.POST['bus']
+                    instance.headcount = request.POST['headcount']
+                    instance.length = int(request.POST['length'])
+                    instance.memo = request.POST['memo']
+                    instance.save()    
+                    return HttpResponseRedirect(reverse('calender:calendar'))
+                except:
+                    return redirect('calender:reservation_edit', reservation_id=reservation_id)
             else :
                 return redirect('calender:reservation_edit', reservation_id=reservation_id)
         else :
@@ -120,7 +124,7 @@ def password(request, reservation_id):
 
 def pw_check(request, reservation_id):
     instance = get_object_or_404(Reservation, pk=reservation_id)
-    password = instance.phone.split('-')[-1]
+    password = instance.phone[-4:]
     if password == request.POST['pw']:
         return redirect('calender:reservation_edit', reservation_id=reservation_id)
     else :
@@ -184,24 +188,35 @@ def regular_form(request, reservation_id=None):
     tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
 
     if request.POST:
-        if request.POST['agree'] == 'on':
-            instance.status = '1'
-            instance.age = request.POST['age']
-            instance.parent_name = request.POST['parent_name']
-            instance.parent_phone = request.POST['parent_phone']
-            instance.name = request.POST['name']
-            instance.phone = request.POST['phone']
-            instance.email = request.POST['email_front'] + '@' +request.POST['email_back']
-            instance.school = request.POST['school']
-            instance.grade = request.POST['grade']
-            instance.headcount = request.POST['headcount']
-            instance.date = get_object_or_404(RegularDate, date = request.POST['date'])
-            instance.motivation = request.POST['motivation']
-            instance.request = request.POST['request']
-            instance.save()    
-            return HttpResponseRedirect(reverse('calender:regular_list'))
+        if request.POST['agree'] == 'on' and int(request.POST['headcount']) >= 10 and int(request.POST['headcount']) < 101 :
+            try:
+                instance.status = '1'
+                instance.age = request.POST['age']
+                instance.parent_name = request.POST['parent_name']
+                parent_phone = request.POST['parent_phone']
+                instance.parent_phone = parent_phone.replace('-', '')
+                instance.name = request.POST['name']
+                phone = request.POST['phone']
+                instance.phone = phone.replace('-', '')
+                instance.email = request.POST['email_front'] + '@' +request.POST['email_back']
+                instance.school = request.POST['school']
+                instance.grade = request.POST['grade']
+                instance.headcount = request.POST['headcount']
+                instance.date = get_object_or_404(RegularDate, date = request.POST['date'])
+                instance.motivation = request.POST['motivation']
+                instance.request = request.POST['request']
+                instance.save()    
+                return HttpResponseRedirect(reverse('calender:regular_list'))
+            except :
+                if state == 1:
+                    return redirect('calender:regular_form', reservation_id=reservation_id)    
+                else :
+                    return redirect('calender:regular_form')
         else :
-            return redirect('calender:regular_form', reservation_id=reservation_id)
+            if state == 1:
+                return redirect('calender:regular_form', reservation_id=reservation_id)    
+            else :
+                return redirect('calender:regular_form')
 
     return render(request, 'calender/regular_form.html', {
         'reservation': instance,
@@ -235,7 +250,7 @@ def regular_pw(request, reservation_id):
     
     elif request.method == 'POST':
         instance = get_object_or_404(RegularReservation, pk=reservation_id)
-        password = instance.phone.split('-')[-1]
+        password = instance.phone[-4:]
         if password == request.POST['pw']:
             return redirect('calender:regular_detail', reservation_id = reservation_id)
         else :
