@@ -35,19 +35,24 @@ class AdminCalendarView(generic.ListView):
 
 def admin_save(request):
     if request.user.is_authenticated:
-        print(request.POST)
-        for a in request.POST:
-            if a == 'csrfmiddlewaretoken':
-                continue
-            date = a.split('-', -1)
-            yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
-            if date[3] == 'am' :
-                time = '10'
-            else :
-                time = '14'
-            instance = Reservation(date=yearmonthdate, time=time, status='0')
-            instance.save()
-        change_status()
+        if 'reset' in request.POST :
+            targets = Reservation.objects.filter(status = '0')
+            for t in targets:
+                t.delete()
+        else :
+            print(request.POST)
+            for a in request.POST:
+                if a == 'csrfmiddlewaretoken' :
+                    continue
+                date = a.split('-', -1)
+                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
+                if date[3] == 'am' :
+                    time = '10'
+                else :
+                    time = '14'
+                instance = Reservation(date=yearmonthdate, time=time, status='0')
+                instance.save()
+            change_status()
         return redirect('manager:calendarAdmin')
     else :
         return redirect('manager:login')

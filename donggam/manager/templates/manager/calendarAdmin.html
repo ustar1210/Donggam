@@ -10,11 +10,17 @@
 		<form method="post" action="{% url 'manager:adminsave' %}">
 			{% csrf_token %}
 			{{ calendar }}
-			<p><input type="submit" value="신청가능 추가"><input type="Reset" name="reset" value="신청가능 초기화"></p>
+			<p>
+				<input type="submit" value="신청가능 추가">
+			</p>
 		</form>
-	</div>
-	
-	
+		<form method="post" action="{% url 'manager:adminsave' %}">
+			{% csrf_token %}
+			<p>
+				<input type="submit" name="reset" value="신청가능 초기화">
+			</p>
+		</form>
+	</div>	
 </div>
 <div class="timetable">
 	<div></div>	
