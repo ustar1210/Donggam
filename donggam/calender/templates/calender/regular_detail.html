@@ -12,6 +12,22 @@
         <form>
             {% csrf_token %}
             <div class="form_body">
+
+                <div >
+                    <span class="title">신청상태</span>
+                    <span class="body">
+                        <span>
+                            {% if reservation.status == '1' or reservation.status == '2' %}
+                                <wait style="color: #999999;">검토중</wait>
+                            {% elif reservation.status == '3'%} 
+                                <high style="color: #DF633B;">승인완료</high>
+                            {% elif reservation.status == '4'%}
+                                <high style="color: #DF633B;">승인거부(재확인 필요)</high>
+                            {% endif %}
+                        </span>
+                    </span>
+                </div>
+
                 <div >
                     <span class="title">신청구분</span>
                     <span class="body">
@@ -108,7 +124,8 @@
 
     <div class="regular_btn_box" style="text-align: right;">
         <a class="regular_btn mo" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}">수정하기</a>
-        <a class="regular_btn mo" href="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">삭제하기</a>
+        <a onclick="javascript:realDel()" class="regular_btn mo" href="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">삭제하기</a>
+        
     </div>
 
     <div class="regular_btn_box" style="text-align: left;">

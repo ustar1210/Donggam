@@ -9,7 +9,7 @@
 <div class="form_wrap">
     <p class="form_title">신청서 작성</p>
     <div class="form_list">
-        <form method="post">
+        <form method="post" onsubmit="return checkDone()">
             {% csrf_token %}
             <div class="form_body">
 
@@ -36,7 +36,6 @@
                 </div>
                 <hr>
                 <!-- 14세 미만일대만 보호자 성명, 연락처 뜨게하기 -->
-
                 <div id="adult_name" style="display: none;">
                     <span class="title">보호자 성명*</span>
                     <span class="body">
@@ -55,7 +54,7 @@
                 <div>
                     <span class="title">신청자 성명*</span>
                     <span class="body">
-                        <input type="text" class="form_box" name="name">
+                        <input type="text" class="form_box" name="name" required>
                     </span>
                 </div>
     
@@ -136,95 +135,196 @@
                     </span>
                 </div>
                 <hr>
+                <div>
+                    <span class="title">동의사항*</span>
+                    <span class="body">
+                        개인정보 수집 및 이용자 동의사항<br>
+                        1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
+                        2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
+                                                [보호자] 보호자 성명, 보호자 연락처<br>
+                        <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
+                        *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
+                        *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                        <br>
+                        <input type="radio" name="agree" value="on"/ required style="margin-right: 10px;">동의
+                        <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
+                    </span>
+                </div>
             {% else %}
-                <p>구분 : 
-                    {% if reservation.age == "u" %}
-                    <input type="radio" name="age" value="u" checked/>14세이상
-                    {% else%}
-                    <input type="radio" name="age" value="u"/>14세이상
-                    {% endif %}
-                    {% if reservation.age == "d" %}
-                    <input type="radio" name="age" value="d" checked/>14세미만
-                    {% else %}
-                    <input type="radio" name="age" value="d"/>14세미만
-                    {% endif %}
-                </p>
-                <p>패스워드 : </p>
-                <p style="color: #DF633B;">*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
+                <div>
+                    <span class="title">구분*</span>
+                    <span class="body">
+                        <span style="margin-right: 42px;">
+                            {% if reservation.age == "u" %}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="u" checked/>14세이상
+                            {% else%}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="u"/>14세이상
+                            {% endif %}
+                        </span>
+                        <span>
+                            {% if reservation.age == "d" %}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="d" checked/>14세미만
+                            {% else %}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="d"/>14세미만
+                            {% endif %}
+                        </span>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">패스워드</span>
+                    <span class="body" style="color: #DF633B;">
+                        *패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다
+                    </span>
+                </div>
+                <hr>
+                <div id="adult_name" style="display: none;">
+                    <span class="title">보호자 성명*</span>
+                    <span class="body">
+                        {% if reservation.parent_name == Null %}
+                        <input class="form_box"type="text" name="parent_name">
+                        {% else %}
+                        <input class="form_box"type="text" name="parent_name" value="{{ reservation.parent_name }}">
+                        {% endif %}
+                    </span>
+                </div>
                 
-                <p>보호자 성명 : <input type="text" name="parent_name" value="{{ reservation.parent_name }}"></p>
-                <p>보호자 연락처 : <input type="text" name="parent_phone" value="{{ reservation.parent_phone }}"></p>
-                <p>신청자 성명 : <input type="text" name="name" value="{{ reservation.name }}"></p>
-                <p>신청자 연락처 : <input type="text" name="phone" value="{{ reservation.phone }}"></p>
-                <p>신청자 이메일 : <input type="text" name="email_front" value="{{ email_front }}"> @ 
-                    <input list="email_list" id="email_back" name="email_back" value="{{ email_back }}"/>
-                    <datalist id="email_list">
-                        <option value="naver.com">naver.com</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="daum.net">daum.net</option>
-                        <option value="hanmail.net">hanmail.net</option>
-                        <option value="직접입력">직접입력</option>
-                    </datalist>
-                </p>
-                <p>소속학교 : <input type="text" name="school" value="{{ reservation.school }}"></p>
-                <p>학년 : <select name="grade">
-                    <option value="" disabled selected>학년선택</option>
-                    {% if reservation.grade == '1' %}
-                    <option value="1" selected>1학년</option>
-                    {% else %}
-                    <option value="1">1학년</option>
-                    {% endif %}
+                <div id="adult_num" style="display: none;">
+                    <span class="title">보호자 연락처*</span>
+                    <span class="body">
+                        {% if reservation.parent_phone == Null %}
+                        <input type="text" class="form_box phone_num" name="parent_phone"  placeholder="'-'를 제외하고 숫자로만 입력하세요"></p>
+                        {% else %}
+                        <input type="text" class="form_box phone_num" name="parent_phone"  value="{{ reservation.parent_phone }}" placeholder="'-'를 제외하고 숫자로만 입력하세요"></p>
+                        {% endif %} 
+                    </span>
+                </div>
+                <hr id="adult_line" style="display: none;"> 
+                <div>
+                    <span class="title">신청자 성명*</span>
+                    <span class="body">
+                        <input type="text" class="form_box" name="name" value="{{ reservation.name }}">
+                    </span>
+                </div>
+                <div>
+                    <span class="title" >신청자 연락처*</span>
+                    <span class="body">
+                        <input type="text"class="form_box" name="phone" value="{{ reservation.phone }}" required placeholder="'-'를 제외하고 숫자로만 입력하세요">
+                    </span>
+                </div>
+                <div>
+                    <span class="title" required>신청자 이메일*</span>
+                    <span class="body">
+                        <input type="text" class="form_box" name="email_front" value="{{ email_front }}">
+                        @ 
+                            <input list="email_list" class="form_box" id="email_back" name="email_back" value="{{ email_back }}"/>
+                            <datalist id="email_list">
+                                <option value="naver.com">naver.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="hanmail.net">hanmail.net</option>
+                                <option value="직접입력">직접입력</option>
+                            </datalist>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">소속학교</span>
+                    <span class="body">
+                        <input type="text"class="form_box"   value="{{ reservation.school }}" name="school">
+                    </span>
+                </div>
 
-                    {% if reservation.grade == '2' %}
-                    <option value="2" selected>2학년</option>
-                    {% else %}
-                    <option value="2">2학년</option>
-                    {% endif %}
+                <div>
+                    <span class="title">학년</span>
+                    <span class="body">
+                        <select name="grade">
+                            <option value="" disabled selected>학년선택</option>
+                            {% if reservation.grade == '1' %}
+                            <option value="1" selected>1학년</option>
+                            {% else %}
+                            <option value="1">1학년</option>
+                            {% endif %}
+        
+                            {% if reservation.grade == '2' %}
+                            <option value="2" selected>2학년</option>
+                            {% else %}
+                            <option value="2">2학년</option>
+                            {% endif %}
+        
+                            {% if reservation.grade == '3' %}
+                            <option value="3" selected>3학년</option>
+                            {% else %}
+                            <option value="3">3학년</option>
+                            {% endif %}
+        
+                            {% if reservation.grade == 'n' %}
+                            <option value="n" selected>기타</option>
+                            {% else %}
+                            <option value="n">기타</option>
+                            {% endif %}
+                        </select>
+                    </span>
+                </div>
 
-                    {% if reservation.grade == '3' %}
-                    <option value="3" selected>3학년</option>
-                    {% else %}
-                    <option value="3">3학년</option>
-                    {% endif %}
+                <div>
+                    <span class="title" >견학인원*</span>
+                    <span class="body">
+                        <input type="number" class="form_box" name="headcount" value="{{ reservation.headcount }}" required>&nbsp;명
+                        <high style="color: #DF633B;"> *10명 이상 100명 이하만 신청 가능합니다</high>
+                    </span>
+                </div>
 
-                    {% if reservation.grade == 'n' %}
-                    <option value="n" selected>기타</option>
-                    {% else %}
-                    <option value="n">기타</option>
-                    {% endif %}
-                </select></p>
-                <p>견학인원 : <input type="number" name="headcount" value="{{ reservation.headcount }}">명</p>
-                <p>* 10명 이상 100명 이하만 신청 가능합니다</p>
-                <p>견학일정 : <select name="date" id="date">
-                    <option value="" disabled>캠퍼스 투어 일정 선택</option>
-                    {% for d in dates %}
-                    {% if reservation.date == d %}
-                    <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" selected>{{ d }}</option>
-                    {% else %}
-                    <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
-                    {% endif %}
-                    {% endfor %}
-                    
-                </select></p>
-                <p>견학 동기 : <input type="textarea" name="motivation" value="{{ reservation.motivation }}"></p>
-                <p>요청사항 : <input type="textarea" name="request" value="{{ reservation.request }}"></p>
+                <hr>
+                
+                <div>
+                    <span class="title">견학일정*</span>
+                    <span class="body">
+                        <select name="date" id="date">
+                            <option value="" class="campus_date">캠퍼스 투어 일정 선택</option>
+                            {% for d in dates %}
+                            {% if reservation.date == d %}
+                            <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" selected>{{ d }}</option>
+                            {% else %}
+                            <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title" >견학 동기</span>
+                    <span class="body">
+                        <textarea name="motivation" id="">{{ reservation.motivation }}</textarea>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">요청사항</span>
+                    <span class="body">
+                        <textarea name="request" id="">{{ reservation.request }}</textarea>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">동의사항*</span>
+                    <span class="body">
+                        개인정보 수집 및 이용자 동의사항<br>
+                        1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
+                        2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
+                                                [보호자] 보호자 성명, 보호자 연락처<br>
+                        <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
+                        *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
+                        *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                        <br>
+                        <input type="radio" name="agree" value="on"/ required style="margin-right: 10px;" checked>동의
+                        <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
+                    </span>
+                </div>
             {% endif %}
 
-            <div>
-                <span class="title">동의사항*</span>
-                <span class="body">
-                    개인정보 수집 및 이용자 동의사항<br>
-                    1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
-                    2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
-                                            [보호자] 보호자 성명, 보호자 연락처<br>
-                    <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
-                    *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
-                    *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
-                    <br>
-                    <input type="radio" name="agree" value="on"/ required>동의
-                    <input type="radio" name="agree" value="off"/>동의하지않음
-                </span>
-            </div>
+            
 
             <div class="regular_btn_box">
                 <a class="regular_btn" href="{% url 'calender:regular_list' %}">이전</a>
@@ -234,31 +334,4 @@
         </form>
     </div>
 </div>
-
-<script>
-   $(function(){
-    			// type 이 radio 이고 id adult 인 input 을 click 했을 경우
-                $('input[type="radio"][id="adult"]').on('click',function(){
-                    console.log("zzz")
-                    // startSetting 에 checked된 radio button의 value 값을 넣는다.
-                    var startSetting = $('input[type=radio][id="adult"]:checked').val();
-                   // startSetting이 later인 경우 style display를 flex로 변경한다. 
-                   if(startSetting == 'd'){
-                        $('#adult_name').css('display','flex');                   
-                        $('#adult_num').css('display','flex');     
-                        $('#adult_line').css('display','flex');                   
-                   // 그외의 경우 style display를 none 으로 변경한다.
-                    }else{
-                        $('#adult_name').css('display','none');                   
-                        $('#adult_num').css('display','none');     
-                        $('#adult_line').css('display','none');                   
-                    }
-                });
-            });
-
-
-  
-  
-</script>
-
 {% endblock %}
