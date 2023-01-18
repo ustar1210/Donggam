@@ -123,8 +123,12 @@
     </div>
 
     <div class="regular_btn_box" style="text-align: right;">
-        <a class="regular_btn mo" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}">수정하기</a>
-        <a onclick="javascript:realDel()" class="regular_btn mo" href="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">삭제하기</a>
+        <form method="post" onsubmit="return realDel()" action="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">
+            {% csrf_token %}
+            <a class="regular_btn mo" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}">수정하기</a>
+            <button type="submit" class="regular_btn mo">삭제하기</button>    
+        </form>
+        
         
     </div>
 

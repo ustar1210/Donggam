@@ -49,5 +49,5 @@ function checkDone() {
 
 // 삭제시 다시 묻기
 function realDel() {
-    confirm("삭제하시겠습니까?");
+    return confirm("삭제하시겠습니까?");
 }
