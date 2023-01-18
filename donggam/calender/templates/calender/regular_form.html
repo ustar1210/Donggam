@@ -182,66 +182,117 @@
                         <input type="text" class="form_box phone_num" name="parent_phone"  placeholder="'-'를 제외하고 숫자로만 입력하세요"></p>
                         {% else %}
                         <input type="text" class="form_box phone_num" name="parent_phone"  value="{{ reservation.parent_phone }}" placeholder="'-'를 제외하고 숫자로만 입력하세요"></p>
-                        {% endif %}
-                        
+                        {% endif %} 
                     </span>
                 </div>
                 <hr id="adult_line" style="display: none;"> 
+                <div>
+                    <span class="title">신청자 성명*</span>
+                    <span class="body">
+                        <input type="text" class="form_box" name="name" value="{{ reservation.name }}">
+                    </span>
+                </div>
+                <div>
+                    <span class="title" >신청자 연락처*</span>
+                    <span class="body">
+                        <input type="text"class="form_box" name="phone" value="{{ reservation.phone }}" required placeholder="'-'를 제외하고 숫자로만 입력하세요">
+                    </span>
+                </div>
+                <div>
+                    <span class="title" required>신청자 이메일*</span>
+                    <span class="body">
+                        <input type="text" class="form_box" name="email_front" value="{{ email_front }}">
+                        @ 
+                            <input list="email_list" class="form_box" id="email_back" name="email_back" value="{{ email_back }}"/>
+                            <datalist id="email_list">
+                                <option value="naver.com">naver.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="hanmail.net">hanmail.net</option>
+                                <option value="직접입력">직접입력</option>
+                            </datalist>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title">소속학교</span>
+                    <span class="body">
+                        <input type="text"class="form_box"   value="{{ reservation.school }}" name="school">
+                    </span>
+                </div>
 
-                <p>신청자 성명 : <input type="text" name="name" value="{{ reservation.name }}"></p>
-                <p>신청자 연락처 : <input type="text" name="phone" value="{{ reservation.phone }}"></p>
-                <p>신청자 이메일 : <input type="text" name="email_front" value="{{ email_front }}"> @ 
-                    <input list="email_list" id="email_back" name="email_back" value="{{ email_back }}"/>
-                    <datalist id="email_list">
-                        <option value="naver.com">naver.com</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="daum.net">daum.net</option>
-                        <option value="hanmail.net">hanmail.net</option>
-                        <option value="직접입력">직접입력</option>
-                    </datalist>
-                </p>
-                <p>소속학교 : <input type="text" name="school" value="{{ reservation.school }}"></p>
-                <p>학년 : <select name="grade">
-                    <option value="" disabled selected>학년선택</option>
-                    {% if reservation.grade == '1' %}
-                    <option value="1" selected>1학년</option>
-                    {% else %}
-                    <option value="1">1학년</option>
-                    {% endif %}
+                <div>
+                    <span class="title">학년</span>
+                    <span class="body">
+                        <select name="grade">
+                            <option value="" disabled selected>학년선택</option>
+                            {% if reservation.grade == '1' %}
+                            <option value="1" selected>1학년</option>
+                            {% else %}
+                            <option value="1">1학년</option>
+                            {% endif %}
+        
+                            {% if reservation.grade == '2' %}
+                            <option value="2" selected>2학년</option>
+                            {% else %}
+                            <option value="2">2학년</option>
+                            {% endif %}
+        
+                            {% if reservation.grade == '3' %}
+                            <option value="3" selected>3학년</option>
+                            {% else %}
+                            <option value="3">3학년</option>
+                            {% endif %}
+        
+                            {% if reservation.grade == 'n' %}
+                            <option value="n" selected>기타</option>
+                            {% else %}
+                            <option value="n">기타</option>
+                            {% endif %}
+                        </select>
+                    </span>
+                </div>
 
-                    {% if reservation.grade == '2' %}
-                    <option value="2" selected>2학년</option>
-                    {% else %}
-                    <option value="2">2학년</option>
-                    {% endif %}
+                <div>
+                    <span class="title" >견학인원*</span>
+                    <span class="body">
+                        <input type="number"class="form_box" name="headcount" value="{{ reservation.headcount }}" required>&nbsp;명
+                        <high style="color: #DF633B;"> *10명 이상 100명 이하만 신청 가능합니다</high>
+                    </span>
+                </div>
 
-                    {% if reservation.grade == '3' %}
-                    <option value="3" selected>3학년</option>
-                    {% else %}
-                    <option value="3">3학년</option>
-                    {% endif %}
-
-                    {% if reservation.grade == 'n' %}
-                    <option value="n" selected>기타</option>
-                    {% else %}
-                    <option value="n">기타</option>
-                    {% endif %}
-                </select></p>
-                <p>견학인원 : <input type="number" name="headcount" value="{{ reservation.headcount }}">명</p>
-                <p>* 10명 이상 100명 이하만 신청 가능합니다</p>
-                <p>견학일정 : <select name="date" id="date">
-                    <option value="" disabled>캠퍼스 투어 일정 선택</option>
-                    {% for d in dates %}
-                    {% if reservation.date == d %}
-                    <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" selected>{{ d }}</option>
-                    {% else %}
-                    <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
-                    {% endif %}
-                    {% endfor %}
-                    
-                </select></p>
-                <p>견학 동기 : <input type="textarea" name="motivation" value="{{ reservation.motivation }}"></p>
-                <p>요청사항 : <input type="textarea" name="request" value="{{ reservation.request }}"></p>
+                <hr>
+                
+                <div>
+                    <span class="title">견학일정*</span>
+                    <span class="body">
+                        <select name="date" id="date">
+                            <option value="" class="campus_date">캠퍼스 투어 일정 선택</option>
+                            {% for d in dates %}
+                            {% if reservation.date == d %}
+                            <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" selected>{{ d }}</option>
+                            {% else %}
+                            <option value="{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}" >{{ d }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title" value="{{ reservation.motivation }}">견학 동기</span>
+                    <span class="body">
+                        <textarea name="motivation" id=""></textarea>
+                    </span>
+                </div>
+                <hr>
+                <div>
+                    <span class="title" value="{{ reservation.request }}">요청사항</span>
+                    <span class="body">
+                        <textarea name="request" id=""></textarea>
+                    </span>
+                </div>
+                <hr>
             {% endif %}
 
             <div>
@@ -255,8 +306,8 @@
                     *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
                     *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
                     <br>
-                    <input type="radio" name="agree" value="on"/ required>동의
-                    <input type="radio" name="agree" value="off"/>동의하지않음
+                    <input type="radio" name="agree" value="on"/ required style="margin-right: 10px;">동의
+                    <input type="radio" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
                 </span>
             </div>
 
