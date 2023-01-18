@@ -137,7 +137,7 @@
                 </div>
                 <hr>
             {% else %}
-            <div >
+                <div>
                     <span class="title">구분*</span>
                     <span class="body">
                         <span style="margin-right: 42px;">
@@ -156,14 +156,38 @@
                         </span>
                     </span>
                 </div>
-                <p>구분 : 
-                   
-                </p>
-                <p>패스워드 : </p>
-                <p style="color: #DF633B;">*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
+                <hr>
+                <div>
+                    <span class="title">패스워드</span>
+                    <span class="body" style="color: #DF633B;">
+                        *패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다
+                    </span>
+                </div>
+                <hr>
+                <div id="adult_name" style="display: none;">
+                    <span class="title">보호자 성명*</span>
+                    <span class="body">
+                        {% if reservation.parent_name == Null %}
+                        <input class="form_box"type="text" name="parent_name">
+                        {% else %}
+                        <input class="form_box"type="text" name="parent_name" value="{{ reservation.parent_name }}">
+                        {% endif %}
+                    </span>
+                </div>
                 
-                <p>보호자 성명 : <input type="text" name="parent_name" value="{{ reservation.parent_name }}"></p>
-                <p>보호자 연락처 : <input type="text" name="parent_phone" value="{{ reservation.parent_phone }}"></p>
+                <div id="adult_num" style="display: none;">
+                    <span class="title">보호자 연락처*</span>
+                    <span class="body">
+                        {% if reservation.parent_phone == Null %}
+                        <input type="text" class="form_box phone_num" name="parent_phone"  placeholder="'-'를 제외하고 숫자로만 입력하세요"></p>
+                        {% else %}
+                        <input type="text" class="form_box phone_num" name="parent_phone"  value="{{ reservation.parent_phone }}" placeholder="'-'를 제외하고 숫자로만 입력하세요"></p>
+                        {% endif %}
+                        
+                    </span>
+                </div>
+                <hr id="adult_line" style="display: none;"> 
+
                 <p>신청자 성명 : <input type="text" name="name" value="{{ reservation.name }}"></p>
                 <p>신청자 연락처 : <input type="text" name="phone" value="{{ reservation.phone }}"></p>
                 <p>신청자 이메일 : <input type="text" name="email_front" value="{{ email_front }}"> @ 
