@@ -9,7 +9,7 @@
 <div class="form_wrap">
     <p class="form_title">신청서 작성</p>
     <div class="form_list">
-        <form method="post">
+        <form method="post" onsubmit="return checkDone()">
             {% csrf_token %}
             <div class="form_body">
 
@@ -312,7 +312,7 @@
 
             <div class="regular_btn_box">
                 <a class="regular_btn" href="{% url 'calender:regular_list' %}">이전</a>
-                <button class="regular_btn" type="submit" onclick="javascript:checkDone()"> 신청완료 </button>
+                <button class="regular_btn" type="submit"> 신청완료 </button>
             </div>
             
         </form>
