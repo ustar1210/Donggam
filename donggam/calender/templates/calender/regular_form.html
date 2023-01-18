@@ -320,6 +320,7 @@
 </div>
 
 <script>
+    // 성인여부
    $(function(){
     			// type 이 radio 이고 id adult 인 input 을 click 했을 경우
                 $('input[type="radio"][id="adult"]').on('click',function(){
@@ -335,6 +336,8 @@
                         // required 추가
                         $("[name=parent_name]").attr("required" , true);              
                         $("[name=parent_phone]").attr("required" , true);  
+                        alert("신청자가 14세 미만의 아동인 경우 법정대리인의 동의가 필수사항이므로 확인 절차를 거친 후 신청 승인됩니다.법정대리인의 성명과 연락처를 입력해 주세요.")
+                        
                    // 그외의 경우 style display를 none 으로 변경한다.
                     }else{
                         $('#adult_name').css('display','none');                   
@@ -346,6 +349,8 @@
                 });
             });
 
+            
+            // 체크확인
             function checkDone(){
                 // 인원체크하기
                 num = $("[name=headcount]").val();
