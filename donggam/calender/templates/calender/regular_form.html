@@ -54,7 +54,7 @@
                 <div>
                     <span class="title">신청자 성명*</span>
                     <span class="body">
-                        <input type="text" class="form_box" name="name">
+                        <input type="text" class="form_box" name="name" required>
                     </span>
                 </div>
     
@@ -255,7 +255,7 @@
                 <div>
                     <span class="title" >견학인원*</span>
                     <span class="body">
-                        <input type="number"class="form_box" name="headcount" value="{{ reservation.headcount }}" required>&nbsp;명
+                        <input type="number" class="form_box" name="headcount" value="{{ reservation.headcount }}" required>&nbsp;명
                         <high style="color: #DF633B;"> *10명 이상 100명 이하만 신청 가능합니다</high>
                     </span>
                 </div>
@@ -306,13 +306,13 @@
                     *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
                     <br>
                     <input type="radio" name="agree" value="on"/ required style="margin-right: 10px;">동의
-                    <input type="radio" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
+                    <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
                 </span>
             </div>
 
             <div class="regular_btn_box">
                 <a class="regular_btn" href="{% url 'calender:regular_list' %}">이전</a>
-                <button class="regular_btn" type="submit"> 신청완료 </button>
+                <button class="regular_btn" type="submit" onclick="javascript:checkDone()"> 신청완료 </button>
             </div>
             
         </form>
@@ -346,9 +346,22 @@
                 });
             });
 
-
-  
-  
+            function checkDone(){
+                // 인원체크하기
+                num = $("[name=headcount]").val();
+                agree = $("#no_agree").is(':checked');
+                console.log(agree);
+                if (num<10 || num>100){
+                    alert("견학인원은 10명 이상 100명 이하만 신청 가능합니다.")
+                    return false;
+                }
+                if(agree === true){
+                    alert("개인정보 수집 및 이용자 동의사항에 동의하셔야 신청이 가능합니다.")
+                    return false;
+                }
+                
+                    
+            } 
 </script>
 
 {% endblock %}
