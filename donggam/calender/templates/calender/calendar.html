@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% load static %}
 <div class="notice_title">
 	<h1>단체 캠퍼스투어 신청</h1>
 </div>
 
 
-<div class="calendar_wrap">
-
-	<div class="clearfix">
-		
-	</div>
+<div class="calendar_wrap" style="margin-bottom: 100px;">
 	<div class="container">
 		<a class="btn btn-info left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> Previous Month </a>
 		<a class="btn btn-info right" href="{% url 'calender:calendar' %}?{{ next_month }}"> Next Month </a>
 		<div class="calendartable">
 			{{ calendar }}	
+			<img src="{% static 'img/step.png' %}" alt="Dongguk logo" class="image" style="display: inline;">
+		</div>
+		<div>
+			
 		</div>
 	</div>
 </div>
