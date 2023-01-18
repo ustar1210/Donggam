@@ -137,17 +137,27 @@
                 </div>
                 <hr>
             {% else %}
+            <div >
+                    <span class="title">구분*</span>
+                    <span class="body">
+                        <span style="margin-right: 42px;">
+                            {% if reservation.age == "u" %}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="u" checked/>14세이상
+                            {% else%}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="u"/>14세이상
+                            {% endif %}
+                        </span>
+                        <span>
+                            {% if reservation.age == "d" %}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="d" checked/>14세미만
+                            {% else %}
+                            <input id="adult"type="radio" style="margin-right:10px" name="age" value="d"/>14세미만
+                            {% endif %}
+                        </span>
+                    </span>
+                </div>
                 <p>구분 : 
-                    {% if reservation.age == "u" %}
-                    <input type="radio" name="age" value="u" checked/>14세이상
-                    {% else%}
-                    <input type="radio" name="age" value="u"/>14세이상
-                    {% endif %}
-                    {% if reservation.age == "d" %}
-                    <input type="radio" name="age" value="d" checked/>14세미만
-                    {% else %}
-                    <input type="radio" name="age" value="d"/>14세미만
-                    {% endif %}
+                   
                 </p>
                 <p>패스워드 : </p>
                 <p style="color: #DF633B;">*패스워드는 '신청자 연락처 마지막 4자리 숫자'입니다</p>
