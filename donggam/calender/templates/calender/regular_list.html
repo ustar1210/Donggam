@@ -32,7 +32,7 @@
                 {% for r in page_obj %}
                 <div class="body">
                     <div class="num">{{ r.pk }}</div>
-                    <div class="title"><a href="{% url 'calender:regular_detail' reservation_id=r.pk %}">{{ r }}</a></div>
+                    <div class="title"><a href="{% url 'calender:regular_pw' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
                         {% if r.status == '1' or r.status == '2' %}
                         <wait style="color: #999999;">검토중</wait>
