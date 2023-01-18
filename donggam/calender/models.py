@@ -60,7 +60,7 @@ class Reservation(models.Model):
         elif self.status == '3':
             return f'<a href="{url}">{self.school}</a>'
         elif self.status == '4':
-            return f'<a>[신청마감]</a>'
+            return f'<a class="endAply">[신청마감]</a>'
         else :
             url = reverse('calender:reservation_edit', args=(self.id,))
             if self.time == '10':

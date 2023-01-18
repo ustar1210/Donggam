@@ -13,7 +13,7 @@ Event
 <div class="form_wrap">
   <p class="form_title">신청서 작성</p>
   <div class="form_list">
-      <form method="post">
+      <form method="post" onsubmit="return checkDone()">
         <div class="form_body"> 
           {% csrf_token %}
           {% if state == 0 %}

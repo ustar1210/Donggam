@@ -1,0 +1,16 @@
+.endAply{
+    background: linear-gradient(0deg, #E8E8E8, #E8E8E8), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #585757;   
+}
+.each_day{
+    list-style: none;
+    padding-left: 10px;
+}
+.date{
+    padding: 10px;
+}
+.day{
+    padding-top: 10px;
+}
