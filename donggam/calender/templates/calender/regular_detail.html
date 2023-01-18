@@ -124,7 +124,8 @@
 
     <div class="regular_btn_box" style="text-align: right;">
         <a class="regular_btn mo" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}">수정하기</a>
-        <a class="regular_btn mo" href="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">삭제하기</a>
+        <a onclick="javascript:realDel()" class="regular_btn mo" href="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">삭제하기</a>
+        
     </div>
 
     <div class="regular_btn_box" style="text-align: left;">
