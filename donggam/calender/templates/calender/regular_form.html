@@ -36,7 +36,6 @@
                 </div>
                 <hr>
                 <!-- 14세 미만일대만 보호자 성명, 연락처 뜨게하기 -->
-
                 <div id="adult_name" style="display: none;">
                     <span class="title">보호자 성명*</span>
                     <span class="body">
@@ -328,15 +327,21 @@
                     // startSetting 에 checked된 radio button의 value 값을 넣는다.
                     var startSetting = $('input[type=radio][id="adult"]:checked').val();
                    // startSetting이 later인 경우 style display를 flex로 변경한다. 
+                   // d이면 미성인
                    if(startSetting == 'd'){
                         $('#adult_name').css('display','flex');                   
                         $('#adult_num').css('display','flex');     
-                        $('#adult_line').css('display','flex');                   
+                        $('#adult_line').css('display','flex');     
+                        // required 추가
+                        $("[name=parent_name]").attr("required" , true);              
+                        $("[name=parent_phone]").attr("required" , true);  
                    // 그외의 경우 style display를 none 으로 변경한다.
                     }else{
                         $('#adult_name').css('display','none');                   
                         $('#adult_num').css('display','none');     
-                        $('#adult_line').css('display','none');                   
+                        $('#adult_line').css('display','none');            
+                        $("[name=parent_name]").attr("required" , false);
+                        $("[name=parent_phone]").attr("required" , false);
                     }
                 });
             });
