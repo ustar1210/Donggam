@@ -135,6 +135,21 @@
                     </span>
                 </div>
                 <hr>
+                <div>
+                    <span class="title">동의사항*</span>
+                    <span class="body">
+                        개인정보 수집 및 이용자 동의사항<br>
+                        1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
+                        2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
+                                                [보호자] 보호자 성명, 보호자 연락처<br>
+                        <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
+                        *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
+                        *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                        <br>
+                        <input type="radio" name="agree" value="on"/ required style="margin-right: 10px;">동의
+                        <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
+                    </span>
+                </div>
             {% else %}
                 <div>
                     <span class="title">구분*</span>
@@ -292,23 +307,24 @@
                     </span>
                 </div>
                 <hr>
+                <div>
+                    <span class="title">동의사항*</span>
+                    <span class="body">
+                        개인정보 수집 및 이용자 동의사항<br>
+                        1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
+                        2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
+                                                [보호자] 보호자 성명, 보호자 연락처<br>
+                        <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
+                        *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
+                        *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
+                        <br>
+                        <input type="radio" name="agree" value="on"/ required style="margin-right: 10px;" checked>동의
+                        <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
+                    </span>
+                </div>
             {% endif %}
 
-            <div>
-                <span class="title">동의사항*</span>
-                <span class="body">
-                    개인정보 수집 및 이용자 동의사항<br>
-                    1. 수집목적 : 캠퍼스투어 신청에 대한 접수·진행 관련 고지사항 전달·원활한 의사소통 경로 확보<br>
-                    2. 수집항목 : [신청인] 이름, 이메일, 소속학교(기관), 연락처<br>
-                                            [보호자] 보호자 성명, 보호자 연락처<br>
-                    <high style="color: #DF633B;">3. 보유 및 이용기간 : 게시 후 2년마다 일괄 삭제<br></high>
-                    *   정보주체는 개인정보의 수집·이용목적에 대한 동의를 거부할 수 있으며, 동의거부 시 캠퍼스투어 접수 및 진행에 어려움이 있을 수 있습니다<br>
-                    *   수집되는 정보는 캠퍼스투어 신청 확인 외에 다른 목적으로 사용되지 않습니다<br>
-                    <br>
-                    <input type="radio" name="agree" value="on"/ required style="margin-right: 10px;">동의
-                    <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
-                </span>
-            </div>
+            
 
             <div class="regular_btn_box">
                 <a class="regular_btn" href="{% url 'calender:regular_list' %}">이전</a>
