@@ -9,8 +9,10 @@
 
 <div class="calendar_wrap" style="margin-bottom: 100px;">
 	<div class="container">
-		<a class="btn btn-info left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> Previous Month </a>
-		<a class="btn btn-info right" href="{% url 'calender:calendar' %}?{{ next_month }}"> Next Month </a>
+		<div>
+			<a class=" left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
+			<a class=" right" href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a>
+		</div>
 			{{ calendar }}	
 	</div>
 
@@ -31,7 +33,9 @@
     border-radius: 4px;
     padding: 3px 4px;
     color: #FF9F2D;
-
+}
+a:hover{
+	color: whitesmoke;
 }
 </style>
 {% endblock %}
