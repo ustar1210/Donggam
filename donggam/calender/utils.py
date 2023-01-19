@@ -22,7 +22,7 @@ class Calendar(calendar.HTMLCalendar):
         except:
             pass
         if day != 0:
-            return f"<td class='day'><span class='date'>{day}</span><ul class='each_day';' > {d} </ul></td>"
+            return f"<td class='day'><span class='date'>{day}</span><ul class='each_day'> {d} </ul></td>"
         
         return '<td></td>'
 
