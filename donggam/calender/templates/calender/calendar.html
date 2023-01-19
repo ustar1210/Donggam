@@ -11,14 +11,28 @@
 	<div class="container">
 		<a class="btn btn-info left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> Previous Month </a>
 		<a class="btn btn-info right" href="{% url 'calender:calendar' %}?{{ next_month }}"> Next Month </a>
-		<div class="calendartable">
 			{{ calendar }}	
-			<img src="{% static 'img/step.png' %}" alt="Dongguk logo" class="image" style="display: inline;">
-		</div>
-		<div>
-			
-		</div>
+	</div>
+
+	<div style="text-align: center;">
+		<img src="{% static 'img/step.png' %}" alt="apply" class="image" style=" display: inline-block;">
 	</div>
 </div>
+<style>
+.waitAply{
+    background: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #0085FF;   
+}
+.schoolAply{
+	
+	background: linear-gradient(0deg, rgba(255, 150, 27, 0.1), rgba(255, 150, 27, 0.1)), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #FF9F2D;
+
+}
+</style>
 {% endblock %}
 
