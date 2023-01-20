@@ -13,7 +13,7 @@ class Calendar(calendar.HTMLCalendar):
         d = ''
         try:
             am_reserv = reservations_per_day.get(time='10')
-            d += f'<li>{am_reserv.get_html_url} </li>'
+            d += f'<li style="margin-bottom: 10px">{am_reserv.get_html_url} </li>'
         except:
             pass
         try:
@@ -22,7 +22,7 @@ class Calendar(calendar.HTMLCalendar):
         except:
             pass
         if day != 0:
-            return f"<td class='day'><span class='date'>{day}</span><ul> {d} </ul></td>"
+            return f"<td class='day'><span class='date'>{day}</span><ul class='each_day'> {d} </ul></td>"
         
         return '<td></td>'
 
@@ -40,6 +40,7 @@ class Calendar(calendar.HTMLCalendar):
         cal += f'{self.formatweekheader()}\n'
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f'{self.formatweek(week, reservations)}\n'
+        cal += f'</table>\n'
         return cal
         
 

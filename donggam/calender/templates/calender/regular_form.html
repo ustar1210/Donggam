@@ -150,6 +150,10 @@
                         <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
                     </span>
                 </div>
+                <div class="regular_btn_box">
+                    <a class="regular_btn" href="{% url 'calender:regular_list' %}">이전</a>
+                    <button class="regular_btn" type="submit"> 신청완료 </button>
+                </div>
             {% else %}
                 <div>
                     <span class="title">구분*</span>
@@ -322,14 +326,11 @@
                         <input type="radio" id="no_agree" name="agree" value="off" style="margin-right: 10px;"/>동의하지않음
                     </span>
                 </div>
+                <div class="regular_btn_box">
+                    <a class="regular_btn" href="{% url 'calender:regular_list' %}">이전</a>
+                    <button class="regular_btn" type="submit"> 수정완료 </button>
+                </div>
             {% endif %}
-
-            
-
-            <div class="regular_btn_box">
-                <a class="regular_btn" href="{% url 'calender:regular_list' %}">이전</a>
-                <button class="regular_btn" type="submit"> 신청완료 </button>
-            </div>
             
         </form>
     </div>

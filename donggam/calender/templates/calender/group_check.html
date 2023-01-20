@@ -51,7 +51,11 @@
                 <div>
                     <span class="title">진행장소</span>
                     <span class="body">
-                            {{ reservation.place }}
+                        {% if reservation.place == null %}
+                        정각원 앞 백년비
+                        {% else %}
+                        {{ reservation.place }}
+                        {% endif %}
                     </span>
                 </div>
                 <hr>
@@ -81,7 +85,11 @@
                 <div>
                     <span class="title">진행장소</span>
                     <span class="body">
+                        {% if reservation.place == null %}
+                        정각원 앞 백년비
+                        {% else %}
                         {{ reservation.place }}
+                        {% endif %}
                     </span>
                 </div>
                 <hr>

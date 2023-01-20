@@ -1,16 +1,67 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
+<div class="notice_title">
+	<h1>단체 캠퍼스투어 신청</h1>
+</div>
 
-	<div class="clearfix">
-		<a class="btn btn-info left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> Previous Month </a>
-		<a class="btn btn-info right" href="{% url 'calender:calendar' %}?{{ next_month }}"> Next Month </a>
-	</div>
-	
-	<div class="container">
-		<div class="calendartable">
-			{{ calendar }}
+
+	<div class="container" style="width: 100%;">
+		<div class="row">
+			<div class="col">
+				<div>
+					<a class="month_btn left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
+					<a class="month_btn " href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a>
+				</div>
+				{{ calendar }}	
+			</div>
+			<div class="col">
+				<div style="text-align: center; ">
+					<img src="{% static 'img/step.png' %}" alt="apply" class="" style="width: 90%;float: right;">
+				</div>
+			</div>
 		</div>
-	</div>
 
+	
+</div>
+<style>
+	.month_btn{
+    margin: 10px;
+    display: inline-block;
+    background: #DF633B;
+    width: 10%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+}
+
+.month_btn:hover{
+    color: #DF633B;
+    background: white;
+}
+
+
+.waitAply{
+    background: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #0085FF;   
+}
+.schoolAply{
+	
+	background: linear-gradient(0deg, rgba(255, 150, 27, 0.1), rgba(255, 150, 27, 0.1)), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #FF9F2D;
+}
+a:hover{
+	color: whitesmoke;
+}
+</style>
 {% endblock %}
+
