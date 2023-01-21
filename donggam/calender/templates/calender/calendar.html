@@ -7,18 +7,18 @@
 </div>
 
 
-	<div class="container" style="width: 100%;">
-		<div class="row">
-			<div class="col">
+	<div class="container-fluid calendar_right" style="margin-bottom: 100px;">
+		<div class="row" style="width: 100%;">
+			<div class="col-8">
 				<div>
 					<a class="month_btn left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
 					<a class="month_btn " href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a>
 				</div>
 				{{ calendar }}	
 			</div>
-			<div class="col">
-				<div style="text-align: center; ">
-					<img src="{% static 'img/step.png' %}" alt="apply" class="" style="width: 90%;float: right;">
+			<div class="col-4 calendar_left">
+				<div>
+					<img src="{% static 'img/step.png' %}" alt="apply" class="" style="width: 100%;">
 				</div>
 			</div>
 		</div>
@@ -26,6 +26,13 @@
 	
 </div>
 <style>
+
+.calendar_right{
+    
+}
+.calendar_left{
+    margin-top: 3em;
+}
 	.month_btn{
     margin: 10px;
     display: inline-block;
