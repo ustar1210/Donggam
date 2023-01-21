@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="text">
+<div class="notice_title">
     <h1>단체 캠퍼스투어 신청 확인</h1>
 </div>
+
 {% if reservation.status == '1' %}
-<div class="check">
+<div class="check" style="text-align: center; margin-top: 50px;">
     <div class="buttons">
         <div class="clearfix">
-            <a class="btn btn-info" href="{% url 'manager:confirm' reservation_id=reservation.pk %}"> 검토하기 </a>
+            <a class="regular_btn" href="{% url 'manager:confirm' reservation_id=reservation.pk %}"> 검토하기 </a>
         </div>
     </div>
 </div>
@@ -63,9 +64,9 @@
     </form>
 </div>
 {% endif %}
-<div class="buttons">
+<div class="buttons" style="text-align: center;">
     <div class="clearfix">
-        <a class="btn btn-info" href="{% url 'manager:calendarAdmin' %}"> 목록으로 </a>
+        <a class="regular_btn" href="{% url 'manager:calendarAdmin' %}"> 목록으로 </a>
     </div>
 </div>
 {% endblock %}
