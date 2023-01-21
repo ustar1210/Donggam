@@ -144,7 +144,7 @@ from django.core.paginator import Paginator
 def regular_list(request):
     instances = RegularReservation.objects.all().order_by('-pk')
     page = request.GET.get('page', '1')
-    paginator = Paginator(instances, '5')
+    paginator = Paginator(instances, '10')
     page_obj = paginator.page(page)
 
     tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
