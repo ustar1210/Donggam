@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"> Next Month </a>
+<div class="notice_title" style="margin:25px 0px;">
+	<h1>단체 캠퍼스투어 신청관리</h1>
 </div>
-<div class="container">
+<div class="container-fluid calendar_right" >
+	<div class="clearfix">
+		<a class="month_btn left" href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"> 이전 달 </a>
+		<a class="month_btn " href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"> 다음 달 </a>
+	</div>
 	<div class="calendartable">
-		<form method="post" action="{% url 'manager:adminsave' %}">
+		<form method="post" action="{% url 'manager:adminsave' %}" style="display: inline;">
 			{% csrf_token %}
 			{{ calendar }}
 			<p>
-				<input type="submit" value="신청가능 추가">
+				<input class="regular_btn"type="submit" value="신청가능 추가">
 			</p>
 		</form>
-		<form method="post" action="{% url 'manager:adminsave' %}">
+		<form style="display: inline;" method="post" action="{% url 'manager:adminsave' %}" >
 			{% csrf_token %}
 			<p>
-				<input type="submit" name="reset" value="신청가능 초기화">
+				<input type="submit" class="regular_btn" name="reset" value="신청가능 초기화">
 			</p>
 		</form>
 	</div>	
@@ -25,4 +28,29 @@
 <div class="timetable">
 	<div></div>	
 </div>
+<style>
+.calendar_right{
+    margin-bottom: 3em;
+    padding: 0em 7em 3em 7em;
+}
+.month_btn{
+    margin: 10px;
+    display: inline-block;
+    background: #DF633B;
+    width: 6%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+}
+
+.month_btn:hover{
+    color: #DF633B;
+    background: white;
+}
+
+</style>
 {% endblock %}
