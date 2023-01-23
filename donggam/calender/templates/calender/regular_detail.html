@@ -118,7 +118,23 @@
                         {{ reservation.request }}
                     </span>
                 </div>
+                <hr>  
+                {% if reservation.status == '2' %} 
+                <div>
+                    <span class="title">진행장소</span>
+                    <span class="body">
+                        {{ reservation.place.name }}
+                    </span>
+                </div>
+                <hr>    
+                <div>
+                    <span class="title">관리자메모</span>
+                    <span class="body">
+                        {{ reservation.admin_comment }}
+                    </span>
+                </div>
                 <hr>            
+                {% endif %}          
         </form>
     </div>
 
