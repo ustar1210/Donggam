@@ -175,12 +175,13 @@ def admin_regular_form(request, reservation_id):
         grade = '기타'
     else :
         grade = str(instance.grade) + '학년'
+    places = Place.objects.all()
     return render(request, 'manager/regular_form.html', 
     {
         'reservation' : instance,
         'age' : age,
         'grade' : grade,
-
+        'places' : places
     })
 
 def regular_status_change(request, reservation_id):
