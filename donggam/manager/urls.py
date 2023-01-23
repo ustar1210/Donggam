@@ -11,4 +11,7 @@ urlpatterns=[
     re_path(f'^calendar/adminsave/$', views.admin_save, name='adminsave'),
     re_path(r'^reservation/group/(?P<reservation_id>\d+)$', views.group_form, name='group_form'),
     re_path(r'^reservation/group/(?P<reservation_id>\d+)/confirm$', views.group_confirm, name='confirm'),
+    path('regular/', views.admin_regular_list, name='admin_regular_list'),
+    re_path(r'^regular/(?P<reservation_id>\d+)/$', views.admin_regular_form, name='admin_regular_form'),
+    re_path(r'^regular/(?P<reservation_id>\d+)/status/$', views.regular_status_change, name='regular_status_change'),
     ]

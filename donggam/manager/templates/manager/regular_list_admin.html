@@ -32,12 +32,14 @@
                 {% for r in page_obj %}
                 <div class="body">
                     <div class="num">{{ r.pk }}</div>
-                    <div class="title"><a href="{% url 'calender:regular_pw' reservation_id=r.pk %}">{{ r }}</a></div>
+                    <div class="title"><a href="{% url 'manager:admin_regular_form' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
                         {% if r.status == '1' %}
                         <wait style="color: #999999;">검토중</wait>
-                        {% elif r.status == '2' or r.status == '3' %}
-                        <high style="color: #DF633B;">신청상태를 확인해주세요</high>
+                        {% elif r.status == '2' %}
+                        <high style="color: #DF633B;">승인완료</high>
+                        {% elif r.status == '3' %}
+                        <high style="color: #DF633B;">재검토요청</high>
                         {% endif %}
                     </div>
                     <div class="date">{{ r.created_at }}</div>

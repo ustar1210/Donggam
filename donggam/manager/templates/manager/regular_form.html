@@ -123,10 +123,14 @@
     </div>
 
     <div class="regular_btn_box" style="text-align: right;">
-        <form method="post" onsubmit="return realDel()" action="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">
+        <form method="post" onsubmit="return realConf()" action="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">
             {% csrf_token %}
-            <a class="regular_btn mo" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}">수정하기</a>
-            <button type="submit" class="regular_btn mo">삭제하기</button>    
+            {% if reservation.status != '3' %}
+            <a class="regular_btn mo" href="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">재확인필요</a>
+            {% endif %}
+            {% if reservation.status != '2' %}
+            <button type="submit" class="regular_btn mo">승인하기</button>
+            {% endif %}    
         </form>
         
         
