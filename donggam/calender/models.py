@@ -141,6 +141,8 @@ class RegularReservation(models.Model):
         ('3', '재확인 필요'),
     )
     status = models.CharField(max_length =1, choices=STATUS_CHOICES, null=False, blank=False)
+    place = models.ForeignKey(Place, on_delete=models.SET_NULL, null=True, blank=True)
+    admin_comment = models.TextField(max_length=200, null=True, blank=True)
     created_at = models.DateField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
