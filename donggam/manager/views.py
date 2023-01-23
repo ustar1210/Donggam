@@ -175,12 +175,13 @@ def admin_regular_form(request, reservation_id):
         grade = '기타'
     else :
         grade = str(instance.grade) + '학년'
+    places = Place.objects.all()
     return render(request, 'manager/regular_form.html', 
     {
         'reservation' : instance,
         'age' : age,
         'grade' : grade,
-
+        'places' : places
     })
 
 def regular_status_change(request, reservation_id):
@@ -189,6 +190,25 @@ def regular_status_change(request, reservation_id):
         if request.method == "GET":
             instance.status = '3'
         elif request.method == "POST":
+            place_name = request.POST['place']
+            if place_name == '':
+                try :
+                    place = get_object_or_404(Place, name='팔정도 코끼리상 앞')
+                except : 
+                    place = Place()
+                    place.name = '팔정도 코끼리상 앞'
+                    place.save()
+            else :
+                try :
+                    place = get_object_or_404(Place, name=place_name)
+                except :
+                    place = Place()
+                    place.name = place_name
+                    place.save()
+            instance.place = place
+            instance.admin_comment = request.POST['comment']
+            
+
             instance.status = '2'
         instance.save()
         return redirect('manager:admin_regular_form', reservation_id=reservation_id)

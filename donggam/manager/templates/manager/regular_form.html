@@ -118,7 +118,23 @@
                         {{ reservation.request }}
                     </span>
                 </div>
+                <hr>   
+                {% if reservation.status == '2' %} 
+                <div>
+                    <span class="title">진행장소</span>
+                    <span class="body">
+                        {{ reservation.place.name }}
+                    </span>
+                </div>
+                <hr>    
+                <div>
+                    <span class="title">관리자메모</span>
+                    <span class="body">
+                        {{ reservation.admin_comment }}
+                    </span>
+                </div>
                 <hr>            
+                {% endif %}
         </form>
     </div>
 
@@ -129,6 +145,40 @@
             <a class="regular_btn mo" href="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">재확인필요</a>
             {% endif %}
             {% if reservation.status != '2' %}
+            <div class="form_body">
+                <div>
+                    <span class="title">진행장소</span>
+                    <span class="body">
+                        {% if reservation.place.name %}
+                        <input list="placelist" name="place" id="place" placeholder="{{ reservation.place.name }}">
+                        {% else %}
+                        <input list="placelist" name="place" id="place" placeholder="팔정도 코끼리상 앞">
+                        {% endif %}
+                        <datalist id="placelist">
+                        {% for p in places %}
+                            {% if p.name == '팔정도 코끼리상 앞' %}
+                            <option value='{{ p.name }}' selected>{{ p.name }}</option>
+                            {% else %}
+                            <option value='{{ p.name }}'>{{ p.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                            <option value='직접입력'>직접입력</option>
+                        </datalist>
+                    </span>
+                </div>
+
+                <div>
+                    <span class="title">관리자메모</span>
+                    <span class="body">
+                        {% if reservation.admin_comment %}
+                        <input type="textarea" name="comment" placeholder="{{ reservation.admin_comment }}" value="{{ reservation.admin_comment }}">
+                        {% else %}
+                        <input type="textarea" name="comment" placeholder="신청자가 볼 수 있는 코멘트입니다.">
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
             <button type="submit" class="regular_btn mo">승인하기</button>
             {% endif %}    
         </form>
