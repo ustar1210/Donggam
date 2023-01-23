@@ -51,3 +51,7 @@ function checkDone() {
 function realDel() {
     return confirm("삭제하시겠습니까?");
 }
+
+function realConf(){
+    return confirm("승인하시겠습니까?");
+}

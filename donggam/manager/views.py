@@ -128,3 +128,69 @@ def group_confirm(request, reservation_id):
         return redirect('manager:group_form', reservation_id = reservation_id)
     else :
         return redirect('manager:login')
+
+def admin_regular_list(request):
+    if request.user.is_authenticated:
+        instances = RegularReservation.objects.all().order_by('-pk')
+        page = request.GET.get('page', '1')
+        paginator = Paginator(instances, '10')
+        page_obj = paginator.page(page)
+
+        tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
+        now_sentence = ''
+        if len(tourdates.filter(date__month=datetime.datetime.today().month)) > 0:
+            now_month_dates = tourdates.filter(date__month=datetime.datetime.today().month)
+            now_sentence = str(datetime.datetime.today().month) + '월 정기 캠퍼스투어일은 '
+            days = ''
+            for d in now_month_dates:
+                days += str(d.date.day) + ', '
+            now_sentence = now_sentence + days[:-2] + "일 입니다."
+
+        days = ''
+        next_sentence = ''
+        if len(tourdates.filter(date__month=datetime.datetime.today().month + 1)) > 0 :
+            next_month_dates = tourdates.filter(date__month=datetime.datetime.today().month + 1)
+            for d in next_month_dates:
+                next_sentence = str(d.date.month) + '월 정기 캠퍼스투어일은 '
+                days += str(d.date.day) + ', '
+            next_sentence = next_sentence + days[:-2] + "일 입니다."
+
+        return render(request, 'manager/regular_list_admin.html', 
+        {
+            'page_obj': page_obj,
+            'now_sentence': now_sentence, 
+            'next_sentence': next_sentence,
+
+        })
+    else:
+        return redirect('manager:login')
+
+def admin_regular_form(request, reservation_id):
+    instance = get_object_or_404(RegularReservation, pk = reservation_id)
+    if instance.age == 'u':
+        age = '14세이상'
+    else :
+        age = '14세미만'
+    if instance.grade == 'n':
+        grade = '기타'
+    else :
+        grade = str(instance.grade) + '학년'
+    return render(request, 'manager/regular_form.html', 
+    {
+        'reservation' : instance,
+        'age' : age,
+        'grade' : grade,
+
+    })
+
+def regular_status_change(request, reservation_id):
+    if request.user.is_authenticated:
+        instance = get_object_or_404(RegularReservation, pk=reservation_id)
+        if request.method == "GET":
+            instance.status = '3'
+        elif request.method == "POST":
+            instance.status = '2'
+        instance.save()
+        return redirect('manager:admin_regular_form', reservation_id=reservation_id)
+    else:
+        return redirect('manager:login')
