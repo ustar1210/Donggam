@@ -45,6 +45,7 @@ class Reservation(models.Model):
         ('2', '검토중'),
         ('3', '승인완료'),
         ('4', '신청마감'),
+        ('5', '휴일'),
     )
     status = models.CharField(max_length =1, choices=STATUS_CHOICES, null=False, blank=False)
     place = models.ForeignKey(Place, on_delete=models.SET_NULL, null=True, blank=True)
@@ -61,6 +62,8 @@ class Reservation(models.Model):
             return f'<a class="schoolAply" href="{url}">{self.school}</a>'
         elif self.status == '4':
             return f'<a class="endAply">[신청마감]</a>'
+        elif self.status == '5':
+            return f'<a class="holiday">휴일</a>'
         else :
             url = reverse('calender:reservation_edit', args=(self.id,))
             if self.time == '10':
@@ -79,6 +82,8 @@ class Reservation(models.Model):
             return f'<a href="{url}">{self.school}</a>'
         elif self.status == '4':
             return f'<a>[신청마감]</a>'
+        elif self.status == '5':
+            return f'<a>휴일</a>'
         else :
             if self.time == '10':
                 return f'<a>[오전 신청가능]</a>'
@@ -95,6 +100,8 @@ class Reservation(models.Model):
             status = '[승인완료]'
         elif self.status == '4':
             status = '[신청마감]'
+        elif self.status == '5':
+            return str(self.date) + ' / 휴일'
         else :
             if self.time == '10':
                 status = '[오전 신청가능]'
