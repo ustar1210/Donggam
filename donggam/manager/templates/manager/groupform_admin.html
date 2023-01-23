@@ -158,7 +158,11 @@
                     </div>
                 </div>
                 <div style="text-align: right;">
+                    {% if reservation.status == '3' %}
+                    <input class="regular_btn" type="submit" value="수정">
+                    {% else %}
                     <input class="regular_btn" type="submit" value="승인">
+                    {% endif %}
                 </div>
             </form>
         </div>
