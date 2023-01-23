@@ -9,20 +9,6 @@
     padding-left: 10px;
 }
 
-.waitAply{
-    background: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;
-    border-radius: 4px;
-    padding: 3px 4px;
-    color: #0085FF
-    ;   
-}
-.schoolAply{
-    background: linear-gradient(0deg, rgba(255, 150, 27, 0.1), rgba(255, 150, 27, 0.1)), #FFFFFF;
-    border-radius: 4px;
-    padding: 3px 4px;
-    color: #FF9F2D;
-
-}
 .calendartable{
     width: 100%;
   }
@@ -33,7 +19,8 @@
   }
   
   .calendar tr, .calendar td {
-    border: 1px solid black;
+    border: 1px solid #c1c1c1;
+
   }
   
   .calendar th {
@@ -43,8 +30,8 @@
   }
   
   .calendar td {
-    width: 200px;
-    height: 150px;
+    width: 164px;
+    height: 105px;
     padding: 10px 0px 10px 5px;
   }
   
@@ -96,4 +83,15 @@
     padding: 5px;
     width: 100%;
   }
+
+  @media (max-width: 768px) {
+    .calendar td {
+      width: 50px;
+      height: 50px;
+      padding: 10px 0px 10px 5px;
+    }
+    .calendar tr, .calendar td {
+      border: 1px solid #c1c1c1;
   
+    }
+}
