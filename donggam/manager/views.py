@@ -39,8 +39,22 @@ def admin_save(request):
             targets = Reservation.objects.filter(status = '0')
             for t in targets:
                 t.delete()
+        elif 'h_reset' in request.POST :
+            targets = Reservation.objects.filter(status = '5')
+            month = str(datetime.datetime.today().month)
+            targets = targets.filter(date__month = month)
+            for t in targets :
+                t.delete()
+        elif 'holiday' in request.POST :
+            name = request.POST['reason']
+            for a in request.POST:
+                if a == 'csrfmiddlewaretoken' or a == 'holiday' or a == 'reason' :
+                    continue  
+                date = a.split('-', -1)
+                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]      
+                instance = Reservation(date=yearmonthdate, name=name, status='5')
+                instance.save()                       
         else :
-            print(request.POST)
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' :
                     continue

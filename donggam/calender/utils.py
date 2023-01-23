@@ -12,15 +12,22 @@ class Calendar(calendar.HTMLCalendar):
         reservations_per_day = reservations.filter(date__day=day)
         d = ''
         try:
-            am_reserv = reservations_per_day.get(time='10')
-            d += f'<li style="margin-bottom: 10px">{am_reserv.get_html_url} </li>'
-        except:
-            pass
-        try:
-            pm_reserv = reservations_per_day.get(time='14')
-            d += f'<li>{pm_reserv.get_html_url} </li>'
-        except:
-            pass
+            instance = reservations_per_day.get(status='5')
+            if instance.name != '' :
+                d += f'<li>{instance.name}</li>'
+            else :
+                d += f'<li></li>'
+        except:    
+            try:
+                am_reserv = reservations_per_day.get(time='10')
+                d += f'<li style="margin-bottom: 10px">{am_reserv.get_html_url} </li>'
+            except:
+                pass
+            try:
+                pm_reserv = reservations_per_day.get(time='14')
+                d += f'<li>{pm_reserv.get_html_url} </li>'
+            except:
+                pass
         if day != 0:
             return f"<td class='day'><span class='date'>{day}</span><ul class='each_day'> {d} </ul></td>"
         

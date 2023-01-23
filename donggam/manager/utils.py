@@ -3,7 +3,6 @@ from django.urls import reverse
 import calendar
 from calender.models import Reservation, RegularReservation
 
-
 class AdminCalendar(calendar.HTMLCalendar):
     def __init__(self, year=None, month=None):
         self.year = year
@@ -13,19 +12,31 @@ class AdminCalendar(calendar.HTMLCalendar):
     def formatday(self, day, reservations):
         reservations_per_day = reservations.filter(date__day=day)
         d = ''
-        datetime = str(self.year)+'-'+str(self.month)+'-'+str(day)
         try:
-            am_reserv = reservations_per_day.get(time='10')
-            d += f'<li>{am_reserv.get_admin_url} </li>'
-        except:
-            amdatetime = datetime + '-am'
-            d += f'<li><label><input type="checkbox" name="{amdatetime}">[10:00]</label></li>'
-        try:
-            pm_reserv = reservations_per_day.get(time='14')
-            d += f'<li>{pm_reserv.get_admin_url} </li>'
-        except:
-            pmdatetime = datetime + '-pm'
-            d += f'<li><label><input type="checkbox" name="{pmdatetime}">[14:00]</label></li>'
+            instance = reservations_per_day.get(status='5')
+            if instance.name != '' :
+                d += f'<li>{instance.name}</li>'
+            else :
+                d += f'<li>휴일 </li>'
+        except:    
+            datetime = str(self.year)+'-'+str(self.month)+'-'+str(day)
+            h=0
+            try:
+                am_reserv = reservations_per_day.get(time='10')
+                d += f'<li>{am_reserv.get_admin_url} </li>'
+                h=1
+            except:
+                amdatetime = datetime + '-am'
+                d += f'<li><label><input type="checkbox" name="{amdatetime}">[10:00]</label></li>'
+            try:
+                pm_reserv = reservations_per_day.get(time='14')
+                d += f'<li>{pm_reserv.get_admin_url} </li>'
+                h=1
+            except:
+                pmdatetime = datetime + '-pm'
+                d += f'<li><label><input type="checkbox" name="{pmdatetime}">[14:00]</label></li>'
+            if h==0:
+                d += f'<li><label><input type="checkbox" name="{datetime}">[휴일]</label></li>'
         if day != 0:
             return f"<td class='day'><span class='date'>{day}</span><ul> {d} </ul></td>"
         
