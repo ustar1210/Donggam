@@ -12,8 +12,7 @@
         <form>
             {% csrf_token %}
             <div class="form_body">
-
-                <div >
+                <div>
                     <span class="title">신청상태</span>
                     <span class="body">
                         <span>
@@ -138,51 +137,53 @@
         </form>
     </div>
 
-    <div class="regular_btn_box" style="text-align: right;">
-        <form method="post" onsubmit="return realConf()" action="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">
-            {% csrf_token %}
-            {% if reservation.status != '3' %}
-            <a class="regular_btn mo" href="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">재확인필요</a>
-            {% endif %}
-            {% if reservation.status != '2' %}
-            <div class="form_body">
-                <div>
-                    <span class="title">진행장소</span>
-                    <span class="body">
-                        {% if reservation.place.name %}
-                        <input list="placelist" name="place" id="place" placeholder="{{ reservation.place.name }}">
-                        {% else %}
-                        <input list="placelist" name="place" id="place" placeholder="팔정도 코끼리상 앞">
-                        {% endif %}
-                        <datalist id="placelist">
-                        {% for p in places %}
-                            {% if p.name == '팔정도 코끼리상 앞' %}
-                            <option value='{{ p.name }}' selected>{{ p.name }}</option>
+    <div class="form_wrap">
+        <div class="form_list">
+            <form method="post" onsubmit="return realConf()" action="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">
+                {% csrf_token %}
+                {% if reservation.status != '3' %}
+                <a class="regular_btn mo" href="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">재확인필요</a>
+                {% endif %}
+                {% if reservation.status != '2' %}
+                <div class="form_body">
+                    <div>
+                        <span class="title">진행장소</span>
+                        <span class="body">
+                            {% if reservation.place.name %}
+                            <input class="form_box" list="placelist" name="place" id="place" placeholder="{{ reservation.place.name }}">
                             {% else %}
-                            <option value='{{ p.name }}'>{{ p.name }}</option>
+                            <input class="form_box" list="placelist" name="place" id="place" placeholder="팔정도 코끼리상 앞">
                             {% endif %}
-                        {% endfor %}
-                            <option value='직접입력'>직접입력</option>
-                        </datalist>
-                    </span>
+                            <datalist id="placelist">
+                            {% for p in places %}
+                                {% if p.name == '팔정도 코끼리상 앞' %}
+                                <option value='{{ p.name }}' selected>{{ p.name }}</option>
+                                {% else %}
+                                <option value='{{ p.name }}'>{{ p.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                                <option value='직접입력'>직접입력</option>
+                            </datalist>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="title">관리자메모</span>
+                        <span class="body">
+                            {% if reservation.admin_comment %}
+                            <textarea   name="comment" placeholder="{{ reservation.admin_comment }}">{{ reservation.admin_comment }}</textarea>
+                            {% else %}
+                            <textarea    name="comment" placeholder="신청자가 볼 수 있는 코멘트입니다."></textarea>
+                            {% endif %}
+                        </span>
+                    </div>
                 </div>
-
-                <div>
-                    <span class="title">관리자메모</span>
-                    <span class="body">
-                        {% if reservation.admin_comment %}
-                        <input type="textarea" name="comment" placeholder="{{ reservation.admin_comment }}" value="{{ reservation.admin_comment }}">
-                        {% else %}
-                        <input type="textarea" name="comment" placeholder="신청자가 볼 수 있는 코멘트입니다.">
-                        {% endif %}
-                    </span>
+                <hr>
+                <div style="text-align: right;">
+                    <button type="submit" class="regular_btn mo">승인하기</button>
                 </div>
-            </div>
-
-            <button type="submit" class="regular_btn mo">승인하기</button>
-            {% endif %}    
-        </form>
-        
+                {% endif %}    
+            </form>
+        </div>
         
     </div>
 
