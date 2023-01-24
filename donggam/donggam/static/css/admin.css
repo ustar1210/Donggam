@@ -1,0 +1,21 @@
+.weektable{
+    width:100%;
+    margin: auto;
+    font-size: 13px;
+}
+.weektable tr, .weektable td {
+    border: 1px solid #c1c1c1;
+
+}
+
+.weektable th {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.weektable td {
+    width: 164px;
+    height: 105px;
+    padding: 10px 0px 10px 5px;
+}

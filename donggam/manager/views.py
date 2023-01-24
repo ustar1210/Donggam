@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from calender.models import Reservation, RegularReservation
-from manager.utils import AdminCalendar
+from manager.utils import AdminCalendar, Weektable
 from django.views import generic
 from calender.views import *
 from calender.models import *
@@ -26,47 +26,24 @@ class AdminCalendarView(generic.ListView):
         context['next_month'] = next_month(d) 
         # Instantiate our calendar class with today's year and date
         cal = AdminCalendar(d.year, d.month)
-
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
 
+
+        weektable = Weektable(d.year, d.month)
+        html_week = weektable.formatmonth(withyear=True)
+        context['weektable'] = mark_safe(html_week)
+
         return context
+
 
 def admin_save(request):
     if request.user.is_authenticated:
-        if 'reset' in request.POST :
-            targets = Reservation.objects.filter(status = '0')
-            for t in targets:
-                t.delete()
-        elif 'h_reset' in request.POST :
-            targets = Reservation.objects.filter(status = '5')
-            month = str(datetime.datetime.today().month)
-            targets = targets.filter(date__month = month)
-            for t in targets :
-                t.delete()
-        elif 'holiday' in request.POST :
-            name = request.POST['reason']
-            for a in request.POST:
-                if a == 'csrfmiddlewaretoken' or a == 'holiday' or a == 'reason' :
-                    continue  
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]      
-                instance = Reservation(date=yearmonthdate, name=name, status='5')
-                instance.save()                       
-        else :
-            for a in request.POST:
-                if a == 'csrfmiddlewaretoken' :
-                    continue
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
-                if date[3] == 'am' :
-                    time = '10'
-                else :
-                    time = '14'
-                instance = Reservation(date=yearmonthdate, time=time, status='0')
-                instance.save()
-            change_status()
+        
+
+        
+        change_status()
         return redirect('manager:calendarAdmin')
     else :
         return redirect('manager:login')

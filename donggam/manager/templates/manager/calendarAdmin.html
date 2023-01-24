@@ -10,23 +10,17 @@
 		<a class="month_btn " href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"> 다음 달 </a>
 	</div>
 	<div class="calendartable">
-		<form method="post" action="{% url 'manager:adminsave' %}" style="display: inline;">
-			{% csrf_token %}
 			{{ calendar }}
-			<p>
-				<input class="regular_btn"type="submit" value="신청가능 추가">
-				<input type="submit" class="regular_btn" name="reset" value="신청가능 초기화">
-			</p>
-			<p>
-				<input type="text" name="reason" placeholder="달력에 표시할 휴일 사유를 입력해주세요">
-				<input type="submit" class="regular_btn" name="holiday" value="선택일 휴일 지정">
-				<input type="submit" class="regular_btn" name="h_reset" value="휴일 초기화">
-			</p>
-		</form>
 	</div>	
 </div>
-<div class="timetable">
-	<div></div>	
+<div class="weektable">
+	<form action="{% url 'manager:adminsave' %}" method="post">
+		{% csrf_token %}
+		<input type="submit" value="저장">
+		<div>
+				{{ weektable }}
+		</div>
+	</form>
 </div>
 <style>
 .calendar_right{
