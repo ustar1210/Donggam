@@ -142,7 +142,7 @@
             <form method="post" onsubmit="return realConf()" action="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">
                 {% csrf_token %}
                 {% if reservation.status != '3' %}
-                <a class="regular_btn mo" href="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}">재확인필요</a>
+                <a class="regular_btn mo" href="{% url 'manager:regular_status_change' reservation_id=reservation.pk %}" style="float: right;">재확인필요</a>
                 {% endif %}
                 {% if reservation.status != '2' %}
                 <div class="form_body">
