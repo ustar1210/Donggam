@@ -5,14 +5,9 @@
 <div class="notice_title" style"margin:25px 0px; ">
 	<h1>관리자 페이지</h1>
 </div>
-<div style="text-align: center; margin-top: 50px;">
+<div style="text-align: center; margin-top: 100px;">
     <a class="regular_btn" href="{% url 'manager:calendarAdmin' %}"> 단체 캠퍼스투어 관리 </a>
     <a class="regular_btn" href="{% url 'manager:admin_regular_list' %}"> 정기 캠퍼스투어 관리 </a>
 </div>
-{% if user.is_authenticated %}
-<div style="text-align: center; margin-top: 150px;">
-    <a class="regular_btn" href="{% url 'manager:logout' %}" style="margin-right: 3em;"> 로그아웃 </a>
-</div>
-{% endif %}
 
 {% endblock %}
