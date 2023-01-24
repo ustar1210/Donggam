@@ -3,6 +3,8 @@
     border-radius: 4px;
     padding: 3px 4px;
     color: #585757;   
+    font-weight: 500;
+    font-size: 14px;
 }
 .each_day{
     list-style: none;
