@@ -86,8 +86,9 @@ class Calendar(calendar.HTMLCalendar):
             s = '%s %s' % (theyear,korea_month_name)
         else:
             s = '%s' % month_name[themonth]
-        return '<tr><th colspan="7" class="%s" style="color:#585757; font-size:24px;" >%s</th></tr>' % (
-            self.cssclass_month_head, s)
+        prev_month = f'<a class="prev_month_btn"> < </a>'
+        next_month = f'<a class="next_month_btn"> > </a>'
+        return f'<p class="month_name_cal">{prev_month}{s}{next_month}</p>'
 
     def formatday(self, day, reservations):
         reservations_per_day = reservations.filter(date__day=day)
@@ -120,6 +121,10 @@ class Calendar(calendar.HTMLCalendar):
             week += self.formatday(d, reservations)
         return f'<tr class="days"> {week} </tr>'
     
+    def formatweekheader(self):
+        s = ''.join(self.formatweekday(i) for i in self.iterweekdays())
+        return '<tr colspan="7">%s</tr>' % s
+
     def formatweekday(self, day):
         font_color = ''
         if day_abbr[day] == 'Sat':

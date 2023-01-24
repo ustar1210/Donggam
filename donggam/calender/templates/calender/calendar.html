@@ -11,8 +11,8 @@
 		<div class="row">
 			<div class="col-8">
 				<div>
-					<a class="month_btn left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
-					<a class="month_btn " href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a>
+					<!-- <a class="month_btn left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
+					<a class="month_btn " href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a> -->
                     <span class="cal_time right">오전 - 10:00</span>
                     <span class="cal_time right">오후 - 14:00</span>
 				</div>
@@ -45,6 +45,18 @@
     </div>
 
 </div>
+<script>
+    $(function () {
+    // type 이 radio 이고 id adult 인 input 을 click 했을 경우
+    $('a[class="prev_month_btn"]').on("click", function () {
+        window.location = "{% url 'calender:calendar' %}?{{ prev_month }}";
+    });
+
+    $('a[class="next_month_btn"]').on("click", function () {
+        window.location = "{% url 'calender:calendar' %}?{{ next_month }}";
+    });
+});
+</script>
 <style>
 
 .calendar_right{
@@ -100,6 +112,17 @@
     padding: 3px 4px;
     color: #FF9F2D;
 }
+
+
+.month_name_cal{
+  color:#585757;
+  font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+}
+
 a:hover{
 	color: whitesmoke;
 }
