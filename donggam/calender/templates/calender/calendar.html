@@ -20,7 +20,7 @@
 			</div>
 			<div class="col-4 calendar_left">
 				<div>
-					<img src="{% static 'img/step.png' %}" alt="apply" style="width: 90%;" class="img_aply_dis" >
+					<img src="{% static 'img/step.png' %}" alt="apply" class="img_aply_dis" >
 				</div>
 			</div>
 		</div>
@@ -30,8 +30,6 @@
     <div >
         <div>
             <div>
-                <a class="month_btn left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
-                <a class="month_btn " href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a>
                 <span class="cal_time right">오전 - 10:00</span>
                 <span class="cal_time right">오후 - 14:00</span>
             </div>
@@ -39,26 +37,24 @@
         </div>
         <div class="calendar_left">
             <div>
-                <img src="{% static 'img/step.png' %}" alt="apply" style="width: 90%;" class="img_aply_dis" >
+                <img src="{% static 'img/step.png' %}" alt="apply" style="width: 90%;" >
             </div>
         </div>
     </div>
 
 </div>
 <script>
-    $(function () {
-    // type 이 radio 이고 id adult 인 input 을 click 했을 경우
-    $('a[class="prev_month_btn"]').on("click", function () {
-        window.location = "{% url 'calender:calendar' %}?{{ prev_month }}";
-    });
-
-    $('a[class="next_month_btn"]').on("click", function () {
-        window.location = "{% url 'calender:calendar' %}?{{ next_month }}";
-    });
-});
+    document.getElementById("prev_month_btn").href="{% url 'calender:calendar' %}?{{ prev_month }}"
+    document.getElementById("next_month_btn").href="{% url 'calender:calendar' %}?{{ next_month }}"
 </script>
 <style>
-
+#prev_month_btn, #next_month_btn{
+    color:#585757;
+}
+.img_aply_dis{
+    width: 548px;
+    height: 673px;
+}
 .calendar_right{
     margin-bottom: 5em;
     padding: 3em 7em 5em 7em;
@@ -67,7 +63,7 @@
     margin-top: 3.5em;
 }
 .cal_time{
-    margin: 15px 10px;
+    margin: 10px 10px;
     display: inline-block;
     background: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;
     padding: 3px 4px;
