@@ -2,11 +2,16 @@ from datetime import datetime, timedelta
 from django.urls import reverse
 import calendar
 
-
+now = datetime.now().day
+now_month = datetime.now().month
 import sys
 import datetime
 import locale as _locale
 from itertools import repeat
+
+
+
+
 
 class _localized_day:
 
@@ -46,7 +51,7 @@ class _localized_month:
 
 month_name = _localized_month('%B')
 day_abbr = _localized_day('%a')
-
+now_mont_flag = False
 class Calendar(calendar.HTMLCalendar):
     def __init__(self, year=None, month=None):
         self.year = year
@@ -55,33 +60,79 @@ class Calendar(calendar.HTMLCalendar):
         
 
     def formatmonthname(self, theyear, themonth, withyear=True):
-        """
-        Return a month name as a table row.
-        """
+        global now_mont_flag
         if withyear:
             if month_name[themonth] == 'January':
+                if now_month == 1 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='1월'
             elif month_name[themonth] == 'February':
+                if now_month == 2 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='2월'
             elif month_name[themonth] == 'March':
+                if now_month == 3 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='3월'
             elif month_name[themonth] == 'April':
+                if now_month == 4 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='4월'
             elif month_name[themonth] == 'May':
+                if now_month == 5 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='5월'
             elif month_name[themonth] == 'June':
+                if now_month == 6 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='6월'
             elif month_name[themonth] == 'July':
+                if now_month == 7 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='7월'
             elif month_name[themonth] == 'August':
+                if now_month == 8 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='8월'
             elif month_name[themonth] == 'September':
+                if now_month == 9 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='9월'
             elif month_name[themonth] == 'October':
+                if now_month == 10 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='10월'
             elif month_name[themonth] == 'November':
+                if now_month == 11 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='11월'
             elif month_name[themonth] == 'December':
+                if now_month == 12 :
+                    now_mont_flag = True
+                else:
+                    now_mont_flag =False
                 korea_month_name ='12월'
             s = '%s %s' % (theyear,korea_month_name)
         else:
@@ -112,7 +163,12 @@ class Calendar(calendar.HTMLCalendar):
             except:
                 pass
         if day != 0:
-            return f"<td class='day'><span class='date'>{day}</span><ul class='each_day'> {d} </ul></td>"
+            now_day_class =''
+            cnt = 0
+            if day == now and now_mont_flag==True:
+                now_day_class="now_day_point"
+
+            return f"<td class='day'><span class='date {now_day_class}'>{day}</span><ul class='each_day'> {d} </ul></td>"
         
         return '<td></td>'
 
