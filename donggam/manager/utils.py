@@ -157,16 +157,16 @@ class AdminCalendar(calendar.HTMLCalendar):
                 h=1
             except:
                 amdatetime = datetime + '-am'
-                d += f'<li><label><input type="checkbox" name="{amdatetime}">[10:00]</label></li>'
+                d += f'<li><label><input type="checkbox"  name="{amdatetime}" style="margin-right:10px">[10:00]</label></li>'
             try:
                 pm_reserv = reservations_per_day.get(time='14')
                 d += f'<li>{pm_reserv.get_admin_url} </li>'
                 h=1
             except:
                 pmdatetime = datetime + '-pm'
-                d += f'<li><label><input type="checkbox" name="{pmdatetime}">[14:00]</label></li>'
+                d += f'<li><label><input type="checkbox"  name="{pmdatetime}" style="margin-right:10px">[14:00]</label></li>'
             if h==0:
-                d += f'<li><label><input type="checkbox" name="{datetime}">[휴일]</label></li>'
+                d += f'<li><label><input type="checkbox"  name="{datetime}" style="margin-right:10px">[휴일]</label></li>'
         if day != 0:
             now_day_class =''
             if day == 25 and now_mont_flag==True:
@@ -174,7 +174,7 @@ class AdminCalendar(calendar.HTMLCalendar):
                     now_day_class="now_day_point_1"
                 else:
                     now_day_class="now_day_point_2"
-            return f"<td class='day'><span class='date {now_day_class}'>{day}</span><ul> {d} </ul></td>"
+            return f"<td class='day'><span class='date {now_day_class} day_inner'>{day}</span><ul class='label_inner' style='margin-left:10px;'> {d} </ul></td>"
         
         return '<td></td>'
 

@@ -14,11 +14,14 @@
 				<input class="regular_btn"type="submit" value="신청가능 추가">
 				<input type="submit" class="regular_btn" name="reset" value="신청가능 초기화">
 			</p>
-			<p>
-				<input type="text" name="reason" placeholder="달력에 표시할 휴일 사유를 입력해주세요">
+			<div style="text-align: right;">
+				<p>
+					<input type="text" name="reason" class="form_box" placeholder="달력에 표시할 휴일 사유를 입력해주세요" style="width: 30%;">
+				</p>
 				<input type="submit" class="regular_btn" name="holiday" value="선택일 휴일 지정">
 				<input type="submit" class="regular_btn" name="h_reset" value="휴일 초기화">
-			</p>
+			</div>
+			
 		</form>
 	</div>	
 </div>
@@ -28,9 +31,14 @@
 <script>
     document.getElementById("prev_month_btn").href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"
     document.getElementById("next_month_btn").href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"
+
 </script>
 
 <style>
+.holiday{
+	color:#E92C2C
+}
+
 #prev_month_btn, #next_month_btn{
     color:#585757;
 }
@@ -100,6 +108,7 @@
     font-weight: 700;
     font-size: 24px;
     line-height: 35px;
+	margin-bottom: 10px;
 }
 
 a:hover{
@@ -133,6 +142,16 @@ tr.days > td:nth-child(7){
 .calendar td {
     padding: 14px 0px 10px 5px;
   }
+
+.label_inner,td.day > ul > li > label {
+	font-weight: 500;
+	font-size: 16px;
+}
+
+td.day > ul > li > label > input:checked{
+  background-color:#F47C7C;
+  border-color:#F47C7C;
+}
 
 </style>
 {% endblock %}

@@ -148,7 +148,7 @@ class Calendar(calendar.HTMLCalendar):
         try:
             instance = reservations_per_day.get(status='5')
             if instance.name != '' :
-                d += f'<li>{instance.name}</li>'
+                d += f'<li class="holiday">{instance.name}</li>'
             else :
                 d += f'<li></li>'
         except:    

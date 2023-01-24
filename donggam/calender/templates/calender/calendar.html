@@ -44,9 +44,14 @@
 <script>
     document.getElementById("prev_month_btn").href="{% url 'calender:calendar' %}?{{ prev_month }}"
     document.getElementById("next_month_btn").href="{% url 'calender:calendar' %}?{{ next_month }}"
+    let firstUp = $(".holiday").parent()
+    firstUp.parent().css({"color":"#E92C2C"});
 
 </script>
 <style>
+.holiday{
+	color:#E92C2C
+}
 #prev_month_btn, #next_month_btn{
     color:#585757;
 }
