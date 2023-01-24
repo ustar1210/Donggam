@@ -150,9 +150,9 @@
                         <span class="title">관리자메모</span>
                         <span class="body">
                             {% if reservation.admin_comment %}
-                            <input type="textarea" name="comment" placeholder="{{ reservation.admin_comment }}">
+                            <textarea name="comment">{{ reservation.admin_comment }}</textarea>
                             {% else %}
-                            <input type="textarea" name="comment" placeholder="신청자가 볼 수 있는 코멘트입니다.">
+                            <textarea name="comment" placeholder="신청자가 볼 수 있는 코멘트입니다."></textarea>
                             {% endif %}
                         </span>
                     </div>
