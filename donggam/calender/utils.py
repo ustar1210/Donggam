@@ -137,10 +137,10 @@ class Calendar(calendar.HTMLCalendar):
             s = '%s %s' % (theyear,korea_month_name)
         else:
             s = '%s' % month_name[themonth]
-        prev_month = f'<a id="prev_month_btn" href=""> < </a>'
+        prev_month = f'<a id="prev_month_btn" href="">< </a>'
         next_month = f'<a id="next_month_btn" href=""> > </a>'
         
-        return f'<div class="month_name_cal">{prev_month}{s}{next_month}</div>'
+        return f'<div class="month_name_cal">{prev_month}&nbsp;&nbsp;{s}&nbsp;&nbsp;{next_month}</div>'
 
     def formatday(self, day, reservations):
         reservations_per_day = reservations.filter(date__day=day)
@@ -164,7 +164,6 @@ class Calendar(calendar.HTMLCalendar):
                 pass
         if day != 0:
             now_day_class =''
-            cnt = 0
             if day == now and now_mont_flag==True:
                 now_day_class="now_day_point"
 
