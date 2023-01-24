@@ -8,6 +8,24 @@ import datetime
 import locale as _locale
 from itertools import repeat
 
+class _localized_day:
+
+    # January 1, 2001, was a Monday.
+    _days = [datetime.date(2001, 1, i+1).strftime for i in range(7)]
+
+    def __init__(self, format):
+        self.format = format
+
+    def __getitem__(self, i):
+        funcs = self._days[i]
+        if isinstance(i, slice):
+            return [f(self.format) for f in funcs]
+        else:
+            return funcs(self.format)
+
+    def __len__(self):
+        return 7
+
 class _localized_month:
 
     _months = [datetime.date(2001, i+1, 1).strftime for i in range(12)]
@@ -27,6 +45,7 @@ class _localized_month:
         return 13
 
 month_name = _localized_month('%B')
+day_abbr = _localized_day('%a')
 
 class Calendar(calendar.HTMLCalendar):
     def __init__(self, year=None, month=None):
@@ -100,6 +119,16 @@ class Calendar(calendar.HTMLCalendar):
         for d, weekday in theweek:
             week += self.formatday(d, reservations)
         return f'<tr class="days"> {week} </tr>'
+    
+    def formatweekday(self, day):
+        font_color = ''
+        if day_abbr[day] == 'Sat':
+            font_color = '#0085FF'
+        elif day_abbr[day] == 'Sun':
+            font_color = '#E92C2C'
+        else :
+            font_color = '#666666'
+        return f'<th class="{self.cssclasses_weekday_head[day]}" style="font-size:16px; color:{font_color}">{day_abbr[day]}</th>'
 
     def formatmonth(self, withyear=True):
         reservations = Reservation.objects.filter(date__year=self.year, date__month=self.month)
