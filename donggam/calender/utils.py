@@ -192,7 +192,7 @@ class Calendar(calendar.HTMLCalendar):
             font_color = '#E92C2C'
         else :
             font_color = '#666666'
-        return f'<th class="{self.cssclasses_weekday_head[day]}" style="font-size:16px; color:{font_color}">{day_abbr[day]}</th>'
+        return f'<th class="{self.cssclasses_weekday_head[day]}" style="font-size:16px; color:{font_color}">{day_abbr[day].upper()}</th>'
 
     def formatmonth(self, withyear=True):
         reservations = Reservation.objects.filter(date__year=self.year, date__month=self.month)
