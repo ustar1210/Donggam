@@ -164,8 +164,11 @@ class Calendar(calendar.HTMLCalendar):
                 pass
         if day != 0:
             now_day_class =''
-            if day == now and now_mont_flag==True:
-                now_day_class="now_day_point"
+            if day == 25 and now_mont_flag==True:
+                if day<10:
+                    now_day_class="now_day_point_1"
+                else:
+                    now_day_class="now_day_point_2"
 
             return f"<td class='day'><span class='date {now_day_class}'>{day}</span><ul class='each_day'> {d} </ul></td>"
         
