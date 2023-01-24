@@ -4,7 +4,7 @@
 <div class="notice_title" style="margin:25px 0px;">
 	<h1>단체 캠퍼스투어 신청관리(관리자)</h1>
 </div>
-<div class="container-fluid calendar_right" >
+<div class="container-fluid calendar_right" style="width: 80%; height: 80%;">
 
 	<div class="calendartable">
 		<form method="post" action="{% url 'manager:adminsave' %}" style="display: inline;">
@@ -31,7 +31,8 @@
 <script>
     document.getElementById("prev_month_btn").href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"
     document.getElementById("next_month_btn").href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"
-
+    let firstUp = $(".holiday").parent()
+    firstUp.parent().css({"color":"#E92C2C"});
 </script>
 
 <style>
@@ -91,15 +92,24 @@
     border-radius: 4px;
     padding: 3px 4px;
     color: #0085FF;   
+	font-size: 16px;
 }
 .schoolAply{
-	
 	background: linear-gradient(0deg, rgba(255, 150, 27, 0.1), rgba(255, 150, 27, 0.1)), #FFFFFF;
     border-radius: 4px;
     padding: 3px 4px;
     color: #FF9F2D;
+	font-size: 16px;
 }
 
+.endAply{
+    background: linear-gradient(0deg, #E8E8E8, #E8E8E8), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #585757;   
+    font-weight: 500;
+    font-size: 16px;
+}
 
 .month_name_cal{
   color:#585757;

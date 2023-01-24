@@ -145,15 +145,15 @@ class AdminCalendar(calendar.HTMLCalendar):
         try:
             instance = reservations_per_day.get(status='5')
             if instance.name != '' :
-                d += f'<li>{instance.name}</li>'
+                d += f'<li class="holiday">{instance.name}</li>'
             else :
-                d += f'<li>휴일 </li>'
+                d += f'<li class="holiday">휴일 </li>'
         except:    
             datetime = str(self.year)+'-'+str(self.month)+'-'+str(day)
             h=0
             try:
                 am_reserv = reservations_per_day.get(time='10')
-                d += f'<li>{am_reserv.get_admin_url} </li>'
+                d += f'<li style="margin-bottom: 10px">{am_reserv.get_admin_url} </li>'
                 h=1
             except:
                 amdatetime = datetime + '-am'
