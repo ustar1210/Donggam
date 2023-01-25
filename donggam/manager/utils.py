@@ -142,28 +142,28 @@ class AdminCalendar(calendar.HTMLCalendar):
     def formatday(self, day, reservations):
         reservations_per_day = reservations.filter(date__day=day)
         d = ''
+        datetime = str(self.year)+'-'+str(self.month)+'-'+str(day)
         try:
             instance = reservations_per_day.get(status='5')
             if instance.name != '' :
-                d += f'<li class="holiday">{instance.name}</li>'
+                d += f'<li class="holiday"><input type="checkbox"  name="{datetime}" style="margin-right:10px">{instance.name}</li>'
             else :
-                d += f'<li class="holiday">휴일 </li>'
+                d += f'<li class="holiday"><input type="checkbox"  name="{datetime}" style="margin-right:10px">휴일 </li>'
         except:    
-            datetime = str(self.year)+'-'+str(self.month)+'-'+str(day)
             h=0
+            amdatetime = datetime + '-am'
+            pmdatetime = datetime + '-pm'
             try:
                 am_reserv = reservations_per_day.get(time='10')
-                d += f'<li style="margin-bottom: 10px">{am_reserv.get_admin_url} </li>'
+                d += f'<li style="margin-bottom: 10px"><input type="checkbox"  name="{amdatetime}" style="margin-right:10px">{am_reserv.get_admin_url} </li>'
                 h=1
             except:
-                amdatetime = datetime + '-am'
                 d += f'<li><label><input type="checkbox"  name="{amdatetime}" style="margin-right:10px">[10:00]</label></li>'
             try:
                 pm_reserv = reservations_per_day.get(time='14')
-                d += f'<li>{pm_reserv.get_admin_url} </li>'
+                d += f'<li style="margin-bottom: 10px"><input type="checkbox"  name="{pmdatetime}" style="margin-right:10px">{pm_reserv.get_admin_url} </li>'
                 h=1
             except:
-                pmdatetime = datetime + '-pm'
                 d += f'<li><label><input type="checkbox"  name="{pmdatetime}" style="margin-right:10px">[14:00]</label></li>'
             if h==0:
                 d += f'<li><label><input type="checkbox"  name="{datetime}" style="margin-right:10px">[휴일]</label></li>'

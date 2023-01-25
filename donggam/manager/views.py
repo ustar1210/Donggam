@@ -36,15 +36,25 @@ class AdminCalendarView(generic.ListView):
 def admin_save(request):
     if request.user.is_authenticated:
         if 'reset' in request.POST :
-            targets = Reservation.objects.filter(status = '0')
-            for t in targets:
-                t.delete()
+            for a in request.POST:
+                if a == 'csrfmiddlewaretoken' or a == 'reason' or a == 'reset':
+                    continue
+                date = a.split('-', -1)
+                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
+                if date[3] == 'am' :
+                    time = '10'
+                else :
+                    time = '14'
+                instance = get_object_or_404(Reservation, date=yearmonthdate, time=time)
+                instance.delete()
         elif 'h_reset' in request.POST :
-            targets = Reservation.objects.filter(status = '5')
-            month = str(datetime.datetime.today().month)
-            targets = targets.filter(date__month = month)
-            for t in targets :
-                t.delete()
+            for a in request.POST:
+                if a == 'csrfmiddlewaretoken' or a == 'reason' or a == 'h_reset':
+                    continue
+                date = a.split('-', -1)
+                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
+                instance = get_object_or_404(Reservation, date=yearmonthdate, status='5')
+                instance.delete()
         elif 'holiday' in request.POST :
             name = request.POST['reason']
             for a in request.POST:
@@ -70,6 +80,7 @@ def admin_save(request):
         return redirect(reverse('manager:calendarAdmin')+'?month='+date[0]+'-'+date[1])
     else :
         return redirect('manager:login')
+
 
 def group_form(request, reservation_id):
     try:

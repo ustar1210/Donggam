@@ -11,15 +11,15 @@
 			{% csrf_token %}
 			{{ calendar }}
 			<p>
-				<input class="regular_btn"type="submit" value="신청가능 추가">
-				<input type="submit" class="regular_btn" name="reset" value="신청가능 초기화">
+				<input type="submit" class="regular_btn" value="신청가능 활성화">
+				<input type="submit" class="regular_btn" name="reset" value="신청가능 비활성화">
 			</p>
 			<div style="text-align: right;">
 				<p>
 					<input type="text" name="reason" class="form_box" placeholder="달력에 표시할 휴일 사유를 입력해주세요" style="width: 30%;">
 				</p>
-				<input type="submit" class="regular_btn" name="holiday" value="선택일 휴일 지정">
-				<input type="submit" class="regular_btn" name="h_reset" value="휴일 초기화">
+				<input type="submit" class="regular_btn" name="holiday" value="휴일 활성화">
+                <input type="submit" class="regular_btn" name="h_reset" value="휴일 비활성화">
 			</div>
 			
 		</form>
