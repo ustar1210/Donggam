@@ -1,0 +1,22 @@
+{% load static %}
+<nav class="navbar" style="margin-top: 12px;"> 
+    <div class="navbar__logo" style="font-weight:600">
+            
+        <a href="{% url 'manager:index' %}" style="color: #A2988F;"> 
+            <img src="{% static 'img/dongguk_logo.png' %}" alt="Dongguk logo" class="image">
+            &nbsp;| &nbsp;캠퍼스투어 신청</a>
+    </div>
+    <ul class="navbar__menu toggle_color">
+        <li><a class="" href="{% url 'calender:calendar' %}"> 단체 캠퍼스투어(신청) </a></li>
+            <li><a class="" href="{% url 'calender:regular_list' %}"> 정기 캠퍼스투어(신청) </a></li>
+        <li><a class="" href="{% url 'manager:calendarAdmin' %}"> 단체 캠퍼스투어(관리자) </a></li>
+        <li><a class="" href="{% url 'manager:admin_regular_list' %}"> 정기 캠퍼스투어(관리자) </a></li>
+        {% if user.is_authenticated %}
+        <li><a class=""href="{% url 'manager:logout' %}"> 로그아웃 </a></li>
+        {% endif %}
+    </ul>
+    <a href="#" class="navbar__toggleBtn">
+        <i class="fas fa-bars"></i>
+    </a>
+</nav>
+<hr>

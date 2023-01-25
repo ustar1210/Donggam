@@ -11,8 +11,6 @@
 		<div class="row">
 			<div class="col-8">
 				<div>
-					<a class="month_btn left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
-					<a class="month_btn " href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a>
                     <span class="cal_time right">오전 - 10:00</span>
                     <span class="cal_time right">오후 - 14:00</span>
 				</div>
@@ -20,7 +18,7 @@
 			</div>
 			<div class="col-4 calendar_left">
 				<div>
-					<img src="{% static 'img/step.png' %}" alt="apply" style="width: 90%;" class="img_aply_dis" >
+					<img src="{% static 'img/step.png' %}" alt="apply" class="img_aply_dis" >
 				</div>
 			</div>
 		</div>
@@ -30,8 +28,6 @@
     <div >
         <div>
             <div>
-                <a class="month_btn left" href="{% url 'calender:calendar' %}?{{ prev_month }}"> 이전 달 </a>
-                <a class="month_btn " href="{% url 'calender:calendar' %}?{{ next_month }}"> 다음 달 </a>
                 <span class="cal_time right">오전 - 10:00</span>
                 <span class="cal_time right">오후 - 14:00</span>
             </div>
@@ -39,14 +35,33 @@
         </div>
         <div class="calendar_left">
             <div>
-                <img src="{% static 'img/step.png' %}" alt="apply" style="width: 90%;" class="img_aply_dis" >
+                <img src="{% static 'img/step.png' %}" alt="apply" style="width: 90%;" >
             </div>
         </div>
     </div>
 
 </div>
-<style>
+<script>
+    document.getElementById("prev_month_btn").href="{% url 'calender:calendar' %}?{{ prev_month }}"
+    document.getElementById("next_month_btn").href="{% url 'calender:calendar' %}?{{ next_month }}"
+    let firstUp = $(".holiday").parent()
+    firstUp.parent().css({"color":"#E92C2C"});
 
+</script>
+<style>
+.holiday{
+	color:#E92C2C;
+    font-weight: 500;
+    font-size: 16px;
+
+}
+#prev_month_btn, #next_month_btn{
+    color:#585757;
+}
+.img_aply_dis{
+    width: 548px;
+    height: 673px;
+}
 .calendar_right{
     margin-bottom: 5em;
     padding: 3em 7em 5em 7em;
@@ -55,7 +70,7 @@
     margin-top: 3.5em;
 }
 .cal_time{
-    margin: 15px 10px;
+    margin: 10px 10px;
     display: inline-block;
     background: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;
     padding: 3px 4px;
@@ -92,6 +107,8 @@
     border-radius: 4px;
     padding: 3px 4px;
     color: #0085FF;   
+    font-weight: 500;
+    font-size: 14px;
 }
 .schoolAply{
 	
@@ -99,10 +116,59 @@
     border-radius: 4px;
     padding: 3px 4px;
     color: #FF9F2D;
+    font-weight: 500;
+    font-size: 14px;
 }
+
+
+.month_name_cal{
+  color:#585757;
+  font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+}
+.endAply{
+    background: linear-gradient(0deg, #E8E8E8, #E8E8E8), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #585757;   
+    font-weight: 500;
+    font-size: 14px;
+}
+
 a:hover{
 	color: whitesmoke;
 }
+tr.days > td:nth-child(6){
+    color:#0085FF
+}
+tr.days > td:nth-child(7){
+    color:#E92C2C
+}
+.now_day_point_1{
+    background: #666666;
+    color: #FFFFFF;
+    padding: 1% 5%;
+    border-radius: 50%;
+}
+.now_day_point_2{
+    background: #666666;
+    color: #FFFFFF;
+    padding: 1% 3%;
+    border-radius: 50%;
+}
+.date{
+    position: relative;
+    bottom: 8px;
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: 3px;
+}
+.calendar td {
+    padding: 14px 0px 10px 5px;
+  }
 @media (max-width: 768px) {
     .calendar_right{
     margin-bottom: 5em;

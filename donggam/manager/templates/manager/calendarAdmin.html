@@ -2,13 +2,10 @@
 
 {% block content %}
 <div class="notice_title" style="margin:25px 0px;">
-	<h1>단체 캠퍼스투어 신청관리</h1>
+	<h1>단체 캠퍼스투어 신청관리(관리자)</h1>
 </div>
-<div class="container-fluid calendar_right" >
-	<div class="clearfix">
-		<a class="month_btn left" href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"> 이전 달 </a>
-		<a class="month_btn " href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"> 다음 달 </a>
-	</div>
+<div class="container-fluid calendar_right" style="width: 80%; height: 80%;">
+
 	<div class="calendartable">
 		<form method="post" action="{% url 'manager:adminsave' %}" style="display: inline;">
 			{% csrf_token %}
@@ -17,27 +14,64 @@
 				<input class="regular_btn"type="submit" value="신청가능 추가">
 				<input type="submit" class="regular_btn" name="reset" value="신청가능 초기화">
 			</p>
-			<p>
-				<input type="text" name="reason" placeholder="달력에 표시할 휴일 사유를 입력해주세요">
+			<div style="text-align: right;">
+				<p>
+					<input type="text" name="reason" class="form_box" placeholder="달력에 표시할 휴일 사유를 입력해주세요" style="width: 30%;">
+				</p>
 				<input type="submit" class="regular_btn" name="holiday" value="선택일 휴일 지정">
 				<input type="submit" class="regular_btn" name="h_reset" value="휴일 초기화">
-			</p>
+			</div>
+			
 		</form>
 	</div>	
 </div>
 <div class="timetable">
 	<div></div>	
 </div>
+<script>
+    document.getElementById("prev_month_btn").href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"
+    document.getElementById("next_month_btn").href="{% url 'manager:calendarAdmin' %}?{{ next_month }}"
+    let firstUp = $(".holiday").parent()
+    firstUp.parent().css({"color":"#E92C2C"});
+</script>
+
 <style>
+.holiday{
+	color:#E92C2C
+}
+
+#prev_month_btn, #next_month_btn{
+    color:#585757;
+}
+.img_aply_dis{
+    width: 548px;
+    height: 673px;
+}
 .calendar_right{
-    margin-bottom: 3em;
-    padding: 0em 7em 3em 7em;
+    margin-bottom: 5em;
+    padding: 3em 7em 5em 7em;
+}
+.calendar_left{
+    margin-top: 3.5em;
+}
+.cal_time{
+    margin: 10px 10px;
+    display: inline-block;
+    background: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;
+    padding: 3px 4px;
+    width: 82px;
+    height: 27px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #0085FF;
 }
 .month_btn{
     margin: 10px;
     display: inline-block;
     background: #DF633B;
-    width: 6%;
+    width: 10%;
     padding-top: 6px;
     padding-bottom: 6px;
     text-align: center;
@@ -50,6 +84,83 @@
 .month_btn:hover{
     color: #DF633B;
     background: white;
+}
+
+
+.waitAply{
+    background: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #0085FF;   
+	font-size: 16px;
+}
+.schoolAply{
+	background: linear-gradient(0deg, rgba(255, 150, 27, 0.1), rgba(255, 150, 27, 0.1)), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #FF9F2D;
+	font-size: 16px;
+}
+
+.endAply{
+    background: linear-gradient(0deg, #E8E8E8, #E8E8E8), #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #585757;   
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.month_name_cal{
+  color:#585757;
+  font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+	margin-bottom: 10px;
+}
+
+a:hover{
+	color: whitesmoke;
+}
+tr.days > td:nth-child(6){
+    color:#0085FF
+}
+tr.days > td:nth-child(7){
+    color:#E92C2C
+}
+.now_day_point_1{
+    background: #666666;
+    color: #FFFFFF;
+    padding: 1% 5%;
+    border-radius: 50%;
+}
+.now_day_point_2{
+    background: #666666;
+    color: #FFFFFF;
+    padding: 1.5% 3%;
+    border-radius: 50%;
+}
+.date{
+    position: relative;
+    bottom: 8px;
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: 3px;
+}
+.calendar td {
+    padding: 14px 0px 10px 5px;
+  }
+
+.label_inner,td.day > ul > li > label {
+	font-weight: 500;
+	font-size: 16px;
+}
+
+td.day > ul > li > label > input:checked{
+  background-color:#F47C7C;
+  border-color:#F47C7C;
 }
 
 </style>

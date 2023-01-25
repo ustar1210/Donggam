@@ -3,6 +3,8 @@
     border-radius: 4px;
     padding: 3px 4px;
     color: #585757;   
+    font-weight: 500;
+    font-size: 14px;
 }
 .each_day{
     list-style: none;
@@ -32,7 +34,7 @@
   .calendar td {
     width: 164px;
     height: 105px;
-    padding: 10px 0px 10px 5px;
+    padding: 14px 0px 10px 5px;
   }
   
   .month {
@@ -88,7 +90,7 @@
     .calendar td {
       width: 50px;
       height: 50px;
-      padding: 10px 0px 10px 5px;
+      padding: 13px 0px 10px 5px;
     }
     .calendar tr, .calendar td {
       border: 1px solid #c1c1c1;

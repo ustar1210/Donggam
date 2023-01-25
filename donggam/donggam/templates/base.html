@@ -51,7 +51,13 @@
 </head>
 <body>
   <header>
+    
+    {% if user.is_authenticated %}
+    {% include 'shared/admin_navbar.html' %}
+    {% else %}
     {% include 'shared/navbar.html' %}
+    {% endif %}
+
   </header>
   <main>
     {% block content %}

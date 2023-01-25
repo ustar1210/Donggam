@@ -75,20 +75,20 @@ class Reservation(models.Model):
     def get_admin_url(self):
         url = reverse('manager:group_form', args=(self.id,))
         if self.status == '1':
-            return f'<a href="{url}">[신청대기]</a>'
+            return f'<a class="schoolAply" href="{url}">[신청대기]</a>'
         elif self.status == '2':
-            return f'<a href="{url}">[검토중]</a>'
+            return f'<a class="schoolAply" href="{url}">[검토중]</a>'
         elif self.status == '3':
-            return f'<a href="{url}">{self.school}</a>'
+            return f'<a class="schoolAply" href="{url}">{self.school}</a>'
         elif self.status == '4':
-            return f'<a>[신청마감]</a>'
+            return f'<a class="endAply">[신청마감]</a>'
         elif self.status == '5':
-            return f'<a>휴일</a>'
+            return f'<a class="holiday">휴일</a>'
         else :
             if self.time == '10':
-                return f'<a>[오전 신청가능]</a>'
+                return f'<a class="waitAply" href="{url}">[오전 신청가능]</a>'
             else:
-                return f'<a>[오후 신청가능]</a>'
+                return f'<a class="waitAply" href="{url}">[오후 신청가능]</a>'
 
     def __str__(self):
         datetime = str(self.date)+' / '+self.time+':00'
