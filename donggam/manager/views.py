@@ -56,7 +56,7 @@ def admin_save(request):
                 instance.save()                       
         else :
             for a in request.POST:
-                if a == 'csrfmiddlewaretoken' :
+                if a == 'csrfmiddlewaretoken' or a == 'reason':
                     continue
                 date = a.split('-', -1)
                 yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
@@ -67,7 +67,7 @@ def admin_save(request):
                 instance = Reservation(date=yearmonthdate, time=time, status='0')
                 instance.save()
             change_status()
-        return redirect('manager:calendarAdmin')
+        return redirect(reverse('manager:calendarAdmin')+'?month='+date[0]+'-'+date[1])
     else :
         return redirect('manager:login')
 
