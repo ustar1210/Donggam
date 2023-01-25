@@ -10,14 +10,11 @@
                 <h1>정기 캠퍼스투어 신청(관리자)</h1>
             </div>
             <div class="regular_info">
-                <p>
                     <!-- [공지] 1월 정기 캠퍼스투어일은 18일 입니다. -->
-                    {% if now_sentence != '' %}
-                    [공지] {{ now_sentence }}
-                    {% endif %}
-                    {% if next_sentence != ''%}
-                    [공지] {{ next_sentence }}
-                    {% endif %}
+                    <p>[공지] 현재 신청 가능한 캠퍼스 투어일입니다.</p>
+                    {% for d in tourdates %}
+                    <p>{{ d }}</p>
+                    {% endfor %}
                 </p>
             </div>
         </div>

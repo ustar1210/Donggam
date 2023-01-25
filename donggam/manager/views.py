@@ -178,29 +178,11 @@ def admin_regular_list(request):
         page_obj = paginator.page(page)
 
         tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
-        now_sentence = ''
-        if len(tourdates.filter(date__month=datetime.datetime.today().month)) > 0:
-            now_month_dates = tourdates.filter(date__month=datetime.datetime.today().month)
-            now_sentence = str(datetime.datetime.today().month) + '월 정기 캠퍼스투어일은 '
-            days = ''
-            for d in now_month_dates:
-                days += str(d.date.day) + ', '
-            now_sentence = now_sentence + days[:-2] + "일 입니다."
-
-        days = ''
-        next_sentence = ''
-        if len(tourdates.filter(date__month=datetime.datetime.today().month + 1)) > 0 :
-            next_month_dates = tourdates.filter(date__month=datetime.datetime.today().month + 1)
-            for d in next_month_dates:
-                next_sentence = str(d.date.month) + '월 정기 캠퍼스투어일은 '
-                days += str(d.date.day) + ', '
-            next_sentence = next_sentence + days[:-2] + "일 입니다."
-
+        
         return render(request, 'manager/regular_list_admin.html', 
         {
-            'page_obj': page_obj,
-            'now_sentence': now_sentence, 
-            'next_sentence': next_sentence,
+            'page_obj' : page_obj,
+            'tourdates' : tourdates,
 
         })
     else:
@@ -255,3 +237,6 @@ def regular_status_change(request, reservation_id):
         return redirect('manager:admin_regular_form', reservation_id=reservation_id)
     else:
         return redirect('manager:login')
+
+def regulardate_cud(request, date_id):
+    return redirect('manager:admin_regular_list')

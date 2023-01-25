@@ -14,4 +14,5 @@ urlpatterns=[
     path('regular/', views.admin_regular_list, name='admin_regular_list'),
     re_path(r'^regular/(?P<reservation_id>\d+)/$', views.admin_regular_form, name='admin_regular_form'),
     re_path(r'^regular/(?P<reservation_id>\d+)/status/$', views.regular_status_change, name='regular_status_change'),
+    re_path(r'^regulardate/(?P<date_id>\d+)/$', views.regulardate_cud, name='regulardate_cud'),
     ]
