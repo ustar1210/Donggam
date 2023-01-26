@@ -7,16 +7,72 @@
             &nbsp;| &nbsp;캠퍼스투어 신청</a>
     </div>
     <ul class="navbar__menu toggle_color">
-        <li><a class="" href="{% url 'calender:calendar' %}"> 단체 캠퍼스투어(신청) </a></li>
-            <li><a class="" href="{% url 'calender:regular_list' %}"> 정기 캠퍼스투어(신청) </a></li>
-        <li><a class="" href="{% url 'manager:calendarAdmin' %}"> 단체 캠퍼스투어(관리자) </a></li>
-        <li><a class="" href="{% url 'manager:admin_regular_list' %}"> 정기 캠퍼스투어(관리자) </a></li>
-        {% if user.is_authenticated %}
-        <li><a class=""href="{% url 'manager:logout' %}"> 로그아웃 </a></li>
-        {% endif %}
+        <li><a href="{% url 'calender:calendar' %}"> 단체 캠퍼스투어(신청) </a></li>
+            <li><a href="{% url 'calender:regular_list' %}"> 정기 캠퍼스투어(신청) </a></li>
+        <li><a href="{% url 'manager:calendarAdmin' %}"> 단체 캠퍼스투어(관리자) </a></li>
+        <li><a href="{% url 'manager:admin_regular_list' %}"> 정기 캠퍼스투어(관리자) </a></li>
+        <li><a href="{% url 'manager:logout' %}"> 로그아웃 </a></li>
     </ul>
     <a href="#" class="navbar__toggleBtn">
         <i class="fas fa-bars"></i>
     </a>
 </nav>
 <hr>
+<style>
+    @media (max-width: 2000px){
+    .navbar__menu li a{
+        font-weight: 500;
+        color:  #333333;
+        font-size: 1em;
+    }
+}
+@media (max-width: 1800px) {
+    .navbar {
+        
+        align-items: flex-start;
+        padding : 10px 24px;
+    }
+    
+    .navbar__menu li a{
+        font-weight: 500;
+        color:  #333333;
+        font-size: 1.3em;
+    }
+
+    .navbar__logo {
+        font-size: 15px;
+        margin-left: 0px;
+    
+    }
+    .image{
+        width: 25%;
+    }
+
+    
+    .navbar__menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navbar__menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar__toggleBtn {
+        display: block;
+        position: absolute;
+        right : 20px;
+        font-size: 18px;
+        color: #A2988F;
+    }
+
+    .navbar__menu.active,
+    .navbar__icons.active {
+        display: flex;
+        transition: 1s ease-out;
+    }
+}
+</style>
