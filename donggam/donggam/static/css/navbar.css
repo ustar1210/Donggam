@@ -29,7 +29,7 @@
 }
 .navbar__menu li a{
     font-weight: 500;
-    color: #333333;
+    color:  #333333;
     font-size: 20px;
 }
 
@@ -48,8 +48,7 @@ hr{
     display: none;
 }
 
-
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
     .navbar {
         
         align-items: flex-start;
@@ -92,9 +91,8 @@ hr{
         transition: 1s ease-out;
     }
 }
-
 /* 768 px 밑일때만  */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;

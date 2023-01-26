@@ -104,6 +104,18 @@
     color: #fff;
 }
 
+    .board_list .title {
+        width: 50%;
+        text-align: left;
+    }
+    
+    .board_list .status{
+        width: 23%;
+    }
+    
+    .board_list .date {
+        width: 10%;
+    }
 
 
 /* tablet */
