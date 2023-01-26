@@ -10,15 +10,16 @@
                 <h1>정기 캠퍼스투어 신청(관리자)</h1>
             </div>
             <div class="regular_info">
-                <p>
+                
                     <!-- [공지] 1월 정기 캠퍼스투어일은 18일 입니다. -->
-                    {% if now_sentence != '' %}
-                    [공지] {{ now_sentence }}
-                    {% endif %}
-                    {% if next_sentence != ''%}
-                    [공지] {{ next_sentence }}
-                    {% endif %}
-                </p>
+                    {% for d in tourdates %}
+                    <p>[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</p>
+                    {% endfor %}
+                    <form method="post" action="{% url 'manager:regulardate_cud' %}">
+                        {% csrf_token %}
+                        <input type="number" name="year">년 <input type="number" name="month">월 <input type="number" name="day">일 
+                        <input type="submit" value="추가하기">
+                    </form>
             </div>
         </div>
         <div class="board_list_wrap">
