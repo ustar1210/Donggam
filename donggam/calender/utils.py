@@ -164,7 +164,7 @@ class Calendar(calendar.HTMLCalendar):
                 pass
         if day != 0:
             now_day_class =''
-            if day == 25 and now_mont_flag==True:
+            if day == now and now_mont_flag==True:
                 if day<10:
                     now_day_class="now_day_point_1"
                 else:
