@@ -7,7 +7,7 @@
 </div>
 
 
-	<div class="container-fluid calendar_right overflow-hidden d-none d-sm-block">
+	<div class="container-fluid calendar_right overflow-hidden d-none d-xl-block">
 		<div class="gridcal">
 			<div >
 				<div>
@@ -24,9 +24,9 @@
 		</div>
     </div>
 
-<div class="calendar_right overflow-hidden d-block d-sm-none">
+<div class="calendar_right overflow-hidden d-xl-none">
     <div >
-        <div>
+        <div style="margin-right: 123px;">
             <div>
                 <span class="cal_time right">오전 - 10:00</span>
                 <span class="cal_time right">오후 - 14:00</span>
@@ -34,8 +34,8 @@
             {{ calendar }}	
         </div>
         <div class="calendar_left">
-            <div>
-                <img src="{% static 'img/step.png' %}" alt="apply" style="width: 90%;" >
+            <div style="text-align: center;">
+                <img src="{% static 'img/step.png' %}" alt="apply" style="width: 70%;" >
             </div>
         </div>
     </div>
@@ -50,11 +50,12 @@
 </script>
 <style>
     
-    .gridcal{
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        gap : 30px;
-    }
+.gridcal{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap : 30px;
+    margin-right: 100px;
+}
 .holiday{
 	color:#E92C2C;
     font-weight: 500;
@@ -65,13 +66,13 @@
     color:#585757;
 }
 .img_aply_dis{
-    width: 130%;
+    width: 100%;
     /* width: 548px;
     height: 673px; */
 }
 .calendar_right{
     margin-bottom: 5em;
-    padding: 3em 122px 5em 122px;
+    padding: 3em 0px 5em 122px;
 }
 .calendar_left{
     margin-top: 3.5em;
@@ -177,14 +178,8 @@ tr.days > td:nth-child(7){
     padding: 14px 0px 10px 5px;
   }
 @media (max-width: 768px) {
-    .calendar_right{
-    margin-bottom: 5em;
-    padding: 3em 0.2em;
-    display: block;
-}
-
 .calendar_left{
-    display: block;
+    margin-right: 123px;
 }
 .month_btn{
     margin: 2px;
@@ -219,11 +214,6 @@ tr.days > td:nth-child(7){
     padding: 2px 3px;
     font-size: 5px;   
 }
-.calendar_left{
-    margin-top: 2em;
-    text-align: center;
 }
-}
-
 </style>
 {% endblock %}

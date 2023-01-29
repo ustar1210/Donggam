@@ -104,10 +104,8 @@
         </form>
     </div>
 
-    {% if reservation.status == '1' %}
-    <div class="regular_btn_box" style="text-align: right;">
-        <a class="regular_btn mo" href="{% url 'calender:password' reservation_id=reservation.pk %}">수정하기</a>
-    </div>
+    {% if reservation.status == '1' %}    
+        <a class="regular_btn mo" style="float: right;" href="{% url 'calender:password' reservation_id=reservation.pk %}">수정하기</a>
     {% endif %}
 
     <div class="regular_btn_box" style="text-align: left;">
