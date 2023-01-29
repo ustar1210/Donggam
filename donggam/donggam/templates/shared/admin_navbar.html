@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbars" style="margin-top: 12px;"> 
+<nav class="navbar" style="margin-top: 12px;"> 
     <div class="navbar__logo" style="font-weight:600">
             
         <a href="{% url 'manager:index' %}" style="color: #A2988F;"> 
@@ -20,13 +20,16 @@
 <hr>
 <style>
     @media (max-width: 2000px){
+    .navbar__logo > a{
+        font-size: 20px;
+    }
     .navbar__menu li a{
         font-weight: 500;
         color:  #333333;
-        font-size: 1em;
+        font-size: 0.8em;
     }
 }
-@media (max-width: 1800px) {
+@media (max-width: 1500px) {
     .navbar {
         
         align-items: flex-start;
