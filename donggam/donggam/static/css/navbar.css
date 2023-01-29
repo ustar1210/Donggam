@@ -35,14 +35,19 @@
 .navbar__menu li:hover {
     border-radius: 5px;
 }
-hr{
+.navbar__hr{
     border: 0;
-    background-color:#e0d9d3;
     height: 2px;
     margin-top: 5px;
     size: 10px;
 }
-
+hr{
+    border: 0;
+    background-color:#E8E8E8;
+    height: 2px;
+    margin-top: 5px;
+    size: 10px;
+}
 .navbar__toggleBtn {
     display: none;
 }
