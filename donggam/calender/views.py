@@ -85,7 +85,9 @@ def reservation(request, reservation_id=None):
                     instance.length = int(request.POST['length'])
                     instance.memo = request.POST['memo']
                     instance.save()    
-                    return HttpResponseRedirect(reverse('calender:calendar'))
+                    return HttpResponseRedirect(reverse('calender:calendar'), {
+                        'text' : '신청 완료되었습니다.'
+                    })
                 except:
                     return redirect('calender:reservation_edit', reservation_id=reservation_id)
             else :
@@ -161,11 +163,13 @@ def regular_form(request, reservation_id=None):
         email_front = instance.email.split('@')[0]
         email_back = instance.email.split('@')[1]
         state = 1
+        text = '정기투어 신청이 수정되었습니다.'
     else :
         instance = RegularReservation()
         email_front = '' 
         email_back = ''
         state = 0
+        text = '정기투어 신청이 완료되었습니다.'
 
     tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
 
@@ -188,7 +192,7 @@ def regular_form(request, reservation_id=None):
                 instance.motivation = request.POST['motivation']
                 instance.request = request.POST['request']
                 instance.save()    
-                return HttpResponseRedirect(reverse('calender:regular_list'))
+                return redirect('calender:regular_detail', reservation_id = instance.pk)
             except :
                 if state == 1:
                     return redirect('calender:regular_form', reservation_id=reservation_id)    

@@ -39,9 +39,9 @@ def admin_save(request):
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'reason' or a == 'reset':
                     continue
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                 try:
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                     if date[3] == 'am' :
                         time = '10'
                     else :
@@ -54,9 +54,9 @@ def admin_save(request):
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'reason' or a == 'h_reset':
                     continue
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                 try :
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                     date[3]
                     continue
                 except:
@@ -67,9 +67,9 @@ def admin_save(request):
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'holiday' or a == 'reason' :
                     continue  
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]   
                 try :
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]   
                     date[3]
                     continue
                 except :
@@ -79,9 +79,9 @@ def admin_save(request):
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'reason':
                     continue
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                 try :
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                     if date[3] == 'am' :
                         time = '10'
                     else :
@@ -91,7 +91,10 @@ def admin_save(request):
                 except:
                     pass
             change_status()
-        return redirect(reverse('manager:calendarAdmin')+'?month='+date[0]+'-'+date[1])
+        try :
+            return redirect(reverse('manager:calendarAdmin')+'?month='+date[0]+'-'+date[1])
+        except : 
+            return redirect('manager:calendarAdmin')
     else :
         return redirect('manager:login')
 
