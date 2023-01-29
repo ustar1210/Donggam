@@ -169,7 +169,7 @@ class AdminCalendar(calendar.HTMLCalendar):
                 d += f'<li><label><input type="checkbox"  name="{datetime}" style="margin-right:10px">[휴일]</label></li>'
         if day != 0:
             now_day_class =''
-            if day == 25 and now_mont_flag==True:
+            if day == now and now_mont_flag==True:
                 if day<10:
                     now_day_class="now_day_point_1"
                 else:

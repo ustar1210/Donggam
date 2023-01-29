@@ -23,3 +23,8 @@ body {
 main {
   flex: 1;
 }
+
+.apply_div_grid{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}

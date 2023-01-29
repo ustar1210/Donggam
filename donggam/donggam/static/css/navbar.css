@@ -1,8 +1,9 @@
-.navbar {
-    display: flex;
+.navbars {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0px;
+
 }
 
 .navbar__logo {
@@ -10,7 +11,7 @@
     margin-left: 123px;
 }
 .image{
-    width: 30%;
+    width: 20%;
 }
 
 
@@ -28,7 +29,7 @@
 .navbar__menu li a{
     font-weight: 500;
     color:  #333333;
-    font-size: 20px;
+    font-size: 1vw;
 }
 
 .navbar__menu li:hover {
@@ -47,52 +48,15 @@ hr{
 }
 
 @media (max-width: 1500px) {
-    .navbar {
-        align-items: flex-start;
-        padding : 10px 0px;
-    }
-    
-    .navbar__logo {
-        font-size: 15px;
-        margin-left: 123px;
-    
-    }
-    .image{
-        width: 25%;
-    }
-
-    
-    .navbar__menu {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .navbar__menu li {
-        width: 100%;
-        text-align: center;
-        
-    }
-
-    .navbar__toggleBtn {
-        display: block;
-        position: absolute;
-        right : 20px;
-        margin-top: 15px;
-        font-size: 18px;
-        color: #A2988F;
-    }
-
-    .navbar__menu.active,
-    .navbar__icons.active {
-        display: flex;
-        transition: 1s ease-out;
+    .navbar__menu li a{
+        font-weight: 500;
+        color:  #333333;
+        font-size: 1.4vw;
     }
 }
 /* 768 px 밑일때만  */
 @media (max-width: 768px) {
-    .navbar {
+    .navbars {
         flex-direction: column;
         align-items: flex-start;
         padding : 10px 0px;
@@ -123,7 +87,6 @@ hr{
         display: block;
         position: absolute;
         right : 20px;
-        margin-top: 8px;
         font-size: 18px;
     color: #A2988F;
     }

@@ -8,15 +8,15 @@
 
 
 	<div class="container-fluid calendar_right overflow-hidden d-none d-sm-block">
-		<div class="row">
-			<div class="col-8">
+		<div class="gridcal">
+			<div >
 				<div>
                     <span class="cal_time right">오전 - 10:00</span>
                     <span class="cal_time right">오후 - 14:00</span>
 				</div>
 				{{ calendar }}	
 			</div>
-			<div class="col-4 calendar_left">
+			<div class="calendar_left">
 				<div>
 					<img src="{% static 'img/step.png' %}" alt="apply" class="img_aply_dis" >
 				</div>
@@ -49,6 +49,10 @@
 
 </script>
 <style>
+    .gridcal{
+        display: grid;
+        grid-template-columns: 8fr 3fr;
+    }
 .holiday{
 	color:#E92C2C;
     font-weight: 500;
@@ -59,8 +63,9 @@
     color:#585757;
 }
 .img_aply_dis{
-    width: 548px;
-    height: 673px;
+    width: 130%;
+    /* width: 548px;
+    height: 673px; */
 }
 .calendar_right{
     margin-bottom: 5em;
