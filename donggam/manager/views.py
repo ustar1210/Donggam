@@ -39,9 +39,9 @@ def admin_save(request):
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'reason' or a == 'reset':
                     continue
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                 try:
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                     if date[3] == 'am' :
                         time = '10'
                     else :
@@ -54,9 +54,9 @@ def admin_save(request):
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'reason' or a == 'h_reset':
                     continue
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                 try :
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                     date[3]
                     continue
                 except:
@@ -67,31 +67,40 @@ def admin_save(request):
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'holiday' or a == 'reason' :
                     continue  
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]   
                 try :
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]   
                     date[3]
                     continue
                 except :
-                    instance = Reservation(date=yearmonthdate, name=name, status='5')
-                    instance.save()                       
+                    try : 
+                        get_object_or_404(Reservation, date=yearmonthdate, status='5')
+                    except:
+                        instance = Reservation(date=yearmonthdate, name=name, status='5')
+                        instance.save()                       
         else :
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'reason':
                     continue
-                date = a.split('-', -1)
-                yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                 try :
+                    date = a.split('-', -1)
+                    yearmonthdate = date[0]+'-'+date[1]+'-'+date[2]
                     if date[3] == 'am' :
                         time = '10'
                     else :
                         time = '14'
-                    instance = Reservation(date=yearmonthdate, time=time, status='0')
-                    instance.save()
+                    try : 
+                        get_object_or_404(Reservation, date=yearmonthdate, time=time, status='0')
+                    except :
+                        instance = Reservation(date=yearmonthdate, time=time, status='0')
+                        instance.save()
                 except:
                     pass
             change_status()
-        return redirect(reverse('manager:calendarAdmin')+'?month='+date[0]+'-'+date[1])
+        try :
+            return redirect(reverse('manager:calendarAdmin')+'?month='+date[0]+'-'+date[1])
+        except : 
+            return redirect('manager:calendarAdmin')
     else :
         return redirect('manager:login')
 
@@ -209,29 +218,28 @@ def admin_regular_form(request, reservation_id):
 def regular_status_change(request, reservation_id):
     if request.user.is_authenticated:
         instance = get_object_or_404(RegularReservation, pk=reservation_id)
-        if request.method == "GET":
-            instance.status = '3'
-        elif request.method == "POST":
-            place_name = request.POST['place']
-            if place_name == '':
-                try :
-                    place = get_object_or_404(Place, name='팔정도 코끼리상 앞')
-                except : 
-                    place = Place()
-                    place.name = '팔정도 코끼리상 앞'
-                    place.save()
+        if request.method == "POST":
+            instance.status = request.POST['status']
+            if request.POST['status'] == '2':
+                place_name = request.POST['place']
+                if place_name == '':
+                    try :
+                        place = get_object_or_404(Place, name='팔정도 코끼리상 앞')
+                    except : 
+                        place = Place()
+                        place.name = '팔정도 코끼리상 앞'
+                        place.save()
+                else :
+                    try :
+                        place = get_object_or_404(Place, name=place_name)
+                    except :
+                        place = Place()
+                        place.name = place_name
+                        place.save()
+                instance.place = place
             else :
-                try :
-                    place = get_object_or_404(Place, name=place_name)
-                except :
-                    place = Place()
-                    place.name = place_name
-                    place.save()
-            instance.place = place
+                instance.place = None
             instance.admin_comment = request.POST['comment']
-            
-
-            instance.status = '2'
         instance.save()
         return redirect('manager:admin_regular_form', reservation_id=reservation_id)
     else:

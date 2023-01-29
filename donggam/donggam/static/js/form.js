@@ -53,5 +53,5 @@ function realDel() {
 }
 
 function realConf(){
-    return confirm("승인하시겠습니까?");
+    return confirm("저장하시겠습니까?");
 }
