@@ -13,9 +13,6 @@
     width: 30%;
 }
 
-.navbar__menu li {
-    padding: 10px 20px;
-}
 
 .navbar__menu {
     display: flex;
@@ -24,6 +21,7 @@
 }
 
 .navbar__menu li {
+    margin-top: 15px;
     padding: 8px 13px;
     color: #333333;
 }
@@ -74,12 +72,14 @@ hr{
     .navbar__menu li {
         width: 100%;
         text-align: center;
+        
     }
 
     .navbar__toggleBtn {
         display: block;
         position: absolute;
         right : 20px;
+        margin-top: 15px;
         font-size: 18px;
         color: #A2988F;
     }
@@ -123,6 +123,7 @@ hr{
         display: block;
         position: absolute;
         right : 20px;
+        margin-top: 8px;
         font-size: 18px;
     color: #A2988F;
     }
