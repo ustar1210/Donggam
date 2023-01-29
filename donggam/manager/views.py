@@ -212,9 +212,9 @@ def admin_regular_form(request, reservation_id):
 def regular_status_change(request, reservation_id):
     if request.user.is_authenticated:
         instance = get_object_or_404(RegularReservation, pk=reservation_id)
-        if request.method == "GET":
-            instance.status = '3'
-        elif request.method == "POST":
+        if request.method == "POST":
+            instance.status = request.POST['status']
+
             place_name = request.POST['place']
             if place_name == '':
                 try :
@@ -231,10 +231,8 @@ def regular_status_change(request, reservation_id):
                     place.name = place_name
                     place.save()
             instance.place = place
-            instance.admin_comment = request.POST['comment']
             
-
-            instance.status = '2'
+            instance.admin_comment = request.POST['comment']
         instance.save()
         return redirect('manager:admin_regular_form', reservation_id=reservation_id)
     else:
