@@ -96,3 +96,41 @@ $(function () {
         $("#add_info").css("display", "none");
     });
 });
+
+// 신청상태 확인
+$(function () {
+    var startSetting = $('input[type=radio][id="status"]:checked').val();
+    // startSetting이 later인 경우 style display를 flex로 변경한다.
+    if (startSetting == "1") {
+        // 대기
+        $("#tour_location").css("display", "none");
+        $("#tour_admin_memo").css("display", "none");
+    } else if (startSetting == "2") {
+        // 승인
+        $("#tour_location").css("display", "flex");
+        $("#tour_admin_memo").css("display", "flex");
+    } else {
+        // 거절
+        $("#tour_location").css("display", "none");
+        $("#tour_admin_memo").css("display", "flex");
+    }
+    // type 이 radio 이고 id adult 인 input 을 click 했을 경우
+    $('input[type="radio"][id="status"]').on("click", function () {
+        // startSetting 에 checked된 radio button의 value 값을 넣는다.
+        var startSetting = $('input[type=radio][id="status"]:checked').val();
+        // startSetting이 later인 경우 style display를 flex로 변경한다.
+        if (startSetting == "1") {
+            // 대기
+            $("#tour_location").css("display", "none");
+            $("#tour_admin_memo").css("display", "none");
+        } else if (startSetting == "2") {
+            // 승인
+            $("#tour_location").css("display", "flex");
+            $("#tour_admin_memo").css("display", "flex");
+        } else {
+            // 거절
+            $("#tour_location").css("display", "none");
+            $("#tour_admin_memo").css("display", "flex");
+        }
+    });
+});

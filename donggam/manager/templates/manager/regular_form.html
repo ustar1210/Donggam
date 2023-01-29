@@ -128,7 +128,7 @@
                         <label for="거부">거부</label>
                     </span>
                 </div>
-                <div>
+                <div id="tour_location" >
                     <span class="title">진행장소</span>
                     <span class="body">
                         {% if reservation.place.name %}
@@ -148,7 +148,7 @@
                         </datalist>
                     </span>
                 </div>
-                <div>
+                <div id="tour_admin_memo">
                     <span class="title">관리자메모</span>
                     <span class="body">
                         {% if reservation.admin_comment %}
