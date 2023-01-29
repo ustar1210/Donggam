@@ -73,8 +73,11 @@ def admin_save(request):
                     date[3]
                     continue
                 except :
-                    instance = Reservation(date=yearmonthdate, name=name, status='5')
-                    instance.save()                       
+                    try : 
+                        get_object_or_404(Reservation, date=yearmonthdate, status='5')
+                    except:
+                        instance = Reservation(date=yearmonthdate, name=name, status='5')
+                        instance.save()                       
         else :
             for a in request.POST:
                 if a == 'csrfmiddlewaretoken' or a == 'reason':
@@ -86,8 +89,11 @@ def admin_save(request):
                         time = '10'
                     else :
                         time = '14'
-                    instance = Reservation(date=yearmonthdate, time=time, status='0')
-                    instance.save()
+                    try : 
+                        get_object_or_404(Reservation, date=yearmonthdate, time=time, status='0')
+                    except :
+                        instance = Reservation(date=yearmonthdate, time=time, status='0')
+                        instance.save()
                 except:
                     pass
             change_status()
