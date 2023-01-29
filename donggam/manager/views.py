@@ -214,24 +214,25 @@ def regular_status_change(request, reservation_id):
         instance = get_object_or_404(RegularReservation, pk=reservation_id)
         if request.method == "POST":
             instance.status = request.POST['status']
-
-            place_name = request.POST['place']
-            if place_name == '':
-                try :
-                    place = get_object_or_404(Place, name='팔정도 코끼리상 앞')
-                except : 
-                    place = Place()
-                    place.name = '팔정도 코끼리상 앞'
-                    place.save()
+            if request.POST['status'] == '2':
+                place_name = request.POST['place']
+                if place_name == '':
+                    try :
+                        place = get_object_or_404(Place, name='팔정도 코끼리상 앞')
+                    except : 
+                        place = Place()
+                        place.name = '팔정도 코끼리상 앞'
+                        place.save()
+                else :
+                    try :
+                        place = get_object_or_404(Place, name=place_name)
+                    except :
+                        place = Place()
+                        place.name = place_name
+                        place.save()
+                instance.place = place
             else :
-                try :
-                    place = get_object_or_404(Place, name=place_name)
-                except :
-                    place = Place()
-                    place.name = place_name
-                    place.save()
-            instance.place = place
-            
+                instance.place = None
             instance.admin_comment = request.POST['comment']
         instance.save()
         return redirect('manager:admin_regular_form', reservation_id=reservation_id)

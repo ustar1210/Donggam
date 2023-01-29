@@ -126,7 +126,9 @@
                         {{ reservation.place.name }}
                     </span>
                 </div>
-                <hr>    
+                <hr>
+                {% endif %}    
+                {% if reservation.status == '2' or reservation.status == '3' %}
                 <div>
                     <span class="title">관리자메모</span>
                     <span class="body">
