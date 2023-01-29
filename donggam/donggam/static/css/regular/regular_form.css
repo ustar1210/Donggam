@@ -2,7 +2,8 @@
     background: rgba(255, 150, 27, 0.1);
     border-radius: 8px;
     margin: 46px 123px 73px 123px;
-    height: 180px;
+    height: auto;
+    padding-bottom: 30px;
 }
 .regular_form_info p.title{
     padding: 30px 35px 0px 35px;
@@ -15,6 +16,7 @@
     padding: 10px 35px 0px 35px;
     font-weight: 500;
     font-size: 16px;
+    line-height: 170%;
 }
 .form_wrap{
     margin: 46px 123px 73px 123px;   
@@ -124,8 +126,7 @@ input[type='radio']:checked:before {
         background: rgba(255, 150, 27, 0.1);
         border-radius: 8px;
         margin: 10px 25px 10px 25px;
-        height: 13rem;
-        padding: 0px 5px;
+        padding: 10px 10px;
     }
     .regular_form_info p.title{
         padding: 10px 10px 0px 20px;
