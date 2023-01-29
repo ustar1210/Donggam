@@ -38,21 +38,21 @@
                 <hr>
 
                 <!-- 14세 미만일대만 보호자 성명, 연락처 뜨게하기 -->
-                {% if age == "14세미만" %}
-                <div id="adult_name" style="display: none;">
+                {% if reservation.age == 'd' %}
+                <div id="adult_name">
                     <span class="title">보호자 성명</span>
                     <span class="body">
                         {{ reservation.parent_name }}
                     </span>
                 </div>
 
-                <div id="adult_num" style="display: none;">
+                <div id="adult_num">
                     <span class="title">보호자 연락처</span>
                     <span class="body">
                         {{ reservation.parent_phone }}
                     </span>
                 </div>
-                <hr id="adult_line" style="display: none;"> 
+                <hr id="adult_line"> 
                 {% endif%}
 
                 
