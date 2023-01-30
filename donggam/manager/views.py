@@ -248,12 +248,16 @@ def regular_status_change(request, reservation_id):
 def regulardate_cud(request, date_id=None):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            instance = RegularDate()
-            year = str(request.POST['year'])
-            month = str(request.POST['month'])
-            day = str(request.POST['day'])
-            instance.date = year+'-'+month+'-'+day
-            instance.save()
-        return redirect('manager:admin_regular_list')
+            if request.POST['month'] != '' and request.POST['day'] != '' :
+                if request.POST['year'] != '' :
+                    instance = get_object_or_404(RegularDate, date__month = request.POST['month'], date__day = request.POST['day'])
+                else:
+                    instance = RegularDate()
+                    year = str(request.POST['year'])
+                month = str(request.POST['month'])
+                day = str(request.POST['day'])
+                instance.date = year+'-'+month+'-'+day
+                instance.save()
+            return redirect('manager:admin_regular_list')
     else:
         return redirect('manager:login')
