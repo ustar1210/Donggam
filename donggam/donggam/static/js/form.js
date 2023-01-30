@@ -74,6 +74,7 @@ $(function () {
         } else {
             // 수정으로 글 변경
             $('input[type="submit"][id="edit_notice"]').attr("value", "수정");
+            $("#notice_yet_edit").css("display", "none");
             $("#add_notice").css("display", "inline");
             alert("수정 완료 됐습니다.");
         }
