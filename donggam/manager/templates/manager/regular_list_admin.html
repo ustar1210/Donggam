@@ -15,8 +15,9 @@
                     {% for d in tourdates %}
                     <span class="notice_done_edit" id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
                     {% endfor %}
-                    <input class="notice_add_btn" type="submit" id="add_notice" value="공지추가">
-                    <input class="notice_edit_btn" type="submit" id="edit_notice" name="edit" value="수정">
+                    <a class="notice_add_btn"  id="add_notice" href="#">공지추가</a>
+                    <input type="hidden" name="kind" id="kind" />
+                    <a class="notice_edit_btn" id="edit_notice" name="edit" href="#none" onclick="test(this)">수정</a>
                     <span class="notice_yet_edit" id="notice_yet_edit" style="display: none;">[공지] <input type="number"  placeholder="월" name="month">월 정기 캠퍼스투어일은 <input type="number" placeholder="일" name="day">일 입니다.</span>
                 </form>
                 <!-- class="notice_add_edit" style="display: none;" -->

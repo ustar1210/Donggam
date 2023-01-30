@@ -61,7 +61,7 @@ function realConf() {
 
 // 정기 공지 수정 버튼 클릭시
 $(function () {
-    $('input[type="submit"][id="edit_notice"]').on("click", function () {
+    $('a[id="edit_notice"]').on("click", function () {
         var startSetting = $('input[type="submit"][id="edit_notice"]').val();
         if (startSetting == "수정") {
             $('input[type="submit"][id="edit_notice"]').attr(
@@ -83,7 +83,7 @@ $(function () {
 
 // 정기 공지 추가하기 버튼 클릭시
 $(function () {
-    $('input[type="submit"][id="add_notice"]').on("click", function () {
+    $('a[id="add_notice"]').on("click", function () {
         $("#add_notice").css("display", "none");
         $("#edit_notice").css("display", "none");
         $("#add_info").css("display", "block");
