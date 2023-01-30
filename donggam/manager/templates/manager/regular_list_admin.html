@@ -7,20 +7,28 @@
     <div class="board_wrap">
         <div class="board_title">
             <div class="notice_title">
-                <h1>정기 캠퍼스투어 신청(관리자)</h1>
+                <h1>정기 캠퍼스투어(관리자)</h1>
             </div>
-            <div class="regular_info">
-                <form method="post" action="{% url 'manager:regulardate_cud' %}">
+            <div class="regular_info_admin" style="padding:33px 59px 27px 34px">
+                <form method="post" action="{% url 'manager:regulardate_cud' %}" onsubmit="return realEdit()">
                     {% csrf_token %}
                     {% for d in tourdates %}
-                    <p>[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</p>
-                    <input type="submit" name="edit" value="수정하기">
+                    <span class="notice_done_edit" id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
                     {% endfor %}
-                    <p>
-                    <input type="number" name="year">년 <input type="number" name="month">월 <input type="number" name="day">일 
-                    <input type="submit" value="추가하기">
-                    </p>
+                    <input class="notice_add_btn" type="submit" id="add_notice" value="공지추가">
+                    <input class="notice_edit_btn" type="submit" id="edit_notice" name="edit" value="수정">
+                    <span class="notice_yet_edit" id="notice_yet_edit" style="display: none;">[공지] <input type="number"  placeholder="월" name="month">월 정기 캠퍼스투어일은 <input type="number" placeholder="일" name="day">일 입니다.</span>
                 </form>
+                <!-- class="notice_add_edit" style="display: none;" -->
+            </div>
+            <div class="regular_info_admin" id="add_info" style="padding:33px 59px 27px 34px; display: none;">
+                <form method="post" action="{% url 'manager:regulardate_cud' %}">
+                    <span class="notice_done_edit" id="notice_done_edit" >[공지] <input type="number" name="month" placeholder="년" style="width:70px"> <input type="number" name="month" placeholder="월">월  정기 캠퍼스투어일은 <input type="number" placeholder="일" name="day">일 입니다.</span>
+                    <input class="notice_add_btn" type="submit" id="save_notice" id="save_notice" value="저장">
+
+                </form>
+                <!-- <input type="number" name="year">년 -->
+                <!-- class="notice_add_edit" style="display: none;" -->
             </div>
         </div>
         <div class="board_list_wrap">
@@ -37,11 +45,11 @@
                     <div class="title"><a href="{% url 'manager:admin_regular_form' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
                         {% if r.status == '1' %}
-                        <wait style="color: #999999;">검토중</wait>
+                        <wait style="color: #999999;">검토대기</wait>
                         {% elif r.status == '2' %}
-                        <high style="color: #DF633B;">승인완료</high>
+                        <high style="color: #00BA34;">승인</high>
                         {% elif r.status == '3' %}
-                        <high style="color: #DF633B;">재검토요청</high>
+                        <high style="color: #DF633B;">거부</high>
                         {% endif %}
                     </div>
                     <div class="date">{{ r.created_at }}</div>
@@ -72,8 +80,41 @@
                 <a href="?page={{ page_obj.end_index }} " class="bt last">>></a>
             </div>
         </div>
-        
     </div>
-    
 </div>
+<style>
+
+.notice_add_btn{
+    text-align: c;
+    float: right;
+    background: #DF633B;
+    padding: 0.3vw 1vw;
+    text-align: center;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 1vw;
+    color: white;
+    }
+    .notice_add_btn:hover{
+    color: #DF633B;
+    background: white;
+}
+.notice_edit_btn{
+    float: right;
+    background: #DF633B;
+    padding: 0.3vw 1vw;
+    text-align: center;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 1vw;
+    color: white;
+    margin-right: 10px;
+    }
+    .notice_edit_btn:hover{
+    color: #DF633B;
+    background: white;
+}
+
+
+</style>
 {% endblock %}
