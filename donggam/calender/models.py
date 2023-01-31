@@ -75,7 +75,7 @@ class Reservation(models.Model):
     def get_admin_url(self):
         url = reverse('manager:group_form', args=(self.id,))
         if self.status == '1':
-            return f'<a class="schoolAply" href="{url}">[신청대기]</a>'
+            return f'<a class="schoolAply" href="#none">[신청대기]</a>'
         elif self.status == '2':
             return f'<a class="schoolAply" href="{url}">[검토중]</a>'
         elif self.status == '3':
