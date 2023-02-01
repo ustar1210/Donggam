@@ -58,15 +58,12 @@
 
                 {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}" class="bt next">></a>
-                {% else %}
-                <a href="#" class="bt next">></a>
-                {% endif %}
-
-                {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.end_index }} " class="bt last">>></a>
                 {% else %}
+                <a href="#" class="bt next">></a>
                 <a href="#" class="bt last">>></a>
                 {% endif %}
+
             </div>
             <a class="apply_btn" href="{% url 'calender:regular_form' %}">글쓰기</a>
             
