@@ -81,6 +81,22 @@ line-height: 35px;
     background: white;
 }
 
+.admin_btn{
+    margin: 10px;
+    display: inline-block;
+    background: #DF633B;
+    padding: 12px 36px;
+    text-align: center;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 1em;
+    color: white;
+}
+.admin_btn:hover{
+    color: #DF633B;
+    background: white;
+}
+
 textarea{
     width: 100%;
     height: 200px;
