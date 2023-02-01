@@ -86,9 +86,9 @@ class Reservation(models.Model):
             return f'<a class="holiday">휴일</a>'
         else :
             if self.time == '10':
-                return f'<a class="waitAply">[오전 신청가능]</a>'
+                return f'<a class="waitAply" style="color: #0085FF;">[오전 신청가능]</a>'
             else:
-                return f'<a class="waitAply">[오후 신청가능]</a>'
+                return f'<a class="waitAply" style="color: #0085FF;">[오후 신청가능]</a>'
 
     def __str__(self):
         datetime = str(self.date)+' / '+self.time+':00'

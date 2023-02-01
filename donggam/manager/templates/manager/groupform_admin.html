@@ -123,10 +123,10 @@
 
     
         <p class="form_title">신청서 작성</p>
-        <div class="form_list" style="margin-bottom: 10em;">
+        <div class="form_list" style="margin-bottom: 12em;">
             <form method="post" action="{% url 'manager:confirm' reservation_id=reservation.pk %}">
                 {% csrf_token %}
-                <div class="form_body">
+                <div class="form_body" style="margin-bottom: 50px;">
                     <div>
                         <span class="title">진행장소</span>
                         <span class="body">
@@ -164,7 +164,7 @@
                 </span>
                 <span style="float: right;">
                     {% if reservation.status == '3' %}
-                    <input class="regular_btn" type="submit" value="수정">
+                    <input class="regular_btn" onclick="alert('수정 완료 됐습니다.')" type="submit" value="수정">
                     {% else %}
                     <input class="regular_btn" type="submit" value="승인">
                     {% endif %}
