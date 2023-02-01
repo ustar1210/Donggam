@@ -25,11 +25,13 @@
     margin-top: 15px;
     padding: 8px 13px;
     color: #333333;
+    transform: translateX(3.5vw);
 }
 .navbar__menu li a{
     font-weight: 500;
     color:  #333333;
-    font-size: 1vw;
+    
+    font-size: 1.2em;
 }
 
 .navbar__menu li:hover {
@@ -56,11 +58,15 @@ hr{
     .image{
         width: 20%;
     }
+    .navbar__menu li{
+        transform: translateX(-3rem);
+    }
+        
     
     .navbar__menu li a{
         font-weight: 500;
         color:  #333333;
-        font-size: 1.2vw;
+        font-size: 0.9em;
     }
     div.navbar__logo > a{
         font-size: 1.5vw;
