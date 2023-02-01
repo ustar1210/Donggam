@@ -8,7 +8,7 @@
     </div>
     <ul class="navbar__menu toggle_color">
         <li><a href="{% url 'calender:calendar' %}"> 단체 캠퍼스투어(신청) </a></li>
-            <li><a href="{% url 'calender:regular_list' %}"> 정기 캠퍼스투어(신청) </a></li>
+        <li><a href="{% url 'calender:regular_list' %}"> 정기 캠퍼스투어(신청) </a></li>
         <li><a href="{% url 'manager:calendarAdmin' %}"> 단체 캠퍼스투어(관리자) </a></li>
         <li><a href="{% url 'manager:admin_regular_list' %}"> 정기 캠퍼스투어(관리자) </a></li>
         <li><a href="{% url 'manager:logout' %}"> 로그아웃 </a></li>
@@ -19,6 +19,9 @@
 </nav>
 <hr style="   background-color:#e0d9d3;">
 <style>
+    .navbar__menu li {
+        transform: translate(0);
+    }
     @media (max-width: 2000px){
     .navbar__logo > a{
         font-size: 20px;
@@ -26,7 +29,7 @@
     .navbar__menu li a{
         font-weight: 500;
         color:  #333333;
-        font-size: 0.8em;
+        font-size: 1em;
     }
 }
 @media (max-width: 1500px) {
