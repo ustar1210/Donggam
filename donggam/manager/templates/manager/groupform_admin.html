@@ -9,6 +9,8 @@
 <div class="check" style="text-align: center; margin-top: 50px;">
     <div class="buttons">
         <div class="clearfix">
+            <a class="regular_btn" href="{% url 'manager:calendarAdmin' %}"> 목록으로 </a>
+
             <a class="regular_btn" href="{% url 'manager:confirm' reservation_id=reservation.pk %}"> 검토하기 </a>
         </div>
     </div>
@@ -121,7 +123,7 @@
 
     
         <p class="form_title">신청서 작성</p>
-        <div class="form_list">
+        <div class="form_list" style="margin-bottom: 10em;">
             <form method="post" action="{% url 'manager:confirm' reservation_id=reservation.pk %}">
                 {% csrf_token %}
                 <div class="form_body">
@@ -129,9 +131,9 @@
                         <span class="title">진행장소</span>
                         <span class="body">
                             {% if reservation.place.name %}
-                            <input list="placelist" name="place" id="place" placeholder="{{ reservation.place.name }}">
+                            <input class="form_box" list="placelist" name="place" id="place" placeholder="{{ reservation.place.name }}">
                             {% else %}
-                            <input list="placelist" name="place" id="place" placeholder="정각원 앞 백년비">
+                            <input class="form_box" list="placelist" name="place" id="place" placeholder="정각원 앞 백년비">
                             {% endif %}
                             <datalist id="placelist">
                             {% for p in places %}
@@ -157,21 +159,18 @@
                         </span>
                     </div>
                 </div>
-                <div style="text-align: right;">
+                <span class="buttons" style="float: left;">
+                        <a class="regular_btn" href="{% url 'manager:calendarAdmin' %}"> 목록으로 </a>
+                </span>
+                <span style="float: right;">
                     {% if reservation.status == '3' %}
                     <input class="regular_btn" type="submit" value="수정">
                     {% else %}
                     <input class="regular_btn" type="submit" value="승인">
                     {% endif %}
-                </div>
+                </span>
             </form>
         </div>
-    
-
 {% endif %}
-<div class="buttons" style="text-align: center;">
-    <div class="clearfix">
-        <a class="regular_btn" href="{% url 'manager:calendarAdmin' %}"> 목록으로 </a>
-    </div>
-</div>
+
 {% endblock %}
