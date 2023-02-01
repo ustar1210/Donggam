@@ -4,8 +4,7 @@
 <div class="notice_title" style="margin:25px 0px;">
 	<h1>단체 캠퍼스투어(관리자)</h1>
 </div>
-<div class="container-fluid calendar_right" style="zoom:0.8;">
-
+<div class="container-fluid calendar_right" style="zoom:0.8;" >
 	<div class="calendartable">
 		<form method="post" action="{% url 'manager:adminsave' %}" style="display: inline;">
 			{% csrf_token %}
@@ -21,9 +20,6 @@
                     <input type="submit" class="admin_btn" name="h_reset" value="휴일 비활성화">
                 </div>
             </div>
-
-
-			
 		</form>
 	</div>	
 </div>
@@ -85,6 +81,13 @@
     border-radius: 4px;
     font-size: 14px;
     color: #0085FF;
+}
+.date{
+    position: relative;
+    bottom: 8px;
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: 3px;
 }
 .month_btn{
     margin: 10px;
