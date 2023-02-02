@@ -8,6 +8,9 @@ from .models import *
 import calendar
 from .utils import Calendar, ReservationForm, RegularReservationForm
 
+import smtplib
+from email.mime.text import MIMEText
+
 def index(request):
     return render(request, 'calender/index.html')
 
@@ -58,6 +61,35 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+# 메일 보내기
+# 자기자신 
+def requestMail(a):
+    # 세션 생성
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    # TLS 보안 시작
+    s.starttls()
+    # 로그인 인증
+    s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
+    msg = MIMEText(f"캠퍼스 투어 신청이 왔습니다.")
+    msg['Subject'] = f'[동감] {a}캠퍼스투어 신청'
+    s.sendmail("donggam.dgu@gmail.com", "donggam.dgu@gmail.com", msg.as_string())
+    # 세션 종료
+    s.quit()
+
+# 신청자에게 상태변경됐으니 확인해봐라는 메일 보내기 
+def statusMail(a,front,back):
+    # 세션 생성
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    # TLS 보안 시작
+    s.starttls()
+    # 로그인 인증
+    s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
+    msg = MIMEText(f"캠퍼스 투어신청 결과가 나왔으니 신청페이지에서 확인해주시길 바랍니다.")
+    msg['Subject'] = f'[동감] {a}캠퍼스투어 신청결과'
+    s.sendmail("donggam.dgu@gmail.com", f"{front}@{back}", msg.as_string())
+    # 세션 종료
+    s.quit()
+
 def reservation(request, reservation_id=None):
     instance = get_object_or_404(Reservation, pk=reservation_id)
     if instance.email != None:
@@ -94,7 +126,6 @@ def reservation(request, reservation_id=None):
                 return redirect('calender:reservation_edit', reservation_id=reservation_id)
         else :
             return redirect('calender:reservation_check', reservation_id=reservation_id)
-
     return render(request, 'calender/reservation.html', {
         'reservation': instance,
         'state': state,
