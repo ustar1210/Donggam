@@ -14,6 +14,7 @@ footer {
 
 .footer_image{
     width: 10%;
+    vertical-align: middle;
 }
 .insta_image{
     float: right;

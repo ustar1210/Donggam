@@ -25,14 +25,37 @@
     margin-top: 15px;
     padding: 8px 13px;
     color: #333333;
+    transform: translateX(3vw);
 }
 .navbar__menu li a{
     font-weight: 500;
     color:  #333333;
-    font-size: 1vw;
+    
+    font-size: 1.2em;
 }
 
 .navbar__menu li:hover {
+    border-radius: 5px;
+}
+.navbar__menu_admin {
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.navbar__menu_admin li {
+    margin-top: 15px;
+    padding: 8px 13px;
+    color: #333333;
+}
+.navbar__menu_admin li a{
+    font-weight: 500;
+    color:  #333333;
+    
+    font-size: 1.2em;
+}
+
+.navbar__menu_admin li:hover {
     border-radius: 5px;
 }
 .navbar__hr{
@@ -56,17 +79,20 @@ hr{
     .image{
         width: 20%;
     }
+    .navbar__menu li{
+        transform: translateX(-3rem);
+    }
+        
     
     .navbar__menu li a{
         font-weight: 500;
         color:  #333333;
-        font-size: 1.2vw;
+        font-size: 0.9em;
     }
     div.navbar__logo > a{
         font-size: 1.5vw;
     }
 }
-/* 768 px 밑일때만  */
 @media (max-width: 930px) {
     .navbars {
         display: flex;
@@ -81,6 +107,9 @@ hr{
     }
     .image{
         width: 25%;
+    }
+    .navbar__menu li{
+        transform: translateX(0);
     }
     .navbar__menu li a{
         font-size: 1rem;
@@ -98,7 +127,17 @@ hr{
         width: 100%;
         text-align: center;
     }
+    .navbar__menu_admin {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
 
+    .navbar__menu_admin li {
+        width: 100%;
+        text-align: center;
+    }
     .navbar__toggleBtn {
         display: block;
         position: absolute;
@@ -109,6 +148,12 @@ hr{
     }
 
     .navbar__menu.active,
+    .navbar__icons.active {
+        display: flex;
+        transition: 1s ease-out;
+    }
+
+    .navbar__menu_admin.active,
     .navbar__icons.active {
         display: flex;
         transition: 1s ease-out;

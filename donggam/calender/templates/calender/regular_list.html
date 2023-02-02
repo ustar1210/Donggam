@@ -40,7 +40,8 @@
                 {% endfor %}
             </div>
             <div class="board_page">
-                <a href="?page={{ page_obj.start_index }}" class="bt first"><<</a>
+                <a href="?page=1" class="bt first"><<</a>
+
                 {% if page_obj.has_previous %}
                 <a href="?page={{ page_obj.previous_page_number }}" class="bt prev"><</a>
                 {% else %}
@@ -57,10 +58,12 @@
 
                 {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}" class="bt next">></a>
+                <a href="?page={{ page_obj.end_index }} " class="bt last">>></a>
                 {% else %}
                 <a href="#" class="bt next">></a>
+                <a href="#" class="bt last">>></a>
                 {% endif %}
-                <a href="?page={{ page_obj.end_index }} " class="bt last">>></a>
+
             </div>
             <a class="apply_btn" href="{% url 'calender:regular_form' %}">글쓰기</a>
             

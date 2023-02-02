@@ -4,29 +4,24 @@
 <div class="notice_title" style="margin:25px 0px;">
 	<h1>단체 캠퍼스투어(관리자)</h1>
 </div>
-<div class="container-fluid calendar_right" style="width: 80%; height: 80%;">
-
+<div class="container-fluid calendar_right" style="zoom:0.8;" >
 	<div class="calendartable">
 		<form method="post" action="{% url 'manager:adminsave' %}" style="display: inline;">
 			{% csrf_token %}
 			{{ calendar }}
-			<p>
-				<input type="submit" class="regular_btn" value="신청가능 활성화">
-				<input type="submit" class="regular_btn" name="reset" value="신청가능 비활성화">
-			</p>
-			<div style="text-align: right;">
-				<p>
-					<input type="text" name="reason" class="form_box" placeholder="달력에 표시할 휴일 사유를 입력해주세요" style="width: 30%;">
-				</p>
-				<input type="submit" class="regular_btn" name="holiday" value="휴일 활성화">
-                <input type="submit" class="regular_btn" name="h_reset" value="휴일 비활성화">
-			</div>
-			
+            <div class="btn_box"style="margin-top: 50px;">
+                <div>
+                    <input type="submit" class="admin_btn" value="신청가능 활성화">
+                    <input type="submit" class="admin_btn" name="reset" value="신청가능 비활성화">
+                </div>
+                <div style="text-align: right;">
+                    <input type="text" name="reason" class="form_box" placeholder="달력에 표시할 휴일 사유를 입력해주세요" style="width: 30%;">
+                    <input type="submit" class="admin_btn" name="holiday" value="휴일 활성화">
+                    <input type="submit" class="admin_btn" name="h_reset" value="휴일 비활성화">
+                </div>
+            </div>
 		</form>
 	</div>	
-</div>
-<div class="timetable">
-	<div></div>	
 </div>
 <script>
     document.getElementById("prev_month_btn").href="{% url 'manager:calendarAdmin' %}?{{ prev_month }}"
@@ -36,6 +31,26 @@
 </script>
 
 <style>
+    .btn_box{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .admin_btn{
+    margin: 10px;
+    display: inline-block;
+    background: #DF633B;
+    padding: 4px 16px;
+    text-align: center;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 1em;
+    color: white;
+}
+.admin_btn:hover{
+    color: #DF633B;
+    background: white;
+}
+
 .holiday{
 	color:#E92C2C
 }
@@ -67,6 +82,13 @@
     font-size: 14px;
     color: #0085FF;
 }
+.date{
+    position: relative;
+    bottom: 8px;
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: 3px;
+}
 .month_btn{
     margin: 10px;
     display: inline-block;
@@ -94,12 +116,6 @@
     color: #0085FF;   
 	font-size: 16px;
 }
-
-.waitAply:hover{
-    background: #0085FF;
-    color: linear-gradient(0deg, rgba(0, 133, 255, 0.1), rgba(0, 133, 255, 0.1)), #FFFFFF;   
-}
-
 .schoolAply{
 	background: linear-gradient(0deg, rgba(255, 150, 27, 0.1), rgba(255, 150, 27, 0.1)), #FFFFFF;
     border-radius: 4px;
@@ -143,7 +159,7 @@ tr.days > td:nth-child(7){
 .now_day_point_1{
     background: #666666;
     color: #FFFFFF;
-    padding: 1% 5%;
+    padding: 1% 3.4%;
     border-radius: 50%;
 }
 .now_day_point_2{

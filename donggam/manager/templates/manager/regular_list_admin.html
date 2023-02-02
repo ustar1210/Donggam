@@ -9,30 +9,24 @@
             <div class="notice_title">
                 <h1>정기 캠퍼스투어(관리자)</h1>
             </div>
-            <div class="regular_info_admin" style="padding:33px 59px 27px 34px">
+            <div class="regular_info_admin" style="padding:33px 59px 57px 34px; margin-bottom: 20px;">
                 <form method="post" action="{% url 'manager:regulardate_cud' %}" onsubmit="return realEdit()">
                     {% csrf_token %}
                     {% for d in tourdates %}
-                    <span class="notice_done_edit" id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
-                    
-                    <input class="notice_add_btn" type="submit" id="add_notice" value="공지추가">
-                    <input class="notice_edit_btn" type="submit" id="edit_notice" name="edit" value="수정">
-
-                    <span class="notice_yet_edit" id="notice_yet_edit" style="display: none;">[공지] <input type="number"  placeholder="{{d.date.month}}" name="month">월 정기 캠퍼스투어일은 <input type="number" placeholder="{{ d.date.day }}" name="day">일 입니다.</span>
-                    
+                    <span class="notice_done_edit"id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
+                    <span class="notice_yet_edit" id="notice_yet_edit" style="display: none;">[공지] <input type="number"  placeholder="{{d.date.month}}" name="month">월 정기 캠퍼스투어일은 <input type="number" placeholder="{{ d.date.day }}" name="day">일 입니다.</span>                    
                     {% endfor %}
+                    <a class="notice_add_btn " type="submit" id="add_notice" style="color: whitesmoke;" >공지추가</a>
+                    <a class="notice_edit_btn " id="edit_notice" name="edit" style="color: whitesmoke;">수정</a>
                 </form>
-                <!-- class="notice_add_edit" style="display: none;" -->
             </div>
-            <div class="regular_info_admin" id="add_info" style="padding:33px 59px 27px 34px; display: none;">
+            
+            <div class="regular_info_admin" id="add_info" style="padding:33px 59px 27px 34px; display: none; margin-top: 0px;">
                 <form method="post" action="{% url 'manager:regulardate_cud' %}">
                     {% csrf_token %}
                     <span class="notice_done_edit" id="notice_done_edit" >[공지] <input type="number" name="month" placeholder="년" style="width:70px"> <input type="number" name="month" placeholder="월">월  정기 캠퍼스투어일은 <input type="number" placeholder="일" name="day">일 입니다.</span>
-                    <input class="notice_add_btn" type="submit" id="save_notice" id="save_notice" value="저장">
-
+                    <a class="notice_add_btn" id="save_notice" id="save_notice" style="color: whitesmoke;">저장</a>
                 </form>
-                <!-- <input type="number" name="year">년 -->
-                <!-- class="notice_add_edit" style="display: none;" -->
             </div>
         </div>
         <div class="board_list_wrap">
@@ -61,7 +55,7 @@
                 {% endfor %}
             </div>
             <div class="board_page">
-                <a href="?page={{ page_obj.start_index }}" class="bt first"><<</a>
+                <a href="?page=1" class="bt first"><<</a>
                 {% if page_obj.has_previous %}
                 <a href="?page={{ page_obj.previous_page_number }}" class="bt prev"><</a>
                 {% else %}
@@ -78,10 +72,12 @@
 
                 {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}" class="bt next">></a>
+                <a href="?page={{ page_obj.end_index }} " class="bt last">>></a>
                 {% else %}
                 <a href="#" class="bt next">></a>
+                <a href="#" class="bt last">>></a>
                 {% endif %}
-                <a href="?page={{ page_obj.end_index }} " class="bt last">>></a>
+
             </div>
         </div>
     </div>

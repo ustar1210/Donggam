@@ -62,19 +62,17 @@ function realConf() {
 // 정기 공지 수정 버튼 클릭시
 $(function () {
     $('a[id="edit_notice"]').on("click", function () {
-        var startSetting = $('input[type="submit"][id="edit_notice"]').val();
+        var startSetting = $('a[id="edit_notice"]').text();
         if (startSetting == "수정") {
-            $('input[type="submit"][id="edit_notice"]').attr(
-                "value",
-                "수정완료"
-            );
+            $('a[id="edit_notice"]').text("수정완료");
             $("#add_notice").css("display", "none");
             $("#notice_done_edit").css("display", "none");
             $("#notice_yet_edit").css("display", "inline");
         } else {
             // 수정으로 글 변경
-            $('input[type="submit"][id="edit_notice"]').attr("value", "수정");
+            $('a[id="edit_notice"]').text("수정");
             $("#notice_yet_edit").css("display", "none");
+            $("#notice_done_edit").css("display", "inline");
             $("#add_notice").css("display", "inline");
             alert("수정 완료 됐습니다.");
         }
@@ -91,7 +89,7 @@ $(function () {
 });
 
 $(function () {
-    $('input[type="submit"][id="save_notice"]').on("click", function () {
+    $('a[id="save_notice"]').on("click", function () {
         $("#add_notice").css("display", "inline");
         $("#edit_notice").css("display", "inline");
         $("#add_info").css("display", "none");
