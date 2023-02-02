@@ -77,7 +77,7 @@ def requestMail(a):
     s.quit()
 
 # 신청자에게 상태변경됐으니 확인해봐라는 메일 보내기 
-def statusMail(a,front,back):
+def statusMail(a,email):
     # 세션 생성
     s = smtplib.SMTP('smtp.gmail.com', 587)
     # TLS 보안 시작
@@ -86,7 +86,7 @@ def statusMail(a,front,back):
     s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
     msg = MIMEText(f"캠퍼스 투어신청 결과가 나왔으니 신청페이지에서 확인해주시길 바랍니다.")
     msg['Subject'] = f'[동감] {a}캠퍼스투어 신청결과'
-    s.sendmail("donggam.dgu@gmail.com", f"{front}@{back}", msg.as_string())
+    s.sendmail("donggam.dgu@gmail.com", email, msg.as_string())
     # 세션 종료
     s.quit()
 
@@ -116,7 +116,8 @@ def reservation(request, reservation_id=None):
                     instance.headcount = request.POST['headcount']
                     instance.length = int(request.POST['length'])
                     instance.memo = request.POST['memo']
-                    instance.save()    
+                    instance.save()   
+                    requestMail('단체') 
                     return HttpResponseRedirect(reverse('calender:calendar'), {
                         'text' : '신청 완료되었습니다.'
                     })
@@ -222,7 +223,9 @@ def regular_form(request, reservation_id=None):
                 instance.date = get_object_or_404(RegularDate, date = request.POST['date'])
                 instance.motivation = request.POST['motivation']
                 instance.request = request.POST['request']
-                instance.save()    
+                instance.save() 
+                
+                requestMail('정기')    
                 return redirect('calender:regular_detail', reservation_id = instance.pk)
             except :
                 if state == 1:
