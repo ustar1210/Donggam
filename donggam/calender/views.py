@@ -76,7 +76,7 @@ def requestMail(a):
     # 세션 종료
     s.quit()
 
-# 메일 보내기 신청자
+# 신청자에게 상태변경됐으니 확인해봐라는 메일 보내기 
 def requestMail(a,front,back):
     # 세션 생성
     s = smtplib.SMTP('smtp.gmail.com', 587)
@@ -84,8 +84,8 @@ def requestMail(a,front,back):
     s.starttls()
     # 로그인 인증
     s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
-    msg = MIMEText(f"캠퍼스 투어 신청이 왔습니다.")
-    msg['Subject'] = f'[동감] {a}캠퍼스투어 신청'
+    msg = MIMEText(f"캠퍼스 투어신청 결과가 나왔으니 신청페이지에서 확인해주시길 바랍니다.")
+    msg['Subject'] = f'[동감] {a}캠퍼스투어 신청결과'
     s.sendmail("donggam.dgu@gmail.com", f"{front}@{back}", msg.as_string())
     # 세션 종료
     s.quit()
