@@ -11,6 +11,7 @@ from .utils import Calendar, ReservationForm, RegularReservationForm
 import smtplib
 from email.mime.text import MIMEText
 
+
 def index(request):
     return render(request, 'calender/index.html')
 
@@ -61,32 +62,51 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
+
+from django.conf import settings
+school_email = getattr(settings, 'EMAIL', None)
+email_pw = getattr(settings, 'EMAIL_PW', None)
+school_phone = getattr(settings, 'PHONE', None)
 # 메일 보내기
 # 자기자신 
-def requestMail(a):
+def requestMail(a, instance):
     # 세션 생성
     s = smtplib.SMTP('smtp.gmail.com', 587)
     # TLS 보안 시작
     s.starttls()
     # 로그인 인증
-    s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
-    msg = MIMEText(f"캠퍼스 투어 신청이 왔습니다.")
-    msg['Subject'] = f'[동감] {a}캠퍼스투어 신청'
-    s.sendmail("donggam.dgu@gmail.com", "donggam.dgu@gmail.com", msg.as_string())
+    s.login(school_email, email_pw)
+    if a == '정기':
+        msg = MIMEText(f"{instance.date} {instance.school}이(가) {a}캠퍼스투어를 신청했습니다.")
+        msg['Subject'] = f'[동감] {instance.date} {instance.school} {a}캠퍼스투어 신청'
+    else :
+        days = ['월', '화', '수', '목', '금', '토', '일']
+        day = instance.date.weekday()
+        msg = MIMEText(f"{instance.date.month}월 {instance.date.day}일({days[day]}) {instance.school}이(가) {a}캠퍼스투어를 신청했습니다.")
+        msg['Subject'] = f'[동감] {instance.date.month}월 {instance.date.day}일({days[day]}) {instance.school} {a}캠퍼스투어 신청'
+
+    s.sendmail(school_email,school_email, msg.as_string())
     # 세션 종료
     s.quit()
 
 # 신청자에게 상태변경됐으니 확인해봐라는 메일 보내기 
-def statusMail(a,front,back):
+def statusMail(a, instance, result):
     # 세션 생성
     s = smtplib.SMTP('smtp.gmail.com', 587)
     # TLS 보안 시작
     s.starttls()
     # 로그인 인증
-    s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
-    msg = MIMEText(f"캠퍼스 투어신청 결과가 나왔으니 신청페이지에서 확인해주시길 바랍니다.")
-    msg['Subject'] = f'[동감] {a}캠퍼스투어 신청결과'
-    s.sendmail("donggam.dgu@gmail.com", f"{front}@{back}", msg.as_string())
+    s.login(school_email, email_pw)
+    if a == '정기':
+        msg = MIMEText(f"{instance.date} {instance.school}의 동국대학교 {a}캠퍼스 투어신청이 {result}되었습니다. \n연락처 : {school_phone}")
+        msg['Subject'] = f'[동감] {instance.date} {instance.school} {a}캠퍼스투어 신청결과'
+    else :
+        days = ['월', '화', '수', '목', '금', '토', '일']
+        day = instance.date.weekday()
+        msg = MIMEText(f"{instance.date.month}월 {instance.date.day}일({days[day]}) {instance.school}의 동국대학교 {a}캠퍼스 투어신청이 {result}되었습니다. \n연락처 : {school_phone}")
+        msg['Subject'] = f'[동감] {instance.date.month}월 {instance.date.day}일({days[day]}) {instance.school} {a}캠퍼스투어 신청결과'
+    s.sendmail(school_email, instance.email, msg.as_string())
     # 세션 종료
     s.quit()
 
@@ -116,7 +136,8 @@ def reservation(request, reservation_id=None):
                     instance.headcount = request.POST['headcount']
                     instance.length = int(request.POST['length'])
                     instance.memo = request.POST['memo']
-                    instance.save()    
+                    instance.save()   
+                    requestMail('단체', instance) 
                     return HttpResponseRedirect(reverse('calender:calendar'), {
                         'text' : '신청 완료되었습니다.'
                     })
@@ -222,7 +243,9 @@ def regular_form(request, reservation_id=None):
                 instance.date = get_object_or_404(RegularDate, date = request.POST['date'])
                 instance.motivation = request.POST['motivation']
                 instance.request = request.POST['request']
-                instance.save()    
+                instance.save() 
+                
+                requestMail('정기', instance)    
                 return redirect('calender:regular_detail', reservation_id = instance.pk)
             except :
                 if state == 1:

@@ -173,7 +173,7 @@ def group_confirm(request, reservation_id):
             
             instance.status = '3'
             instance.save()
-            
+            statusMail('단체', instance, '승인')
         return redirect('manager:group_form', reservation_id = reservation_id)
     else :
         return redirect('manager:login')
@@ -235,8 +235,10 @@ def regular_status_change(request, reservation_id):
                         place.name = place_name
                         place.save()
                 instance.place = place
+                statusMail('정기', instance, '승인')
             else :
                 instance.place = None
+                statusMail('정기', instance, '거부')
             instance.admin_comment = request.POST['comment']
         instance.save()
         return redirect('manager:admin_regular_form', reservation_id=reservation_id)
