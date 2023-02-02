@@ -11,6 +11,7 @@ from .utils import Calendar, ReservationForm, RegularReservationForm
 import smtplib
 from email.mime.text import MIMEText
 
+
 def index(request):
     return render(request, 'calender/index.html')
 
@@ -61,6 +62,11 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
+
+from django.conf import settings
+school_email = getattr(settings, 'EMAIL', None)
+email_pw = getattr(settings, 'EMAIL_PW', None)
 # 메일 보내기
 # 자기자신 
 def requestMail(a):
@@ -69,10 +75,10 @@ def requestMail(a):
     # TLS 보안 시작
     s.starttls()
     # 로그인 인증
-    s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
+    s.login(school_email, email_pw)
     msg = MIMEText(f"캠퍼스 투어 신청이 왔습니다.")
     msg['Subject'] = f'[동감] {a}캠퍼스투어 신청'
-    s.sendmail("donggam.dgu@gmail.com", "donggam.dgu@gmail.com", msg.as_string())
+    s.sendmail(school_email,school_email, msg.as_string())
     # 세션 종료
     s.quit()
 
@@ -83,10 +89,10 @@ def statusMail(a,email):
     # TLS 보안 시작
     s.starttls()
     # 로그인 인증
-    s.login('donggam.dgu@gmail.com', 'pwuqnqimeczczgmv')
+    s.login(school_email, email_pw)
     msg = MIMEText(f"캠퍼스 투어신청 결과가 나왔으니 신청페이지에서 확인해주시길 바랍니다.")
     msg['Subject'] = f'[동감] {a}캠퍼스투어 신청결과'
-    s.sendmail("donggam.dgu@gmail.com", email, msg.as_string())
+    s.sendmail(school_email, email, msg.as_string())
     # 세션 종료
     s.quit()
 
