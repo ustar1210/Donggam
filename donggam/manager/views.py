@@ -4,7 +4,6 @@ from manager.utils import AdminCalendar
 from django.views import generic
 from calender.views import *
 from calender.models import *
-
 # Create your views here.
 def manager_index(request):
     if request.user.is_authenticated:
@@ -186,8 +185,7 @@ def admin_regular_list(request):
         paginator = Paginator(instances, '10')
         page_obj = paginator.page(page)
 
-        tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
-        
+        tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)]).order_by('date')
         return render(request, 'manager/regular_list_admin.html', 
         {
             'page_obj': page_obj,
@@ -248,16 +246,28 @@ def regular_status_change(request, reservation_id):
 def regulardate_cud(request, date_id=None):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            if request.POST['month'] != '' and request.POST['day'] != '' :
-                if request.POST['year'] != '' :
-                    instance = get_object_or_404(RegularDate, date__month = request.POST['month'], date__day = request.POST['day'])
-                else:
-                    instance = RegularDate()
-                    year = str(request.POST['year'])
-                month = str(request.POST['month'])
-                day = str(request.POST['day'])
-                instance.date = year+'-'+month+'-'+day
-                instance.save()
+            print(request.POST)
+            if request.POST['pk'] == 'none':
+                instance = RegularDate()
+                year = request.POST['year']
+                month = request.POST['month']
+                day = request.POST['day']    
+            else:
+                instance = get_object_or_404(RegularDate, pk=request.POST['pk'])
+                if request.POST['year'] != '':
+                    year = request.POST['year']
+                else :
+                    year = str(instance.date.year)
+                if request.POST['month'] != '':
+                    month = request.POST['month']
+                else :
+                    month = str(instance.date.month)
+                if request.POST['day'] != '':
+                    day = request.POST['day']    
+                else :
+                    day = str(instance.date.day)
+            instance.date = year+'-'+month+'-'+day
+            instance.save()
             return redirect('manager:admin_regular_list')
     else:
         return redirect('manager:login')

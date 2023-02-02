@@ -60,17 +60,18 @@ function realConf() {
 }
 
 // 정기 공지 수정 버튼 클릭시
+/*
 $(function () {
     $('a[id="edit_notice"]').on("click", function () {
         var startSetting = $('a[id="edit_notice"]').text();
         if (startSetting == "수정") {
-            $('a[id="edit_notice"]').text("수정완료");
-            $("#add_notice").css("display", "none");
             $("#notice_done_edit").css("display", "none");
+            $("#edit_notice").css("display", "none");
             $("#notice_yet_edit").css("display", "inline");
+            $("#add_notice").css("display", "none");
         } else {
             // 수정으로 글 변경
-            $('a[id="edit_notice"]').text("수정");
+            $("#edit_notice").css("display", "inline");
             $("#notice_yet_edit").css("display", "none");
             $("#notice_done_edit").css("display", "inline");
             $("#add_notice").css("display", "inline");
@@ -78,20 +79,38 @@ $(function () {
         }
     });
 });
+*/
+
+function edit_date(my){
+    const parent = my.parentNode;
+    parent.getElementsByClassName('notice_yet_edit')[0].style.display = 'inline';
+    parent.getElementsByClassName('notice_done_edit')[0].style.display = "none";
+    var count = document.getElementsByClassName('notice_edit_btn').length;
+    for(let index = 0; index < count; index++){
+        document.getElementsByClassName('notice_edit_btn')[index].style.display = "none";
+    };
+    document.getElementsByClassName('notice_add_btn')[0].style.display = "none";
+};
 
 // 정기 공지 추가하기 버튼 클릭시
 $(function () {
     $('a[id="add_notice"]').on("click", function () {
         $("#add_notice").css("display", "none");
-        $("#edit_notice").css("display", "none");
+        var count = document.getElementsByClassName('notice_edit_btn').length;
+        for(let index = 0; index < count; index++){
+            document.getElementsByClassName('notice_edit_btn')[index].style.display = "none";
+        };
         $("#add_info").css("display", "block");
     });
 });
 
 $(function () {
-    $('a[id="save_notice"]').on("click", function () {
+    $("#save_notice").on("click", function () {
         $("#add_notice").css("display", "inline");
-        $("#edit_notice").css("display", "inline");
+        var count = document.getElementsByClassName('notice_edit_btn').length;
+        for(let index = 0; index < count; index++){
+            document.getElementsByClassName('notice_edit_btn')[index].style.display = "inline";
+        };
         $("#add_info").css("display", "none");
     });
 });

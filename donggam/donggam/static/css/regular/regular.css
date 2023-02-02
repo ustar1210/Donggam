@@ -9,7 +9,6 @@
     font-weight: 700;
 }
 
-
 .board_list_wrap{
     margin: 46px 123px 73px 123px;
 }
@@ -65,7 +64,7 @@
 .board_list .date {
     width: 10%;
 }
-div.regular_info_admin>form>span> input{
+div.regular_info_admin>form>p> input{
     width: 50px;
     padding-left: 8px;
 }

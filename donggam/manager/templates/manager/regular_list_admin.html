@@ -10,22 +10,36 @@
                 <h1>정기 캠퍼스투어(관리자)</h1>
             </div>
             <div class="regular_info_admin" style="padding:33px 59px 57px 34px; margin-bottom: 20px;">
-                <form method="post" action="{% url 'manager:regulardate_cud' %}" onsubmit="return realEdit()">
-                    {% csrf_token %}
-                    {% for d in tourdates %}
-                    <span class="notice_done_edit"id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
-                    <span class="notice_yet_edit" id="notice_yet_edit" style="display: none;">[공지] <input type="number"  placeholder="{{d.date.month}}" name="month">월 정기 캠퍼스투어일은 <input type="number" placeholder="{{ d.date.day }}" name="day">일 입니다.</span>                    
-                    {% endfor %}
-                    <a class="notice_add_btn " type="submit" id="add_notice" style="color: whitesmoke;" >공지추가</a>
-                    <a class="notice_edit_btn " id="edit_notice" name="edit" style="color: whitesmoke;">수정</a>
-                </form>
+                {% for d in tourdates %}
+                    <p>
+                        <form method="post" action="{% url 'manager:regulardate_cud' %}" onsubmit="return realEdit()">
+                            {% csrf_token %}
+                            <span class="notice_done_edit" id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
+                            <a class="notice_edit_btn " id="edit_notice" style="color: whitesmoke;" onclick="edit_date(this)">수정</a>
+                            <span id="notice_yet_edit" class="notice_yet_edit" style=display:none; >
+                                
+                                [공지]<input type="number" name="pk" value="{{d.pk}}" style="display:none;">
+                                <input type="number" name="year" placeholder="{{d.date.year}}" value="{{d.date.year}}" style="display:none;">
+                                <input type="number" name="month" placeholder="{{d.date.month}}">월 정기 캠퍼스투어일은 
+                                <input type="number" name="day" placeholder="{{ d.date.day }}">일 입니다.
+                            
+                                <input type="submit" class="notice_submit_btn" style="color: whitesmoke;" value="수정완료">   
+                            </span>   
+                        </form>  
+                    </p>
+                {% endfor %}   
+                <a class="notice_add_btn " id="add_notice" style="color: whitesmoke;" >공지추가</a>
             </div>
-            
             <div class="regular_info_admin" id="add_info" style="padding:33px 59px 27px 34px; display: none; margin-top: 0px;">
                 <form method="post" action="{% url 'manager:regulardate_cud' %}">
                     {% csrf_token %}
-                    <span class="notice_done_edit" id="notice_done_edit" >[공지] <input type="number" name="month" placeholder="년" style="width:70px"> <input type="number" name="month" placeholder="월">월  정기 캠퍼스투어일은 <input type="number" placeholder="일" name="day">일 입니다.</span>
-                    <a class="notice_add_btn" id="save_notice" id="save_notice" style="color: whitesmoke;">저장</a>
+                    <span class="notice_done_edit" id="notice_done_edit" >
+                        [공지] <input type="text" name="pk" value="none" style="display:none;">
+                        <input type="number" name="year" placeholder="년" style="width:70px"> 년 
+                        <input type="number" name="month" placeholder="월"> 월 정기 캠퍼스투어일은 
+                        <input type="number" name="day" placeholder="일">일 입니다.
+                    </span>
+                    <input type="submit" class="notice_add_btn" id="save_notice" style="color: whitesmoke;" value="저장">
                 </form>
             </div>
         </div>
@@ -99,7 +113,7 @@
     color: #DF633B;
     background: white;
 }
-.notice_edit_btn{
+.notice_edit_btn, .notice_submit_btn{
     float: right;
     background: #DF633B;
     padding: 0.3vw 1vw;
@@ -110,7 +124,7 @@
     color: white;
     margin-right: 10px;
     }
-    .notice_edit_btn:hover{
+    .notice_edit_btn:hover, .notice_submit_btn:hover{
     color: #DF633B;
     background: white;
 }
