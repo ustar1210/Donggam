@@ -33,6 +33,7 @@ DEBUG = env('DEBUG')
 
 EMAIL = env('EMAIL')
 EMAIL_PW = env('EMAIL_PW')
+PHONE = env('PHONE')
 
 ALLOWED_HOSTS = ['*']
 
