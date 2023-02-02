@@ -77,7 +77,7 @@ def requestMail(a):
     s.quit()
 
 # 신청자에게 상태변경됐으니 확인해봐라는 메일 보내기 
-def requestMail(a,front,back):
+def statusMail(a,front,back):
     # 세션 생성
     s = smtplib.SMTP('smtp.gmail.com', 587)
     # TLS 보안 시작
@@ -126,9 +126,6 @@ def reservation(request, reservation_id=None):
                 return redirect('calender:reservation_edit', reservation_id=reservation_id)
         else :
             return redirect('calender:reservation_check', reservation_id=reservation_id)
-
-    # 신청 메일 보내기
-    requestMail("단체")
     return render(request, 'calender/reservation.html', {
         'reservation': instance,
         'state': state,
