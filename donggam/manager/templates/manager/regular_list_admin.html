@@ -9,27 +9,33 @@
             <div class="notice_title">
                 <h1>정기 캠퍼스투어(관리자)</h1>
             </div>
-            <div class="regular_info_admin" style="padding:33px 59px 57px 34px; margin-bottom: 20px;">
-                {% for d in tourdates %}
-                    <p>
-                        <form method="post" action="{% url 'manager:regulardate_cud' %}" onsubmit="return realEdit()">
-                            {% csrf_token %}
-                            <span class="notice_done_edit" id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
-                            <a class="notice_edit_btn " id="edit_notice" onclick="edit_date(this)">수정</a>
-                            <span id="notice_yet_edit" class="notice_yet_edit" style=display:none; >
-                                
-                                [공지]<input type="number" name="pk" value="{{d.pk}}" style="display:none;">
-                                <input type="number" name="year" min="2023" placeholder="{{d.date.year}}" value="{{d.date.year}}" style="display:none;">
-                                <input type="number" name="month" min="1" max="12" placeholder="{{d.date.month}}">월 정기 캠퍼스투어일은 
-                                <input type="number" name="day" min="1" max="31" placeholder="{{ d.date.day }}">일 입니다.
-                            
-                                <input type="submit" class="notice_submit_btn" id="notice_submit_btns" value="수정완료">   
-                            </span>   
-                        </form>  
-                    </p>
-                {% endfor %}   
-                <a class="notice_add_btn " id="add_notice" >공지추가</a>
-            </div>
+                <div class="tourdate_box">
+                    {% for d in tourdates %}
+                        <div class="regular_info">
+                            <form method="post" action="{% url 'manager:regulardate_cud' %}" onsubmit="return realEdit()" class="admin_regular_list_form">
+                                {% csrf_token %}
+                                <span class="notice_done_edit" id="notice_done_edit" >[공지] {{ d.date.month }}월 정기 캠퍼스투어일은 {{d.date.day }}일 입니다.</span>
+                                <a class="notice_edit_btn " id="edit_notice" onclick="edit_date(this)">수정</a>
+                                <!-- 누르면 수정 화면 -->
+                                <span id="notice_yet_edit" class="notice_yet_edit" style=display:none; >
+                                    [공지]<input type="number" name="pk" value="{{d.pk}}" style="display:none;">
+                                    <input type="number" name="year" min="2023" placeholder="{{d.date.year}}" value="{{d.date.year}}" style="display:none;">
+                                    <input type="number" name="month" min="1" max="12" placeholder="{{d.date.month}}">월 정기 캠퍼스투어일은 
+                                    <input type="number" name="day" min="1" max="31" placeholder="{{ d.date.day }}">일 입니다.
+                                    <input  onclick="alert('수정완료 됐습니다.')" type="submit" class="notice_submit_btn" id="notice_submit_btns" value="수정완료">   
+                                </span>   
+                            </form>
+                        </div>
+                    {% endfor %}
+                    <div class="add_btn_box">
+                        <a class="notice_add_btn_2 " id="add_notice" >공지추가</a>
+                    </div>
+                </div>
+                
+
+
+
+
             <div class="regular_info_admin" id="add_info" style="padding:33px 59px 27px 34px; display: none; margin-top: 0px;">
                 <form method="post" action="{% url 'manager:regulardate_cud' %}">
                     {% csrf_token %}
@@ -97,12 +103,24 @@
     </div>
 </div>
 <style>
-
+.add_btn_box{
+    text-align:right;
+    margin-right: 123px;
+}
+.admin_regular_list_form{
+    padding: 30px 35px;
+}
+.admin_regular_list_form > span{
+    font-weight: 700;
+}
+.regular_info{
+    margin-bottom: 30px;
+}
 .notice_add_btn{
-    text-align: c;
+    text-align: center;
     float: right;
     background: #DF633B;
-    padding: 0.3vw 1vw;
+    padding: 0.4vw 1.1vw;
     text-align: center;
     border: 1px solid #DF633B;
     border-radius: 8px;
@@ -113,6 +131,24 @@
     color: #DF633B;
     background: white;
 }
+.notice_add_btn_2{
+    text-align: center;
+    background: #DF633B;
+    padding: 0.4vw 1.1vw;
+    text-align: center;
+    border: 1px solid #DF633B;
+    border-radius: 8px;
+    font-size: 1vw;
+    color: white;
+    margin-right: 30px;
+    }
+
+    .notice_add_btn:hover{
+    color: #DF633B;
+    background: white;
+    }
+
+
 .notice_edit_btn, .notice_submit_btn{
     float: right;
     background: #DF633B;
@@ -132,5 +168,12 @@
     color: #DF633B;
     background: white;
 }
+    
+    @media  (max-width: 768px) {
+        .add_btn_box{
+        text-align:right;
+        margin-right: 40px;
+}
+        }
 </style>
 {% endblock %}
