@@ -123,6 +123,9 @@ div.regular_info_admin>form>p> input{
 /* tablet */
 @media  (max-width: 1200px) {
     
+.notice_add_btn_2{
+    margin-right: 50px;
+}
 .board_list_wrap{
     margin: 46px 113px 73px 113px;
 }
@@ -170,7 +173,9 @@ div.regular_info_admin>form>p> input{
 }
 
 @media  (max-width: 768px) {
-
+.notice_add_btn_2{
+    margin-right: 50px;
+}
     .regular_info{
         background: rgba(255, 150, 27, 0.1);
         border-radius: 8px;
