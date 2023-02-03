@@ -10,6 +10,7 @@
                 <h1>정기 캠퍼스투어 신청</h1>
             </div>
             {% if tourdates %}
+            
             <div class="tourdate_box">
                 {% for d in tourdates %}
                     <div class="regular_info">
@@ -17,6 +18,7 @@
                     </div>
                 {% endfor %}
             </div>
+
             {% else%}
             <div class="regular_info">
                 <p>[공지] 현재 등록되어 있는 정기캠퍼스 투어일은 없습니다.</p>

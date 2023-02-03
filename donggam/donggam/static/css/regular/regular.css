@@ -4,7 +4,7 @@
     margin: 46px 123px 73px 123px;
     height: auto;
 }
-.regular_info p, .regular_info_admin span{
+.regular_info p, .regular_info_admin > p > form > span{
     padding: 30px 35px;
     font-weight: 700;
 }
