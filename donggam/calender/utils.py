@@ -172,19 +172,17 @@ class Calendar(calendar.HTMLCalendar):
                 d += f'<li>{pm_reserv.get_html_url} </li>'
             except:
                 pass
-        # d+= f'{am_nbsp_flag}, {pm_nbsp_flag}'
-        # am은 있지만 pm은 없는 경우 
-        # 한 줄 추가하기 
+        # am은 있지만 pm은 없는 경우  한 줄 추가하기 
         if am_nbsp_flag == True and pm_nbsp_flag == False:
             d += f'<li style="margin-top:10px;">&nbsp;</li>'
         
-        # pm은 있지만 am은 없는 경우
-        # 한 줄 추가하기 
+        # pm은 있지만 am은 없는 경우 한 줄 추가하기 
         elif pm_nbsp_flag == True and am_nbsp_flag == False:
                 d += f'<li style="margin-top:10px;">&nbsp;</li>'
-
+        # am, pm 둘다 없는 경우 두 줄 추가하기
         elif am_nbsp_flag == False and pm_nbsp_flag == False:
                 d += f'<li>&nbsp;</li>'
+                # 휴일 지정되어 있으면 margin-top 주지말기
                 if holiday_flag == True:
                     d += f'<li>&nbsp;</li>'
                 else: 
