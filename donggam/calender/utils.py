@@ -52,6 +52,10 @@ class _localized_month:
 month_name = _localized_month('%B')
 day_abbr = _localized_day('%a')
 now_mont_flag = False
+
+am_nbsp_flag = False
+pm_nbsp_flag = False
+
 class Calendar(calendar.HTMLCalendar):
     def __init__(self, year=None, month=None):
         self.year = year
@@ -143,25 +147,50 @@ class Calendar(calendar.HTMLCalendar):
         return f'<div class="month_name_cal">{prev_month}&nbsp;&nbsp;{s}&nbsp;&nbsp;{next_month}</div>'
 
     def formatday(self, day, reservations):
+        am_nbsp_flag = False 
+        pm_nbsp_flag = False
+        holiday_flag = False
         reservations_per_day = reservations.filter(date__day=day)
         d = ''
         try:
             instance = reservations_per_day.get(status='5')
             if instance.name != '' :
                 d += f'<li class="holiday">{instance.name}</li>'
-            else :
-                d += f'<li></li>'
+                holiday_flag = True
+            # else :
+
         except:    
             try:
                 am_reserv = reservations_per_day.get(time='10')
+                am_nbsp_flag = True
                 d += f'<li style="margin-bottom: 10px">{am_reserv.get_html_url} </li>'
             except:
                 pass
             try:
                 pm_reserv = reservations_per_day.get(time='14')
+                pm_nbsp_flag = True
                 d += f'<li>{pm_reserv.get_html_url} </li>'
             except:
                 pass
+        # d+= f'{am_nbsp_flag}, {pm_nbsp_flag}'
+        # am은 있지만 pm은 없는 경우 
+        # 한 줄 추가하기 
+        if am_nbsp_flag == True and pm_nbsp_flag == False:
+            d += f'<li style="margin-top:10px;">&nbsp;</li>'
+        
+        # pm은 있지만 am은 없는 경우
+        # 한 줄 추가하기 
+        elif pm_nbsp_flag == True and am_nbsp_flag == False:
+                d += f'<li style="margin-top:10px;">&nbsp;</li>'
+
+        elif am_nbsp_flag == False and pm_nbsp_flag == False:
+                d += f'<li>&nbsp;</li>'
+                if holiday_flag == True:
+                    d += f'<li>&nbsp;</li>'
+                else: 
+                    d += f'<li style="margin-top:10px;">&nbsp;</li>'
+            
+
         if day != 0:
             now_day_class =''
             if day == now and now_mont_flag==True:
