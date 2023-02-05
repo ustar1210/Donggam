@@ -155,7 +155,7 @@ class Calendar(calendar.HTMLCalendar):
         try:
             instance = reservations_per_day.get(status='5')
             if instance.name != '' :
-                d += f'<li class="holiday">{instance.name}</li>'
+                d += f'<li class="holiday" style="margin-top:-8px;">{instance.name}</li>'
                 holiday_flag = True
             # else :
 
