@@ -38,12 +38,14 @@ function checkDone() {
     if (num < 10 || num > 100) {
         alert("견학인원은 10명 이상 100명 이하만 신청 가능합니다.");
         return false;
-    }
-    if (agree === true) {
+    } else if (agree === true) {
         alert(
             "개인정보 수집 및 이용자 동의사항에 동의하셔야 신청이 가능합니다."
         );
         return false;
+    } else {
+        alert("신청완료됐습니다.");
+        return true;
     }
 }
 
@@ -81,25 +83,30 @@ $(function () {
 });
 */
 
-function edit_date(my){
+function edit_date(my) {
     const parent = my.parentNode;
-    parent.getElementsByClassName('notice_yet_edit')[0].style.display = 'inline';
-    parent.getElementsByClassName('notice_done_edit')[0].style.display = "none";
-    var count = document.getElementsByClassName('notice_edit_btn').length;
-    for(let index = 0; index < count; index++){
-        document.getElementsByClassName('notice_edit_btn')[index].style.display = "none";
-    };
-    document.getElementsByClassName('notice_add_btn')[0].style.display = "none";
-};
+    parent.getElementsByClassName("notice_yet_edit")[0].style.display =
+        "inline";
+    parent.getElementsByClassName("notice_done_edit")[0].style.display = "none";
+    var count = document.getElementsByClassName("notice_edit_btn").length;
+    for (let index = 0; index < count; index++) {
+        document.getElementsByClassName("notice_edit_btn")[
+            index
+        ].style.display = "none";
+    }
+    document.getElementsByClassName("notice_add_btn")[0].style.display = "none";
+}
 
 // 정기 공지 추가하기 버튼 클릭시
 $(function () {
     $('a[id="add_notice"]').on("click", function () {
         $("#add_notice").css("display", "none");
-        var count = document.getElementsByClassName('notice_edit_btn').length;
-        for(let index = 0; index < count; index++){
-            document.getElementsByClassName('notice_edit_btn')[index].style.display = "none";
-        };
+        var count = document.getElementsByClassName("notice_edit_btn").length;
+        for (let index = 0; index < count; index++) {
+            document.getElementsByClassName("notice_edit_btn")[
+                index
+            ].style.display = "none";
+        }
         $("#add_info").css("display", "block");
     });
 });
@@ -107,10 +114,12 @@ $(function () {
 $(function () {
     $("#save_notice").on("click", function () {
         $("#add_notice").css("display", "inline");
-        var count = document.getElementsByClassName('notice_edit_btn').length;
-        for(let index = 0; index < count; index++){
-            document.getElementsByClassName('notice_edit_btn')[index].style.display = "inline";
-        };
+        var count = document.getElementsByClassName("notice_edit_btn").length;
+        for (let index = 0; index < count; index++) {
+            document.getElementsByClassName("notice_edit_btn")[
+                index
+            ].style.display = "inline";
+        }
         $("#add_info").css("display", "none");
     });
 });
