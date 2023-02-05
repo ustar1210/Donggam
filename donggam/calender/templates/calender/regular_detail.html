@@ -6,7 +6,7 @@
 </div>
 {% include 'shared/regular_head.html' %}
 
-<div class="form_wrap">
+<div class="form_wrap" style="margin-bottom: 10em;">
     <p class="form_title">신청정보 확인</p>
     <div class="form_list">
         <form>
@@ -139,20 +139,20 @@
                 {% endif %}          
         </form>
     </div>
+        <span class="regular_btn_box">
+            <form method="post" onsubmit="return realDel()" action="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">
+                {% csrf_token %}
+                <span style="float: left;">
+                    <a class="regular_btn" href="{% url 'calender:regular_list' %}">목록으로</a>
+                </span>
+                <span style="float: right;">
+                    <a class="regular_btn" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}">수정하기</a>
+                    <button type="submit" class="regular_btn">삭제하기</button>        
+                </span>                
+            </form>
+        </span>
+    
 
-    <div class="regular_btn_box" style="text-align: right;">
-        <form method="post" onsubmit="return realDel()" action="{% url 'calender:regular_delete' reservation_id=reservation.pk %}">
-            {% csrf_token %}
-            <a class="regular_btn mo" href="{% url 'calender:regular_update' reservation_id=reservation.pk %}">수정하기</a>
-            <button type="submit" class="regular_btn mo">삭제하기</button>    
-        </form>
-        
-        
-    </div>
-
-    <div class="regular_btn_box" style="text-align: left;">
-        <a class="regular_btn" href="{% url 'calender:regular_list' %}" style="text-align: center;">목록으로</a>
-    </div>
 
 </div>
 {% endblock %}
