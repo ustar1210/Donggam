@@ -61,7 +61,7 @@ class Reservation(models.Model):
         elif self.status == '3':
             return f'<a class="schoolAply" href="{url}">{self.school}</a>'
         elif self.status == '4':
-            return f'<a class="endAply">[신청마감]</a>'
+            return f'<a class="endAply" style="color : #585757">[신청마감]</a>'
         elif self.status == '5':
             return f'<a class="holiday">휴일</a>'
         else :
@@ -81,7 +81,7 @@ class Reservation(models.Model):
         elif self.status == '3':
             return f'<a class="schoolAply" href="{url}">{self.school}</a>'
         elif self.status == '4':
-            return f'<a class="endAply">[신청마감]</a>'
+            return f'<a class="endAply" style="color : #585757>[신청마감]</a>'
         elif self.status == '5':
             return f'<a class="holiday">휴일</a>'
         else :
