@@ -140,6 +140,10 @@ class AdminCalendar(calendar.HTMLCalendar):
         return f'<div class="month_name_cal">{prev_month}&nbsp;&nbsp;{s}&nbsp;&nbsp;{next_month}</div>'
 
     def formatday(self, day, reservations):
+        am_nbsp_flag = False 
+        pm_nbsp_flag = False
+        holiday_flag = False
+
         reservations_per_day = reservations.filter(date__day=day)
         d = ''
         datetime = str(self.year)+'-'+str(self.month)+'-'+str(day)
@@ -147,26 +151,40 @@ class AdminCalendar(calendar.HTMLCalendar):
             instance = reservations_per_day.get(status='5')
             if instance.name != '' :
                 d += f'<li class="holiday"><input type="checkbox"  name="{datetime}" style="margin-right:10px">{instance.name}</li>'
+                holiday_flag = True
             else :
                 d += f'<li class="holiday"><input type="checkbox"  name="{datetime}" style="margin-right:10px">휴일 </li>'
+                holiday_flag = True
+
         except:    
             h=0
             amdatetime = datetime + '-am'
             pmdatetime = datetime + '-pm'
             try:
                 am_reserv = reservations_per_day.get(time='10')
+                am_nbsp_flag = True
                 d += f'<li style="margin-bottom: 10px"><input type="checkbox"  name="{amdatetime}" style="margin-right:10px">{am_reserv.get_admin_url} </li>'
                 h=1
             except:
                 d += f'<li><label><input type="checkbox"  name="{amdatetime}" style="margin-right:10px">[10:00]</label></li>'
             try:
                 pm_reserv = reservations_per_day.get(time='14')
+                pm_nbsp_flag = True
                 d += f'<li style="margin-bottom: 10px"><input type="checkbox"  name="{pmdatetime}" style="margin-right:10px">{pm_reserv.get_admin_url} </li>'
                 h=1
             except:
                 d += f'<li><label><input type="checkbox"  name="{pmdatetime}" style="margin-right:10px">[14:00]</label></li>'
             if h==0:
                 d += f'<li><label><input type="checkbox"  name="{datetime}" style="margin-right:10px">[휴일]</label></li>'
+
+        # am, pm 둘다 없는 경우 두 줄 추가하기
+        if am_nbsp_flag == False and pm_nbsp_flag == False:
+                if holiday_flag == True:
+                    d += f'<li style="margin-top:10px;">&nbsp;</li>'
+                    d += f'<li style="margin-top:10px;">&nbsp;</li>'
+        else :
+            d += f'<li>&nbsp;</li>'
+
         if day != 0:
             now_day_class =''
             if day == now and now_mont_flag==True:
