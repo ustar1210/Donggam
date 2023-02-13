@@ -201,7 +201,7 @@ def regular_list(request):
     paginator = Paginator(instances, '10')
     page_obj = paginator.page(page)
 
-    tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)])
+    tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=91)]).order_by('date')
 
     return render(request, 'calender/regular_list.html', 
     {

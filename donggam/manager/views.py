@@ -185,7 +185,7 @@ def admin_regular_list(request):
         paginator = Paginator(instances, '10')
         page_obj = paginator.page(page)
 
-        tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=31)]).order_by('date')
+        tourdates = RegularDate.objects.filter(date__range=[datetime.datetime.today(), datetime.datetime.today() + datetime.timedelta(days=91)]).order_by('date')
         return render(request, 'manager/regular_list_admin.html', 
         {
             'page_obj': page_obj,
@@ -248,7 +248,6 @@ def regular_status_change(request, reservation_id):
 def regulardate_cud(request, date_id=None):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            print(request.POST)
             if request.POST['pk'] == 'none':
                 instance = RegularDate()
                 year = request.POST['year']
