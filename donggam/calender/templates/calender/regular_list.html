@@ -40,9 +40,11 @@
                     <div class="title"><a href="{% url 'calender:regular_pw' reservation_id=r.pk %}">{{ r }}</a></div>
                     <div class="status">
                         {% if r.status == '1' %}
-                        <wait style="color: #999999;">검토중</wait>
-                        {% elif r.status == '2' or r.status == '3' %}
-                        <high style="color: #DF633B;">신청상태를 확인해주세요</high>
+                        <wait style="color: #999999;">검토대기</wait>
+                        {% elif r.status == '2' %}
+                        <high style="color: #00BA34;">승인</high>
+                        {% elif r.status == '3' %}
+                        <high style="color: #DF633B;">거부</high>
                         {% endif %}
                     </div>
                     <div class="date">{{ r.created_at }}</div>
